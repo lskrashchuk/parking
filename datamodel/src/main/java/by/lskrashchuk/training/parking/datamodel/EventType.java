@@ -1,5 +1,5 @@
 package by.lskrashchuk.training.parking.datamodel;
 
-public class Make {
+public class EventType {
 
 }

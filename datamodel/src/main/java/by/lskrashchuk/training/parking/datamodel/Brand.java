@@ -1,7 +1,7 @@
 package by.lskrashchuk.training.parking.datamodel;
 
-public class CarType extends AbstractModel {
-
+public class Brand extends AbstractModel{
+	
 	private String name;
 
 	public String getName() {
@@ -11,6 +11,7 @@ public class CarType extends AbstractModel {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
+	
 
 }
