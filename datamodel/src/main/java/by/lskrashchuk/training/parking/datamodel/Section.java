@@ -6,7 +6,9 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -24,7 +26,8 @@ public class Section extends AbstractModel {
 	@OneToMany(mappedBy = "section", fetch = FetchType.LAZY)
 	private List<Place> places;
 	
-	@JoinTable(name = "user_type_2_section", joinColumns = {})
+	@JoinTable(name = "user_type_2_section", joinColumns = { @JoinColumn (name = "section_id")}, inverseJoinColumns = { @JoinColumn (name = "user_type_id") })
+	@ManyToMany (targetEntity = UserType.class, fetch = FetchType.LAZY)
 	private List<UserType> userTypes;
 	
 	public String getName() {

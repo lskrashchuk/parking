@@ -1,5 +1,7 @@
 package by.lskrashchuk.training.parking.datamodel;
 
-public class EventType {
+public enum EventType {
+	
+	arrived, departed, binded, released
 
 }
