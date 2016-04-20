@@ -4,9 +4,9 @@ public class Place extends AbstractModel{
 	
 	private Section section;
 	
-	private int number;
+	private Integer number;
 	
-	private PlaceSize placeSize;
+	private CarType carType;
 
 	public Section getSection() {
 		return section;
@@ -16,23 +16,22 @@ public class Place extends AbstractModel{
 		this.section = section;
 	}
 
-	public int getNumber() {
+	public Integer getNumber() {
 		return number;
 	}
 
-	public void setNumber(int number) {
+	public void setNumber(Integer number) {
 		this.number = number;
 	}
 
-	public PlaceSize getPlaceSize() {
-		return placeSize;
+	public CarType getCarType() {
+		return carType;
 	}
 
-	public void setPlaceSize(PlaceSize placeSize) {
-		this.placeSize = placeSize;
+	public void setCarType(CarType carType) {
+		this.carType = carType;
 	}
-	
-	
+
 	
 
 }

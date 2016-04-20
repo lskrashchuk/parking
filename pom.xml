@@ -14,7 +14,7 @@
 
 	<modules>
 		<module>datamodel</module>
-		<module>dataccess</module>
+		<module>dataaccess</module>
 		<module>services</module>
 		<!-- <module>webapp</module> -->
 	</modules>
