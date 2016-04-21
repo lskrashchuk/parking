@@ -12,6 +12,9 @@ public class CarType extends AbstractModel {
 
 	@Column
 	private String name;
+	
+	@Column
+	private Integer rank;
 
 	@OneToMany(mappedBy = "car_type", fetch = FetchType.LAZY)
 	private List<Model> models;
@@ -32,5 +35,14 @@ public class CarType extends AbstractModel {
 		this.models = models;
 	}
 
+	public Integer getRank() {
+		return rank;
+	}
+
+	public void setRank(Integer rank) {
+		this.rank = rank;
+	}
+
+	
 
 }

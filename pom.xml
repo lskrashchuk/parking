@@ -9,7 +9,7 @@
 	<packaging>pom</packaging>
 
 	<properties>
-
+		<spring.version>4.0.3.RELEASE</spring.version>
 	</properties>
 
 	<modules>
