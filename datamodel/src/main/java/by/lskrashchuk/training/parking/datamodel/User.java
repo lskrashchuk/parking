@@ -2,13 +2,18 @@ package by.lskrashchuk.training.parking.datamodel;
 
 import java.sql.Blob;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class User extends AbstractModel {
@@ -40,7 +45,14 @@ public class User extends AbstractModel {
 	@Column
 	@Enumerated (value = EnumType.ORDINAL)
 	private UserRole userRole;
-
+	
+	@JoinTable(name = "user_2_car", joinColumns = {@JoinColumn(name = "user_id")}, inverseJoinColumns = {@JoinColumn(name = "car_id")})
+	@ManyToMany(targetEntity = Car.class, fetch = FetchType.LAZY)
+	private List<Car> cars;
+	
+	@OneToMany(mappedBy = "registry", fetch = FetchType.LAZY)
+	private List<Registry> registry;
+	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -108,7 +120,23 @@ public class User extends AbstractModel {
 	public void setUserRole(UserRole userRole) {
 		this.userRole = userRole;
 	}
-	
+
+	public List<Car> getCars() {
+		return cars;
+	}
+
+	public void setCars(List<Car> cars) {
+		this.cars = cars;
+	}
+
+	public List<Registry> getRegistry() {
+		return registry;
+	}
+
+	public void setRegistry(List<Registry> registry) {
+		this.registry = registry;
+	}
+
 	
 
 }

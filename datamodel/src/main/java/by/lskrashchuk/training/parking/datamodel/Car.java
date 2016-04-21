@@ -1,16 +1,33 @@
 package by.lskrashchuk.training.parking.datamodel;
 
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Car extends AbstractModel{
 	
+	@Column
 	private String regNumber;
 	
+	@ManyToOne( targetEntity = Model.class, fetch = FetchType.LAZY)
 	private Model model;
-	
-	private CarType carType;
-	
+
+	@Column
 	private Integer yearProduced;
 	
+	@ManyToOne( targetEntity = Color.class, fetch = FetchType.LAZY)
 	private Color color;
+	
+	@JoinTable(name = "user_2_car", joinColumns = {@JoinColumn(name = "car_id")}, inverseJoinColumns = {@JoinColumn(name = "user_id")})
+	@ManyToMany(targetEntity = User.class,fetch = FetchType.LAZY)
+	private List<User> users;
 	
 	public String getRegNumber() {
 		return regNumber;
@@ -28,14 +45,6 @@ public class Car extends AbstractModel{
 		this.model = model;
 	}
 	
-	public CarType getCarType() {
-		return carType;
-	}
-	
-	public void setCarType(CarType carType) {
-		this.carType = carType;
-	}
-	
 	public Integer getYearProduced() {
 		return yearProduced;
 	}
@@ -50,6 +59,14 @@ public class Car extends AbstractModel{
 	
 	public void setColor(Color color) {
 		this.color = color;
+	}
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 	
 	
