@@ -2,6 +2,7 @@ package by.lskrashchuk.training.parking.datamodel;
 
 import java.sql.Blob;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;

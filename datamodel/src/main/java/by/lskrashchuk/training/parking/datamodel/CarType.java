@@ -16,7 +16,7 @@ public class CarType extends AbstractModel {
 	@Column
 	private Integer rank;
 
-	@OneToMany(mappedBy = "car_type", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "carType", fetch = FetchType.LAZY)
 	private List<Model> models;
 	
 	public String getName() {

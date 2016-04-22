@@ -20,7 +20,7 @@ public class UserType extends AbstractModel{
 	@ManyToMany(targetEntity = Section.class, fetch = FetchType.LAZY)
 	private List<Section> sections;
 	
-	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "userType", fetch = FetchType.LAZY)
 	private List<User> users;
 	
 	public String getName() {

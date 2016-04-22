@@ -50,7 +50,7 @@ public class User extends AbstractModel {
 	@ManyToMany(targetEntity = Car.class, fetch = FetchType.LAZY)
 	private List<Car> cars;
 	
-	@OneToMany(mappedBy = "registry", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private List<Registry> registry;
 	
 	public String getFirstName() {
