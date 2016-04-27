@@ -13,6 +13,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import by.lskrashchuk.training.parking.dataaccess.UserDao;
 import by.lskrashchuk.training.parking.dataaccess.impl.AbstractDaoImpl;
+import by.lskrashchuk.training.parking.datamodel.User;
+import by.lskrashchuk.training.parking.datamodel.Role;
 import by.lskrashchuk.training.parking.service.UserService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -42,6 +44,37 @@ public class UserServiceTest {
 		Assert.assertNotNull(em);
 		
 	}
+	
+	@Test
+	public void testRegistration(){
+		User user = new User();
+		user.setFirstName("testFName");
+		user.setLastName("testLName");
+		user.setPhone("+375777777");
+        user.setEmail(System.currentTimeMillis() + "mail@test.by");
+        user.setPassword("pswd");
+  //      user.setUserType(userType);
+        user.setRole(Role.admin);
+        userService.register(user);
+        
+        Long userId = user.getId();
+
+        User registredUser = userService.getUser(userId);
+
+        Assert.assertNotNull(registredUser);
+
+        String updatedFName = "updatedName";
+        user.setFirstName(updatedFName);
+        userService.update(user);
+
+        Assert.assertEquals(updatedFName, userService.getUser(user.getId()).getFirstName());
+
+        userService.delete(user.getId());
+
+        Assert.assertNull(userService.getUser(user.getId()));
+  
+	}
+	
 	
 
 }

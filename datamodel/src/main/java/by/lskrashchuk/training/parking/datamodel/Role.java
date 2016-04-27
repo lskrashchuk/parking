@@ -1,5 +1,5 @@
 package by.lskrashchuk.training.parking.datamodel;
 
-public enum UserRole {
+public enum Role {
 	admin, manager, guard, employee, visitor
 }

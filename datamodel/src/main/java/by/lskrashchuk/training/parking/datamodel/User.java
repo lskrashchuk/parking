@@ -44,7 +44,7 @@ public class User extends AbstractModel {
 	
 	@Column
 	@Enumerated (value = EnumType.ORDINAL)
-	private UserRole userRole;
+	private Role role;
 	
 	@JoinTable(name = "user_2_car", joinColumns = {@JoinColumn(name = "user_id")}, inverseJoinColumns = {@JoinColumn(name = "car_id")})
 	@ManyToMany(targetEntity = Car.class, fetch = FetchType.LAZY)
@@ -104,6 +104,10 @@ public class User extends AbstractModel {
 	public Date getCreated() {
 		return created;
 	}
+	
+	public void setCreated(Date created) {
+		this.created = created;
+	}
 
 	public UserType getUserType() {
 		return userType;
@@ -113,12 +117,12 @@ public class User extends AbstractModel {
 		this.userType = userType;
 	}
 
-	public UserRole getUserRole() {
-		return userRole;
+	public Role getRole() {
+		return role;
 	}
 
-	public void setUserRole(UserRole userRole) {
-		this.userRole = userRole;
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 	public List<Car> getCars() {
@@ -137,6 +141,9 @@ public class User extends AbstractModel {
 		this.registry = registry;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "User: " + firstName + " " + lastName;
+	}
 
 }

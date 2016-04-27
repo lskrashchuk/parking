@@ -1,25 +1,21 @@
 package by.lskrashchuk.training.parking.dataaccess.impl;
 
+import java.util.List;
+
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import by.lskrashchuk.training.parking.dataaccess.UserDao;
 import by.lskrashchuk.training.parking.datamodel.User;
 
 @Repository
-public class UserDaoImpl extends AbstractDaoImpl implements UserDao{
+public class UserDaoImpl extends AbstractDaoImpl<User, Long> implements UserDao{
 
-	@Override
-	public User get(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	protected UserDaoImpl() {
+		super(User.class);
 	}
 
-	@Override
-	public User save() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 	
 
 }
