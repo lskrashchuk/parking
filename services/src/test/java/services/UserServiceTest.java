@@ -50,10 +50,11 @@ public class UserServiceTest {
 		User user = new User();
 		user.setFirstName("testFName");
 		user.setLastName("testLName");
+	//	user.setPhoto(null);
 		user.setPhone("+375777777");
         user.setEmail(System.currentTimeMillis() + "mail@test.by");
         user.setPassword("pswd");
-  //      user.setUserType(userType);
+        user.setUserType(null);
         user.setRole(Role.admin);
         userService.register(user);
         
