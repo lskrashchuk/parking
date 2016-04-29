@@ -24,18 +24,20 @@
 		class="by.lskrashchuk.training.parking.datamodel.util.SchemaNameAwareBasicDataSource"
 		destroy-method="close" 
 		p:driverClassName="org.postgresql.Driver"
-		p:url="jdbc:postgresql://localhost:5432/shop" 
+		p:url="jdbc:postgresql://localhost:5432/parking" 
 		p:username="postgres" 
 		p:password="postgres"
 		p:schema="public" />
+		
+		
 
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
 		p:dataSource-ref="dataSource" />
 
-<!-- 	<tx:annotation-driven />
+ 	<tx:annotation-driven />
 
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
 		p:entityManagerFactory-ref="entityManagerFactory" />
- -->
+ 
 </beans>

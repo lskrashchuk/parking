@@ -20,7 +20,7 @@
 		class="by.lskrashchuk.training.parking.datamodel.util.SchemaNameAwareBasicDataSource"
 		destroy-method="close" 
 		p:driverClassName="org.postgresql.Driver"
-		p:url="jdbc:postgresql://localhost:5432/shop" 
+		p:url="jdbc:postgresql://localhost:5432/parking" 
 		p:username="postgres" 
 		p:password="postgres"
 		p:schema="test" />

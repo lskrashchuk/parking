@@ -57,9 +57,9 @@ public class UserServiceTest {
         user.setRole(Role.admin);
         userService.register(user);
         
-        Long userId = user.getId();
+ //       Long userId = user.getId();
 
-        User registredUser = userService.getUser(userId);
+        User registredUser = userService.getUser(user.getId());
 
         Assert.assertNotNull(registredUser);
 
