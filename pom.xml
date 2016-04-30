@@ -59,6 +59,12 @@
 				<version> 9.4-1201-jdbc41</version>
 			</dependency>
 
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-jpamodelgen</artifactId>
+				<version>4.3.4.Final</version>
+				<scope>provided</scope>
+			</dependency>
 
 
 			<dependency>
@@ -118,6 +124,27 @@
 				<artifactId>junit</artifactId>
 				<version>4.11</version>
 				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-api</artifactId>
+				<version>2.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-core</artifactId>
+				<version>2.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-slf4j-impl</artifactId>
+				<version>2.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-jcl</artifactId>
+				<version>2.1</version>
 			</dependency>
 
 		</dependencies>

@@ -18,9 +18,8 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public void register(User user) {
-		userDao.insert(user);
 		user.setCreated(new Date());
-
+		userDao.insert(user);
 	}
 
 	@Override

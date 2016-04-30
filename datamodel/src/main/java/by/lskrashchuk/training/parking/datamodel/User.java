@@ -17,6 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
 @Entity
 @Table(name="`user`")
 public class User extends AbstractModel {
@@ -28,7 +30,8 @@ public class User extends AbstractModel {
 	private String lastName;
 	
 	@Column
-	private Blob photo;
+//	@Type(type="org.hibernate.type.MaterializedClobType")
+	private byte[] photo;
 	
 	@Column
 	private String phone;
@@ -72,11 +75,11 @@ public class User extends AbstractModel {
 		this.lastName = lastName;
 	}
 
-	public Blob getPhoto() {
+	public byte[] getPhoto() {
 		return photo;
 	}
 
-	public void setPhoto(Blob photo) {
+	public void setPhoto(byte[] photo) {
 		this.photo = photo;
 	}
 

@@ -1,6 +1,8 @@
 package services;
 
+import java.io.OutputStream;
 import java.lang.reflect.Field;
+import java.sql.Blob;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -50,7 +52,8 @@ public class UserServiceTest {
 		User user = new User();
 		user.setFirstName("testFName");
 		user.setLastName("testLName");
-	//	user.setPhoto(null);
+		byte[] b = "hello there".getBytes();
+		user.setPhoto(b);
 		user.setPhone("+375777777");
         user.setEmail(System.currentTimeMillis() + "mail@test.by");
         user.setPassword("pswd");
