@@ -1,7 +1,10 @@
 package by.lskrashchuk.training.parking.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
+import by.lskrashchuk.training.parking.dataaccess.filters.UserFilter;
 import by.lskrashchuk.training.parking.datamodel.User;
 
 public interface UserService {
@@ -16,5 +19,10 @@ public interface UserService {
 	
 	@Transactional
 	void delete(Long id);
+	
+    List<User> find(UserFilter filter);
+
+    List<User> getAll();
+
 
 }

@@ -55,5 +55,9 @@ public class AbstractDaoImpl<T, ID> implements AbstractDao<T, ID> {
         return entityClass;
     }
 
+	protected EntityManager getEntityManager() {
+	        return entityManager;
+	    }
+
 
 }

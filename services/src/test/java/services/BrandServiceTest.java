@@ -10,7 +10,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import by.lskrashchuk.training.parking.dataaccess.BrandDao;
 import by.lskrashchuk.training.parking.datamodel.Brand;
-import by.lskrashchuk.training.parking.datamodel.Color;
 import by.lskrashchuk.training.parking.service.BrandService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -19,9 +18,6 @@ public class BrandServiceTest {
 	
 	@Inject
 	private BrandService brandService;
-	
-	@Inject
-	private BrandDao brandDao;
 	
 	@Test
 	public void testRegistrationBrand(){

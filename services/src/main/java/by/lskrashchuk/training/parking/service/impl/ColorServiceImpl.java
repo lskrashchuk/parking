@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import by.lskrashchuk.training.parking.dataaccess.ColorDao;
@@ -12,6 +14,7 @@ import by.lskrashchuk.training.parking.service.ColorService;
 
 @Service
 public class ColorServiceImpl implements ColorService{
+    private static Logger LOGGER = LoggerFactory.getLogger(ColorServiceImpl.class);
 
 	@Inject
 	private ColorDao colorDao;
@@ -19,16 +22,19 @@ public class ColorServiceImpl implements ColorService{
 	@Override
 	public void register(Color color) {
 		colorDao.insert(color);
+        LOGGER.info("Color regirstred: {}", color);
 	}
 
 	@Override
 	public void update(Color color) {
 		colorDao.update(color);
+        LOGGER.info("Color updated: {}", color);
 	}
 
 	@Override
 	public void delete(Long id) {
 		colorDao.delete(id);
+        LOGGER.info("Color deleted, id: {}", id);
 	}
 
 	@Override
