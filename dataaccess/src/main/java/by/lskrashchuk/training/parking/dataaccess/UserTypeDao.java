@@ -2,10 +2,6 @@ package by.lskrashchuk.training.parking.dataaccess;
 
 import by.lskrashchuk.training.parking.datamodel.UserType;
 
-public interface UserTypeDao {
+public interface UserTypeDao extends AbstractDao<UserType, Long>{
 	
-	UserType get(Long id);
-	
-	UserType save();
-
 }

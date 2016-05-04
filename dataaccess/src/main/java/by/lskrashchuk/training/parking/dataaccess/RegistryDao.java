@@ -2,10 +2,6 @@ package by.lskrashchuk.training.parking.dataaccess;
 
 import by.lskrashchuk.training.parking.datamodel.Registry;
 
-public interface RegistryDao {
+public interface RegistryDao extends AbstractDao<Registry, Long>{
 	
-	Registry get(Long id);
-	
-	Registry save();
-
 }

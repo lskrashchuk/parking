@@ -1,4 +1,4 @@
-package services;
+package by.lskrashchuk.training.parking.service;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

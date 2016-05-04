@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService{
 	public void register(User user) {
 		user.setCreated(new Date());
 		userDao.insert(user);
-        LOGGER.info("User regirstred: {}", user);
+        LOGGER.info("User registred: {}", user);
 	}
 
 	@Override

@@ -2,10 +2,6 @@ package by.lskrashchuk.training.parking.dataaccess;
 
 import by.lskrashchuk.training.parking.datamodel.Section;
 
-public interface SectionDao {
+public interface SectionDao extends AbstractDao<Section, Long>{
 	
-	Section get(Long id);
-	
-	Section save();
-
 }

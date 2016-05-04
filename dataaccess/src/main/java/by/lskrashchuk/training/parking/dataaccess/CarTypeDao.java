@@ -2,10 +2,6 @@ package by.lskrashchuk.training.parking.dataaccess;
 
 import by.lskrashchuk.training.parking.datamodel.CarType;
 
-public interface CarTypeDao {
+public interface CarTypeDao extends AbstractDao<CarType, Long>{
 	
-	CarType get(Long id);
-	
-	CarType save();
-
 }

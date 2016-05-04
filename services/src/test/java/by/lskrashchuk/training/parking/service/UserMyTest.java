@@ -1,4 +1,4 @@
-package services;
+package by.lskrashchuk.training.parking.service;
 
 import java.lang.reflect.Field;
 
@@ -19,18 +19,19 @@ import by.lskrashchuk.training.parking.datamodel.User;
 import by.lskrashchuk.training.parking.service.UserService;
 import by.lskrashchuk.training.parking.service.impl.UserServiceImpl;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:service-context.xml"})
 
 public class UserMyTest {
 		
+	@Inject
+	private UserService userService;
 		
-	
-	private static UserServiceImpl userServiceImpl;
-		
-		public static void main(String[] args){
-	        Long n = new Long(9);
-			userServiceImpl.delete(n);
-
-	  
+		@Test
+		public void test(){
+	        Long n = new Long(6);
+			userService.delete(n);
+  
 		}
 		
 		

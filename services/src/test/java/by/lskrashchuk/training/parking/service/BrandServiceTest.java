@@ -1,4 +1,4 @@
-package services;
+package by.lskrashchuk.training.parking.service;
 
 import javax.inject.Inject;
 

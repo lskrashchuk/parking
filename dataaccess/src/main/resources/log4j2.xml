@@ -25,7 +25,7 @@
 
 
 		<Logger name="by.lskrashchuk.training.parking.service"
-			level="WARN" additivity="false">
+			level="INFO" additivity="false">
 			<AppenderRef ref="CONSOLE" />
 			<AppenderRef ref="SERVER_LOGFILE" />
 		</Logger>

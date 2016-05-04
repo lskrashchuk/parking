@@ -1,4 +1,4 @@
-package services;
+package by.lskrashchuk.training.parking.service;
 
 import java.io.OutputStream;
 import java.lang.reflect.Field;
@@ -51,7 +51,34 @@ public class UserServiceTest {
 	}
 	
 	@Test
-	public void testRegistration(){
+	public void testRegistrationUser(){
+		User user = registrationUser();
+		
+        User registredUser = userService.getUser(user.getId());
+
+        Assert.assertNotNull(registredUser);
+
+
+        String updatedFName = "updatedName";
+        user.setFirstName(updatedFName);
+        userService.update(user);
+
+        Assert.assertEquals(updatedFName, userService.getUser(user.getId()).getFirstName());
+
+        deleteUser(user);
+  
+        Assert.assertNull(userService.getUser(user.getId()));
+	}
+
+	
+	private void deleteUser(User user) {
+
+		userService.delete(user.getId());
+
+	}
+
+
+	private User registrationUser() {
 		User user = new User();
 		user.setFirstName("testFName");
 		user.setLastName("testLName");
@@ -64,22 +91,7 @@ public class UserServiceTest {
         user.setRole(Role.admin);
         userService.register(user);
         
- //       Long userId = user.getId();
-
-        User registredUser = userService.getUser(user.getId());
-
-        Assert.assertNotNull(registredUser);
-
-        String updatedFName = "updatedName";
-        user.setFirstName(updatedFName);
-        userService.update(user);
-
-        Assert.assertEquals(updatedFName, userService.getUser(user.getId()).getFirstName());
-
-        userService.delete(user.getId());
-
-        Assert.assertNull(userService.getUser(user.getId()));
-  
+ 		return user;
 	}
 	
 	   @Test
@@ -93,19 +105,7 @@ public class UserServiceTest {
 	        // start create new data
 	        int testObjectsCount = 5;
 	        for (int i = 0; i < testObjectsCount; i++) {
-	            User user = new User();
-
-	            user.setFirstName("testFName" + i);
-	            user.setLastName("testLName" + i);
-
-	    		byte[] b = "hello there".getBytes();
-	    		user.setPhoto(b);
-	    		user.setPhone("+375777777");
-	            user.setEmail(System.currentTimeMillis() + "mail@test.by");
-	            user.setPassword("pswd");
-	            user.setUserType(null);
-	            user.setRole(Role.admin);
-	            userService.register(user);
+	    		User user = registrationUser();
 	        }
 
 	        UserFilter filter = new UserFilter();
