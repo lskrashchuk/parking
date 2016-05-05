@@ -52,7 +52,7 @@ public class UserServiceTest {
 	
 	@Test
 	public void testRegistrationUser(){
-		User user = registrationUser();
+		User user = registrationUser("testFName", "testLName");
 		
         User registredUser = userService.getUser(user.getId());
 
@@ -78,10 +78,10 @@ public class UserServiceTest {
 	}
 
 
-	private User registrationUser() {
+	private User registrationUser(String fn, String ln) {
 		User user = new User();
-		user.setFirstName("testFName");
-		user.setLastName("testLName");
+		user.setFirstName(fn);
+		user.setLastName(ln);
 		byte[] b = "hello there".getBytes();
 		user.setPhoto(b);
 		user.setPhone("+375777777");
@@ -105,7 +105,7 @@ public class UserServiceTest {
 	        // start create new data
 	        int testObjectsCount = 5;
 	        for (int i = 0; i < testObjectsCount; i++) {
-	    		User user = registrationUser();
+	    		User user = registrationUser("testFName"+i, "testLName"+i);
 	        }
 
 	        UserFilter filter = new UserFilter();

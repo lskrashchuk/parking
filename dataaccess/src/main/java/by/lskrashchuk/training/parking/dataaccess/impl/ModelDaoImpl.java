@@ -12,32 +12,32 @@ import javax.persistence.criteria.Root;
 import org.hibernate.jpa.criteria.OrderImpl;
 import org.springframework.stereotype.Repository;
 
-import by.lskrashchuk.training.parking.dataaccess.CarDao;
-import by.lskrashchuk.training.parking.dataaccess.filters.CarFilter;
-import by.lskrashchuk.training.parking.datamodel.Car;
-import by.lskrashchuk.training.parking.datamodel.Car_;
+import by.lskrashchuk.training.parking.dataaccess.ModelDao;
+import by.lskrashchuk.training.parking.dataaccess.filters.ModelFilter;
+import by.lskrashchuk.training.parking.datamodel.Model;
+import by.lskrashchuk.training.parking.datamodel.Model_;
 
 @Repository
-public class CarDaoImpl extends AbstractDaoImpl<Car, Long> implements CarDao{
-	
-	protected CarDaoImpl() {
-		super(Car.class);
+public class ModelDaoImpl extends AbstractDaoImpl<Model, Long> implements ModelDao{
+
+	protected ModelDaoImpl(){
+		super(Model.class);
 	}
 
 	@Override
-	public List<Car> find(CarFilter filter) {
+	public List<Model> find(ModelFilter filter) {
 		EntityManager em = getEntityManager();
         CriteriaBuilder cb = em.getCriteriaBuilder();
 
-        CriteriaQuery<Car> cq = cb.createQuery(Car.class);
+        CriteriaQuery<Model> cq = cb.createQuery(Model.class);
 
-        Root<Car> from = cq.from(Car.class);
+        Root<Model> from = cq.from(Model.class);
 
         // set selection
         cq.select(from);
 
-        if (filter.getCarRegNumber() != null) {
-            Predicate fRegNumberEqualCondition = cb.equal(from.get(Car_.regNumber), filter.getCarRegNumber());
+        if (filter.getModelName() != null) {
+            Predicate fRegNumberEqualCondition = cb.equal(from.get(Model_.name), filter.getModelName());
             cq.where(cb.or(fRegNumberEqualCondition));
         }
         // set fetching
@@ -50,7 +50,7 @@ public class CarDaoImpl extends AbstractDaoImpl<Car, Long> implements CarDao{
             cq.orderBy(new OrderImpl(from.get(filter.getSortProperty()), filter.isSortOrder()));
         }
 
-        TypedQuery<Car> q = em.createQuery(cq);
+        TypedQuery<Model> q = em.createQuery(cq);
 
         // set paging
         if (filter.getOffset() != null && filter.getLimit() != null) {
@@ -59,10 +59,8 @@ public class CarDaoImpl extends AbstractDaoImpl<Car, Long> implements CarDao{
         }
 
         // set execute query
-        List<Car> allitems = q.getResultList();
+        List<Model> allitems = q.getResultList();
         return allitems;
 	}
-	
-	
 
 }
