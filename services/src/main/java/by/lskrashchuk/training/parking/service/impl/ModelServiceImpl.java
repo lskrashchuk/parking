@@ -17,7 +17,7 @@ import by.lskrashchuk.training.parking.service.ModelService;
 @Service
 public class ModelServiceImpl implements ModelService{
 
-	private static Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
+	private static Logger LOGGER = LoggerFactory.getLogger(ModelServiceImpl.class);
 
 	@Inject
 	private ModelDao modelDao;

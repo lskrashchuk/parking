@@ -14,7 +14,7 @@ public class CarPhoto extends AbstractModel{
 	private Car car;
 	
 	@Column
-	private Blob photo;
+	private byte[] photo;
 
 	public Car getCar() {
 		return car;
@@ -24,13 +24,14 @@ public class CarPhoto extends AbstractModel{
 		this.car = car;
 	}
 
-	public Blob getPhoto() {
+	public byte[] getPhoto() {
 		return photo;
 	}
 
-	public void setPhoto(Blob photo) {
+	public void setPhoto(byte[] photo) {
 		this.photo = photo;
 	}
+
 	
 	
 	

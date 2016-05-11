@@ -82,7 +82,8 @@ public class UserServiceTest {
 		User user = new User();
 		user.setFirstName(fn);
 		user.setLastName(ln);
-		byte[] b = "hello there".getBytes();
+//		byte[] b = "hello there".getBytes();
+		byte[] b = null;
 		user.setPhoto(b);
 		user.setPhone("+375777777");
         user.setEmail(System.currentTimeMillis() + "mail@test.by");

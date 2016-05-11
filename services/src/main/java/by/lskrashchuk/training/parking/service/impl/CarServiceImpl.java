@@ -15,7 +15,7 @@ import by.lskrashchuk.training.parking.service.CarService;
 
 @Service
 public class CarServiceImpl implements CarService{
-    private static Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(CarServiceImpl.class);
 
 	@Inject
 	private CarDao carDao;
