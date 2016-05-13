@@ -9,12 +9,12 @@ import by.lskrashchuk.training.parking.webapp.page.user.UserPage;
 public class HomePage extends AbstractPage{
     public HomePage() {
         super();
-        add(new Link("linkproduct") {
+ /*       add(new Link("linkproduct") {
             @Override
             public void onClick() {
                 setResponsePage(new UserPage());
             }
-        });
+        });*/
     }
 
 }
