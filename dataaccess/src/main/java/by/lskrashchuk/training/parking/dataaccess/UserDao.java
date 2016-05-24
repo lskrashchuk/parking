@@ -7,6 +7,8 @@ import by.lskrashchuk.training.parking.datamodel.User;
 
 public interface UserDao extends AbstractDao<User, Long>{
 	
-    List<User> find(UserFilter filter);
+    Long count(UserFilter filter);
+
+	List<User> find(UserFilter filter);
 
 }

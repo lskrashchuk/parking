@@ -34,15 +34,20 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public void update(User user) {
-		userDao.update(user);
+	public void saveOrUpdate(User user) {
+	       if (user.getId() == null) {
+	            userDao.insert(user);
+	        } else {
+	            userDao.update(user);
+	        }
+
         LOGGER.info("User updated: {}", user);
 	}
 
 	@Override
-	public void delete(Long id) {
-		userDao.delete(id);
-        LOGGER.info("User deleted, id: {}", id);
+	public void delete(User user) {
+		userDao.delete(user.getId());
+        LOGGER.info("User deleted: {}", user);
 	}
 
 	@Override
@@ -53,6 +58,12 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public List<User> getAll() {
 		return userDao.getAll();
+	}
+
+	@Override
+	public Long count(UserFilter filter) {
+        return userDao.count(filter);
+
 	}
 	
 	

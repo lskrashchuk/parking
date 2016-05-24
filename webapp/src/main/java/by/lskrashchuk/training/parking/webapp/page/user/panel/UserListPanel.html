@@ -1,0 +1,28 @@
+<meta charset="utf-8">
+<wicket:panel>
+	<table>
+		<thead>
+			<tr>
+				<th><a wicket:id="sort-id">id</a></th>
+				<th><a wicket:id="sort-fname">Имя</a></th>
+				<th><a wicket:id="sort-lname">Фамилия</a></th>
+				<th>Дата регистрации</th>
+<!-- 				<th>is active</th>  -->
+				<th>Действия</th>
+			</tr>
+		
+		</thead>
+		<tbody>
+			<tr wicket:id="rows">
+				<td><span wicket:id="id"/></td>
+				<td><span wicket:id="fname"/></td>
+				<td><span wicket:id="lname"/></td>
+				<td><span wicket:id="created"/></td>
+<!-- 				<td><input wicket:id="active" type="checkbox" /></td>   -->
+				<td><a wicket:id="delete-link">удалить</a>/<a wicket:id="edit-link">редактировать</a></td>
+			</tr>
+		</tbody>
+	</table>
+	<div wicket:id="paging"></div>
+
+</wicket:panel>

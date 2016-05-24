@@ -64,6 +64,17 @@ public class UserDaoImpl extends AbstractDaoImpl<User, Long> implements UserDao{
         List<User> allitems = q.getResultList();
         return allitems;
     }
+
+	@Override
+	public Long count(UserFilter filter) {
+        EntityManager em = getEntityManager();
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Long> cq = cb.createQuery(Long.class);
+        Root<User> from = cq.from(User.class);
+        cq.select(cb.count(from));
+        TypedQuery<Long> q = em.createQuery(cq);
+        return q.getSingleResult();
+	}
 		
 
 }

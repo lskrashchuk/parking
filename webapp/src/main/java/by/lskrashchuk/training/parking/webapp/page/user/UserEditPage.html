@@ -1,0 +1,26 @@
+<wicket:extend xmlns:wicket="http://wicket.apache.org">
+<meta charset="utf-8">
+
+	<h2>Редактирование пользователя</h2>
+
+	<form wicket:id="form" id="form">
+
+			<label>
+				<strong>Имя:</strong>
+				<input type="text" wicket:id="firstName" />
+			</label>
+			<label>
+				<strong>Фамилия:</strong>
+				<input type="text" wicket:id="lastName" />
+			</label>
+			<label>
+				<strong>Создан:</strong>
+				<input type="text" wicket:id="created" />
+			</label>
+			<label>
+				<a class="button-2" type="submit" wicket:id="save">Сохранить</a>
+			</label>
+	</form>
+	<div wicket:id="feedback"></div>
+	
+</wicket:extend>

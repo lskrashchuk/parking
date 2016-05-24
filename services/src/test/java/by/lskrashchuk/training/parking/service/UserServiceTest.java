@@ -61,7 +61,7 @@ public class UserServiceTest {
 
         String updatedFName = "updatedName";
         user.setFirstName(updatedFName);
-        userService.update(user);
+        userService.saveOrUpdate(user);
 
         Assert.assertEquals(updatedFName, userService.getUser(user.getId()).getFirstName());
 
@@ -73,7 +73,7 @@ public class UserServiceTest {
 	
 	private void deleteUser(User user) {
 
-		userService.delete(user.getId());
+		userService.delete(user);
 
 	}
 
@@ -100,7 +100,7 @@ public class UserServiceTest {
 	        // clean all data from users
 	        List<User> all = userService.getAll();
 	        for (User user : all) {
-	            userService.delete(user.getId());
+	            userService.delete(user);
 	        }
 
 	        // start create new data

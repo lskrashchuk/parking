@@ -15,14 +15,17 @@ public interface UserService {
 	User getUser(Long id);
 	
 	@Transactional
-	void update(User user);
+	void saveOrUpdate(User user);
 	
 	@Transactional
-	void delete(Long id);
+	void delete(User user);
 	
     List<User> find(UserFilter filter);
 
     List<User> getAll();
+    
+    Long count(UserFilter filter);
+
 
 
 }
