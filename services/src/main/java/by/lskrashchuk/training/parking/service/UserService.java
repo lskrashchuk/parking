@@ -1,5 +1,6 @@
 package by.lskrashchuk.training.parking.service;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -25,6 +26,10 @@ public interface UserService {
     List<User> getAll();
     
     Long count(UserFilter filter);
+    
+    User getByNameAndPassword(String userName, String password);
+    
+    Collection<? extends String> resolveRoles(Long id);
 
 
 

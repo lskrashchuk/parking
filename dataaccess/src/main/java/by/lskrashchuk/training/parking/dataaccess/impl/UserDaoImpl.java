@@ -75,6 +75,34 @@ public class UserDaoImpl extends AbstractDaoImpl<User, Long> implements UserDao{
         TypedQuery<Long> q = em.createQuery(cq);
         return q.getSingleResult();
 	}
+
+	@Override
+	public User find(String userName, String password) {
+        EntityManager em = getEntityManager();
+
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+
+        CriteriaQuery<User> cq = cb.createQuery(User.class);
+
+        Root<User> from = cq.from(User.class);
+
+        cq.select(from);
+        Predicate usernameEqualCondition = cb.equal(from.get(User_.email), userName);
+        Predicate passwEqualCondition = cb.equal(from.get(User_.password), password);
+        cq.where(cb.and(usernameEqualCondition, passwEqualCondition));
+
+        TypedQuery<User> q = em.createQuery(cq);
+
+        List<User> allitems = q.getResultList();
+
+        if (allitems.isEmpty()) {
+            return null;
+        } else if (allitems.size() == 1) {
+            return allitems.get(0);
+        } else {
+            throw new IllegalArgumentException("more than 1 user found ");
+        }
+	}
 		
 
 }

@@ -4,6 +4,7 @@ import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.Panel;
 
 import by.lskrashchuk.training.parking.webapp.page.car.CarsPage;
+import by.lskrashchuk.training.parking.webapp.page.login.LoginPage;
 import by.lskrashchuk.training.parking.webapp.page.place.PlacesPage;
 import by.lskrashchuk.training.parking.webapp.page.registry.RegistryPage;
 import by.lskrashchuk.training.parking.webapp.page.report.ReportsPage;
@@ -53,6 +54,15 @@ public class MenuPanel extends Panel{
                 setResponsePage(new ReportsPage());
             }
         }); 
+        
+        add(new Link("link-logout") {
+            @Override
+            public void onClick() {
+                getSession().invalidate();
+                setResponsePage(LoginPage.class);
+            }
+        });
+
 
 	}
 

@@ -1,5 +1,7 @@
 package by.lskrashchuk.training.parking.service.impl;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -64,6 +66,17 @@ public class UserServiceImpl implements UserService{
 	public Long count(UserFilter filter) {
         return userDao.count(filter);
 
+	}
+
+	@Override
+	public User getByNameAndPassword(String userName, String password) {
+        return userDao.find(userName, password);
+	}
+
+	@Override
+	public Collection<? extends String> resolveRoles(Long id) {
+        User user = userDao.get(id);
+        return Collections.singletonList(user.getRole().name());
 	}
 	
 	

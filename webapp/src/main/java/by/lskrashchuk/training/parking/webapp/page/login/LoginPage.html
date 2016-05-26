@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org">
+<?xml version="1.0" encoding="UTF-8"?>
+<title>Login</title>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/style.css">
+</head>
+
+
+<body>
+  <div class="header-content">
+  	<div class="main">
+      <div class="wrap">
+      	<div class="block-1">
+			<p class="color-1 p1">Вход в систему</p>
+
+			<form wicket:id="form" id="form">
+				<label>
+					<strong>Логин:</strong>
+					<input type="text" wicket:id="username"  autocomplete="off" />
+				</label>
+				<label>
+					<strong>Пароль:</strong>
+					<input type="password" wicket:id="password" />
+				</label>
+				<label>
+					<a type="submit" class="button-2" align="left" wicket:id="submit-btn">Войти</a>
+				</label>
+			</form>
+		<div wicket:id="feedbackpanel"></div>
+			
+      	</div>
+      </div> 
+    </div>
+  </div> 
+</body>
+
+</html>
+

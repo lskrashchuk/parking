@@ -10,5 +10,7 @@ public interface UserDao extends AbstractDao<User, Long>{
     Long count(UserFilter filter);
 
 	List<User> find(UserFilter filter);
+	
+	User find(String userName, String password);
 
 }
