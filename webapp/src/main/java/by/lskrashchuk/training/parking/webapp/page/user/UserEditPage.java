@@ -1,10 +1,13 @@
 package by.lskrashchuk.training.parking.webapp.page.user;
 
+import java.util.Arrays;
+
 import javax.inject.Inject;
 
 import org.apache.wicket.extensions.markup.html.form.DateTextField;
 import org.apache.wicket.extensions.yui.calendar.DatePicker;
 import org.apache.wicket.markup.html.form.CheckBox;
+import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.SubmitLink;
 import org.apache.wicket.markup.html.form.TextField;
@@ -13,8 +16,10 @@ import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.validation.validator.RangeValidator;
 
+import by.lskrashchuk.training.parking.datamodel.Role;
 import by.lskrashchuk.training.parking.datamodel.User;
 import by.lskrashchuk.training.parking.service.UserService;
+import by.lskrashchuk.training.parking.webapp.common.UserRoleChoiceRenderer;
 import by.lskrashchuk.training.parking.webapp.page.AbstractPage;
 
 public class UserEditPage extends AbstractPage{
@@ -62,6 +67,10 @@ public class UserEditPage extends AbstractPage{
         CheckBox activeField = new CheckBox("active");
         form.add(activeField); */
 
+        DropDownChoice<Role> roleField = new DropDownChoice<>("role", Arrays.asList(Role.values()), UserRoleChoiceRenderer.INSTANCE);
+        roleField.setRequired(true);
+        form.add(roleField);
+        
         form.add(new SubmitLink("save") {
             @Override
             public void onSubmit() {
