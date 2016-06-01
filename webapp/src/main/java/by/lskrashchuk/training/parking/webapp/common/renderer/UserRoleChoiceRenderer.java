@@ -1,4 +1,4 @@
-package by.lskrashchuk.training.parking.webapp.common;
+package by.lskrashchuk.training.parking.webapp.common.renderer;
 
 import org.apache.wicket.markup.html.form.ChoiceRenderer;
 

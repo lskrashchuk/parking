@@ -4,6 +4,7 @@ import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.Panel;
 
 import by.lskrashchuk.training.parking.webapp.page.car.CarsPage;
+import by.lskrashchuk.training.parking.webapp.page.home.HomePage;
 import by.lskrashchuk.training.parking.webapp.page.login.LoginPage;
 import by.lskrashchuk.training.parking.webapp.page.place.PlacesPage;
 import by.lskrashchuk.training.parking.webapp.page.registry.RegistryPage;
@@ -20,7 +21,14 @@ public class MenuPanel extends Panel{
 	protected void onInitialize() {
 		super.onInitialize();
 
-        add(new Link("link-users") {
+        add(new Link("link-home") {
+            @Override
+            public void onClick() {
+                setResponsePage(new HomePage());
+            }
+        });
+
+		add(new Link("link-users") {
             @Override
             public void onClick() {
                 setResponsePage(new UsersPage());
@@ -55,13 +63,6 @@ public class MenuPanel extends Panel{
             }
         }); 
         
-        add(new Link("link-logout") {
-            @Override
-            public void onClick() {
-                getSession().invalidate();
-                setResponsePage(LoginPage.class);
-            }
-        });
 
 
 	}

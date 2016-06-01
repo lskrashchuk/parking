@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import by.lskrashchuk.training.parking.dataaccess.filters.UserFilter;
 import by.lskrashchuk.training.parking.datamodel.User;
+import by.lskrashchuk.training.parking.datamodel.UserType;
 
 public interface UserService {
 	
@@ -31,6 +32,8 @@ public interface UserService {
     
     Collection<? extends String> resolveRoles(Long id);
 
+    Collection<? extends String> resolveTypes(Long id);
+    
 
 
 }

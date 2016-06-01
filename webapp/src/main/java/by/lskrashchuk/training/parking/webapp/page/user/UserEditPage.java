@@ -1,8 +1,14 @@
 package by.lskrashchuk.training.parking.webapp.page.user;
 
+
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import javax.inject.Inject;
+
+
+
 
 import org.apache.wicket.extensions.markup.html.form.DateTextField;
 import org.apache.wicket.extensions.yui.calendar.DatePicker;
@@ -11,15 +17,24 @@ import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.SubmitLink;
 import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.model.IModel;
+import org.apache.wicket.model.Model;
+import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.validation.validator.RangeValidator;
 
 import by.lskrashchuk.training.parking.datamodel.Role;
 import by.lskrashchuk.training.parking.datamodel.User;
+import by.lskrashchuk.training.parking.datamodel.UserType;
+import by.lskrashchuk.training.parking.datamodel.UserType_;
+import by.lskrashchuk.training.parking.datamodel.User_;
 import by.lskrashchuk.training.parking.service.UserService;
-import by.lskrashchuk.training.parking.webapp.common.UserRoleChoiceRenderer;
+import by.lskrashchuk.training.parking.service.UserTypeService;
+import by.lskrashchuk.training.parking.webapp.common.renderer.UserRoleChoiceRenderer;
+import by.lskrashchuk.training.parking.webapp.common.renderer.UserTypeChoiceRenderer;
 import by.lskrashchuk.training.parking.webapp.page.AbstractPage;
 
 public class UserEditPage extends AbstractPage{
@@ -27,7 +42,11 @@ public class UserEditPage extends AbstractPage{
 	@Inject
 	private UserService userService;
 	
+	@Inject
+	private UserTypeService userTypeService;
+
 	private User user;
+	
 
 	public UserEditPage(PageParameters parameters) {
 		super(parameters);
@@ -42,7 +61,7 @@ public class UserEditPage extends AbstractPage{
 	protected void onInitialize() {
 		super.onInitialize();
 		
-        Form form = new Form("form", new CompoundPropertyModel<User>(user));
+        Form<User> form = new Form<User>("form", new CompoundPropertyModel<User>(user));
         add(form);
 
         TextField<String> fnameField = new TextField<>("firstName");
@@ -57,16 +76,35 @@ public class UserEditPage extends AbstractPage{
         basePriceField.add(RangeValidator.<Double> range(0d, 1_000_000d));
         basePriceField.setRequired(true); */
 
-        DateTextField createdField = new DateTextField("created");
+ 
+          
+        DateTextField createdField = new DateTextField("created", "dd-MM-yyyy");
         createdField.add(new DatePicker());
         createdField.setRequired(true);
-        form.add(createdField);
+        form.add(createdField); 
 
   /*      form.add(basePriceField);
 
         CheckBox activeField = new CheckBox("active");
         form.add(activeField); */
 
+        TextField<String> phoneField = new TextField<>("phone");
+        phoneField.setRequired(true);
+        form.add(phoneField);
+
+        TextField<String> emailField = new TextField<>("email");
+        emailField.setRequired(true);
+        form.add(emailField);
+       
+        TextField<String> passwordField = new TextField<>("password");
+        passwordField.setRequired(true);
+        form.add(passwordField);
+      
+       
+        DropDownChoice<UserType> typeField = new DropDownChoice<>("userType", userTypeService.getAll(), UserTypeChoiceRenderer.INSTANCE);;
+        typeField.setRequired(true);
+        form.add(typeField);
+        
         DropDownChoice<Role> roleField = new DropDownChoice<>("role", Arrays.asList(Role.values()), UserRoleChoiceRenderer.INSTANCE);
         roleField.setRequired(true);
         form.add(roleField);
@@ -79,6 +117,11 @@ public class UserEditPage extends AbstractPage{
                 setResponsePage(new UsersPage());
             }
         });
+        
+   /*     Image photoField = new Image("photo", "image");
+        form.add(photoField);*/
+       
+        
 
         add(new FeedbackPanel("feedback"));
 

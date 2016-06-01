@@ -12,11 +12,14 @@
   <header>
   	<div class="main">
       <div class="wrap">
- 	    	<img src="images/icon-car.png" align="left"> 
-          <h1><a href="index.html"><img src="images/logo.png" alt=""></a></h1>
+  	    	<a wicket:id="link-home1"><img src="images/icon-car.png" align="left" width="80px"></a> 
+  <!--        <h1><a href="index.html"><img src="images/logo.png" alt=""></a></h1> -->
+          <h1><a wicket:id="link-home2"><img src="images/logo.png" alt=""></a></h1> 
           <div class="slogan">Система учета</div>
           <div>
           	<wicket:container wicket:id="login-panel"></wicket:container>  
+ 	        <div wicket:id="language-select" class="language-comp"></div>
+ 
           </div>       
       </div>
       <div class="nav-shadow">
@@ -50,6 +53,8 @@
   <footer>
       <p>© 2016 </p>
   </footer>	
+  
+  
 </body>
 </html>
 	

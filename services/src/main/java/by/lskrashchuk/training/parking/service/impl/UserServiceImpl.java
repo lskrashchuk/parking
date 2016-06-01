@@ -12,8 +12,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import by.lskrashchuk.training.parking.dataaccess.UserDao;
+import by.lskrashchuk.training.parking.dataaccess.UserTypeDao;
 import by.lskrashchuk.training.parking.dataaccess.filters.UserFilter;
 import by.lskrashchuk.training.parking.datamodel.User;
+import by.lskrashchuk.training.parking.datamodel.UserType;
 import by.lskrashchuk.training.parking.service.UserService;
 
 @Service
@@ -78,6 +80,13 @@ public class UserServiceImpl implements UserService{
         User user = userDao.get(id);
         return Collections.singletonList(user.getRole().name());
 	}
+
+	@Override
+	public Collection<? extends String> resolveTypes(Long id) {
+        User user = userDao.get(id);
+        return Collections.singletonList(user.getUserType().getName());
+	}
+
 	
 	
 
