@@ -26,13 +26,15 @@ public interface UserService {
 
     List<User> getAll();
     
+    List<UserType> getAllUserTypes();
+
+    
     Long count(UserFilter filter);
     
     User getByNameAndPassword(String userName, String password);
     
     Collection<? extends String> resolveRoles(Long id);
 
-    Collection<? extends String> resolveTypes(Long id);
     
 
 

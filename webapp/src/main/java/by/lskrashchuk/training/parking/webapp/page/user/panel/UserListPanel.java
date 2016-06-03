@@ -88,7 +88,7 @@ public class UserListPanel extends Panel{
         public UsersDataProvider() {
             super();
             userFilter = new UserFilter();
-            setSort((Serializable) User_.firstName, SortOrder.ASCENDING);
+            setSort((Serializable) User_.lastName, SortOrder.ASCENDING);
         }
 
         @Override

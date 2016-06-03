@@ -5,6 +5,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import by.lskrashchuk.training.parking.dataaccess.filters.CarFilter;
+import by.lskrashchuk.training.parking.dataaccess.filters.UserFilter;
 import by.lskrashchuk.training.parking.datamodel.Car;
 
 public interface CarService {
@@ -18,11 +19,13 @@ public interface CarService {
 	void update(Car car);
 	
 	@Transactional
-	void delete(Long id);
+	void delete(Car car);
 	
     List<Car> find(CarFilter filter);
 
     List<Car> getAll();
+    
+    Long count(CarFilter filter);
 
 
 

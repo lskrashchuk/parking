@@ -13,7 +13,7 @@ public class Model extends AbstractModel{
 	@Column
 	private String name;
 	
-	@ManyToOne(targetEntity = Brand.class, fetch = FetchType.LAZY)
+	@ManyToOne(targetEntity = Brand.class, fetch = FetchType.EAGER)
 	private Brand brand;
 	
 	@ManyToOne(targetEntity = CarType.class, fetch = FetchType.LAZY)

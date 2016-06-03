@@ -1,0 +1,26 @@
+<meta charset="utf-8">
+<wicket:panel>
+	<table>
+		<thead>
+			<tr>
+				<th><a wicket:id="sort-id">id</a></th>
+				<th><a wicket:id="sort-regnumber">Регистрационный номер</a></th>
+				<th><a wicket:id="sort-brand">Марка</a></th>
+				<th><a wicket:id="sort-model">Модель</a></th>
+				<th>Действия</th>
+			</tr>
+		
+		</thead>
+		<tbody>
+			<tr wicket:id="rows">
+				<td><span wicket:id="id"/></td>
+				<td><span wicket:id="regnumber"/></td>
+				<td><span wicket:id="brand"/></td>
+				<td><span wicket:id="model"/></td>
+				<td><a wicket:id="delete-link">удалить</a>/<a wicket:id="edit-link">редактировать</a></td>
+			</tr>
+		</tbody>
+	</table>
+	<div wicket:id="paging"></div>
+
+</wicket:panel>

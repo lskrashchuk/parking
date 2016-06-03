@@ -16,7 +16,7 @@ public class Car extends AbstractModel{
 	@Column
 	private String regNumber;
 	
-	@ManyToOne( targetEntity = Model.class, fetch = FetchType.LAZY)
+	@ManyToOne( targetEntity = Model.class, fetch = FetchType.EAGER)
 	private Model model;
 
 	@Column

@@ -13,6 +13,7 @@ import javax.persistence.criteria.Root;
 import org.hibernate.jpa.criteria.OrderImpl;
 import org.springframework.stereotype.Repository;
 
+
 import by.lskrashchuk.training.parking.dataaccess.UserDao;
 import by.lskrashchuk.training.parking.dataaccess.filters.UserFilter;
 import by.lskrashchuk.training.parking.datamodel.User;
@@ -103,6 +104,31 @@ public class UserDaoImpl extends AbstractDaoImpl<User, Long> implements UserDao{
             throw new IllegalArgumentException("more than 1 user found ");
         }
 	}
+
+	@Override
+	public User getWithUserType(Long id) {
+	       EntityManager em = getEntityManager();
+
+	        CriteriaBuilder cb = em.getCriteriaBuilder();
+
+	        CriteriaQuery<User> cq = cb.createQuery(User.class);
+
+	        Root<User> from = cq.from(User.class);
+
+	        // set selection
+	        cq.select(from);
+
+	        from.fetch(User_.userType, JoinType.LEFT);
+
+	        cq.where(cb.equal(from.get(User_.id), id));
+	        cq.distinct(true);
+
+	        TypedQuery<User> q = em.createQuery(cq);
+
+	        // set execute query
+	        return q.getSingleResult();
+	    }
+}
 		
 
-}
+

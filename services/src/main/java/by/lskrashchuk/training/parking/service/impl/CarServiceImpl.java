@@ -38,13 +38,6 @@ public class CarServiceImpl implements CarService{
 	}
 
 	@Override
-	public void delete(Long id) {
-		carDao.delete(id);
-        LOGGER.info("Car deleted, id: {}", id);
-
-	}
-
-	@Override
 	public List<Car> find(CarFilter filter) {
 		return carDao.find(filter);
 	}
@@ -52,6 +45,18 @@ public class CarServiceImpl implements CarService{
 	@Override
 	public List<Car> getAll() {
 		return carDao.getAll();
+	}
+
+	@Override
+	public void delete(Car car) {
+		carDao.delete(car.getId());
+        LOGGER.info("Car deleted: {}", car);
+		
+	}
+
+	@Override
+	public Long count(CarFilter filter) {
+        return carDao.count(filter);
 	}
 
 

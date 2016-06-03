@@ -14,8 +14,10 @@ import org.springframework.stereotype.Repository;
 
 import by.lskrashchuk.training.parking.dataaccess.CarDao;
 import by.lskrashchuk.training.parking.dataaccess.filters.CarFilter;
+import by.lskrashchuk.training.parking.dataaccess.filters.UserFilter;
 import by.lskrashchuk.training.parking.datamodel.Car;
 import by.lskrashchuk.training.parking.datamodel.Car_;
+import by.lskrashchuk.training.parking.datamodel.User;
 
 @Repository
 public class CarDaoImpl extends AbstractDaoImpl<Car, Long> implements CarDao{
@@ -61,6 +63,17 @@ public class CarDaoImpl extends AbstractDaoImpl<Car, Long> implements CarDao{
         // set execute query
         List<Car> allitems = q.getResultList();
         return allitems;
+	}
+
+	@Override
+	public Long count(CarFilter filter) {
+        EntityManager em = getEntityManager();
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Long> cq = cb.createQuery(Long.class);
+        Root<Car> from = cq.from(Car.class);
+        cq.select(cb.count(from));
+        TypedQuery<Long> q = em.createQuery(cq);
+        return q.getSingleResult();
 	}
 	
 	

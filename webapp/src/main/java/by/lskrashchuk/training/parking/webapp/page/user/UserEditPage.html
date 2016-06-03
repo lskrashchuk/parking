@@ -1,11 +1,11 @@
 <wicket:extend xmlns:wicket="http://wicket.apache.org">
 <meta charset="utf-8">
-<section class="contene-subpage" id="content">
+<form wicket:id="form" id="form">
+<section class="content-subpage" id="content">
 		<div class="wrap">
 			<div class="col-1 border-2">
 	<h2>Сведения о пользователе</h2>
 
-	<form wicket:id="form" id="form">
 			<label>
 				<strong>Имя:</strong>
 				<input type="text" wicket:id="firstName" />
@@ -42,16 +42,32 @@
 			<label>
 				<a class="button-2" type="submit" wicket:id="save">Сохранить</a>
 			</label>
-	</form>
+
 			</div>
 			<div class="col-2">
 				<label>
 					<strong>Фото:</strong>
 <!-- -					<img wicket:id="photo"> -->
 				</label>
+				<label>
+					<a class="button-1 top-1" type="submit" wicket:id="load">Загрузить</a>
+				</label>
+	
+	
+				<label>
+					<strong>ТC:</strong>
+                    <wicket:container wicket:id="carlist-panel"></wicket:container>  				
+                </label>
+ 				<label>
+					<a class="button-1 top-1" type="submit" wicket:id="editlist">Редактировать список ТС</a>
+				</label>
+                
+
 			</div>
-		</div>
+	</div>
+
 </section>
+</form>
 	<div wicket:id="feedback"></div>
 	
 </wicket:extend>

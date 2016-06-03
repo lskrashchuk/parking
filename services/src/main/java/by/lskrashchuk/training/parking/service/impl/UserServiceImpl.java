@@ -24,6 +24,9 @@ public class UserServiceImpl implements UserService{
 	
 	@Inject
 	private UserDao userDao;
+	
+	@Inject
+	private UserTypeDao userTypeDao;
 
 	@Override
 	public void register(User user) {
@@ -34,7 +37,7 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public User getUser(Long id) {
-		return userDao.get(id);
+		return userDao.getWithUserType(id);
 	}
 
 	@Override
@@ -82,9 +85,8 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public Collection<? extends String> resolveTypes(Long id) {
-        User user = userDao.get(id);
-        return Collections.singletonList(user.getUserType().getName());
+	public List<UserType> getAllUserTypes() {
+		return userTypeDao.getAll();
 	}
 
 	

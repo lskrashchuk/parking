@@ -3,6 +3,7 @@ package by.lskrashchuk.training.parking.webapp.page.user;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -26,6 +27,8 @@ import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.validation.validator.RangeValidator;
 
+
+import by.lskrashchuk.training.parking.dataaccess.filters.UserTypeFilter;
 import by.lskrashchuk.training.parking.datamodel.Role;
 import by.lskrashchuk.training.parking.datamodel.User;
 import by.lskrashchuk.training.parking.datamodel.UserType;
@@ -35,7 +38,9 @@ import by.lskrashchuk.training.parking.service.UserService;
 import by.lskrashchuk.training.parking.service.UserTypeService;
 import by.lskrashchuk.training.parking.webapp.common.renderer.UserRoleChoiceRenderer;
 import by.lskrashchuk.training.parking.webapp.common.renderer.UserTypeChoiceRenderer;
+import by.lskrashchuk.training.parking.webapp.component.login.LoginPanel;
 import by.lskrashchuk.training.parking.webapp.page.AbstractPage;
+import by.lskrashchuk.training.parking.webapp.page.user.panel.CarListPanel;
 
 public class UserEditPage extends AbstractPage{
 	
@@ -54,7 +59,12 @@ public class UserEditPage extends AbstractPage{
 
 	public UserEditPage(User user) {
 		super();
-		this.user = user;
+        if (user.getId() == null) {
+        	this.user = user;
+        } else {
+        	this.user = userService.getUser(user.getId());
+        }
+
 	}
 	
 	@Override
@@ -100,8 +110,11 @@ public class UserEditPage extends AbstractPage{
         passwordField.setRequired(true);
         form.add(passwordField);
       
-       
-        DropDownChoice<UserType> typeField = new DropDownChoice<>("userType", userTypeService.getAll(), UserTypeChoiceRenderer.INSTANCE);;
+
+  //      List<UserType> allUserTypes = userTypeService.find(new UserTypeFilter());
+  //      DropDownChoice<UserType> typeField = new DropDownChoice<>("userType", allUserTypes, UserTypeChoiceRenderer.INSTANCE);
+ //       DropDownChoice<UserType> typeField = new DropDownChoice<>("userType", userTypeService.getAll(), UserTypeChoiceRenderer.INSTANCE);;
+        DropDownChoice<UserType> typeField = new DropDownChoice<>("userType", userService.getAllUserTypes(), UserTypeChoiceRenderer.INSTANCE);;
         typeField.setRequired(true);
         form.add(typeField);
         
@@ -120,9 +133,27 @@ public class UserEditPage extends AbstractPage{
         
    /*     Image photoField = new Image("photo", "image");
         form.add(photoField);*/
+        form.add(new SubmitLink("load") {
+            @Override
+            public void onSubmit() {
+                super.onSubmit();
+ //               userService.saveOrUpdate(user);
+ //               setResponsePage(new UsersPage());
+            }
+        });
        
         
-
+        form.add(new CarListPanel("carlist-panel"));
+        
+        form.add(new SubmitLink("editlist") {
+            @Override
+            public void onSubmit() {
+                super.onSubmit();
+ //               userService.saveOrUpdate(user);
+ //               setResponsePage(new UsersPage());
+            }
+        });
+  
         add(new FeedbackPanel("feedback"));
 
 	}
