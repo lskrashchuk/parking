@@ -1,0 +1,1058 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.5.2
+-- Dumped by pg_dump version 9.5.2
+
+-- Started on 2016-06-03 15:22:05
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET search_path = public, pg_catalog;
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 198 (class 1259 OID 17559)
+-- Name: brand; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE brand (
+    id integer NOT NULL,
+    name character varying(100) NOT NULL
+);
+
+
+--
+-- TOC entry 185 (class 1259 OID 17503)
+-- Name: car; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE car (
+    id integer NOT NULL,
+    reg_number character varying(50) NOT NULL,
+    model_id integer NOT NULL,
+    year_produced integer,
+    color_id integer
+);
+
+
+--
+-- TOC entry 184 (class 1259 OID 17501)
+-- Name: car_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE car_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 2315 (class 0 OID 0)
+-- Dependencies: 184
+-- Name: car_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE car_id_seq OWNED BY car.id;
+
+
+--
+-- TOC entry 202 (class 1259 OID 17575)
+-- Name: car_photo; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE car_photo (
+    id integer NOT NULL,
+    car_id integer NOT NULL,
+    photo bytea NOT NULL
+);
+
+
+--
+-- TOC entry 201 (class 1259 OID 17573)
+-- Name: car_photo_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE car_photo_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 2316 (class 0 OID 0)
+-- Dependencies: 201
+-- Name: car_photo_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE car_photo_id_seq OWNED BY car_photo.id;
+
+
+--
+-- TOC entry 196 (class 1259 OID 17551)
+-- Name: car_type; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE car_type (
+    id integer NOT NULL,
+    name character varying(100) NOT NULL,
+    size_rank integer
+);
+
+
+--
+-- TOC entry 195 (class 1259 OID 17549)
+-- Name: car_type_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE car_type_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 2317 (class 0 OID 0)
+-- Dependencies: 195
+-- Name: car_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE car_type_id_seq OWNED BY car_type.id;
+
+
+--
+-- TOC entry 192 (class 1259 OID 17535)
+-- Name: color; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE color (
+    id integer NOT NULL,
+    name character varying(100) NOT NULL
+);
+
+
+--
+-- TOC entry 191 (class 1259 OID 17533)
+-- Name: color_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE color_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 2318 (class 0 OID 0)
+-- Dependencies: 191
+-- Name: color_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE color_id_seq OWNED BY color.id;
+
+
+--
+-- TOC entry 197 (class 1259 OID 17557)
+-- Name: make_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE make_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 2319 (class 0 OID 0)
+-- Dependencies: 197
+-- Name: make_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE make_id_seq OWNED BY brand.id;
+
+
+--
+-- TOC entry 194 (class 1259 OID 17543)
+-- Name: model; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE model (
+    id integer NOT NULL,
+    brand_id integer NOT NULL,
+    name character varying(100) NOT NULL,
+    car_type_id integer,
+    length numeric(5,1),
+    width numeric(5,1)
+);
+
+
+--
+-- TOC entry 193 (class 1259 OID 17541)
+-- Name: model_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE model_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 2320 (class 0 OID 0)
+-- Dependencies: 193
+-- Name: model_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE model_id_seq OWNED BY model.id;
+
+
+--
+-- TOC entry 200 (class 1259 OID 17567)
+-- Name: place; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE place (
+    id integer NOT NULL,
+    section_id integer NOT NULL,
+    number integer NOT NULL,
+    car_type_id integer
+);
+
+
+--
+-- TOC entry 199 (class 1259 OID 17565)
+-- Name: place_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE place_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 2321 (class 0 OID 0)
+-- Dependencies: 199
+-- Name: place_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE place_id_seq OWNED BY place.id;
+
+
+--
+-- TOC entry 189 (class 1259 OID 17522)
+-- Name: registry; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE registry (
+    id integer NOT NULL,
+    car_id integer NOT NULL,
+    event_time timestamp without time zone NOT NULL,
+    place_id integer NOT NULL,
+    event_type integer,
+    user_id integer
+);
+
+
+--
+-- TOC entry 188 (class 1259 OID 17520)
+-- Name: registry_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE registry_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 2322 (class 0 OID 0)
+-- Dependencies: 188
+-- Name: registry_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE registry_id_seq OWNED BY registry.id;
+
+
+--
+-- TOC entry 187 (class 1259 OID 17511)
+-- Name: section; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE section (
+    id integer NOT NULL,
+    name character varying(100) NOT NULL,
+    description character varying(300),
+    plan bytea
+);
+
+
+--
+-- TOC entry 186 (class 1259 OID 17509)
+-- Name: section_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE section_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 2323 (class 0 OID 0)
+-- Dependencies: 186
+-- Name: section_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE section_id_seq OWNED BY section.id;
+
+
+--
+-- TOC entry 183 (class 1259 OID 17492)
+-- Name: user; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE "user" (
+    id integer NOT NULL,
+    first_name character varying(100) NOT NULL,
+    last_name character varying(100) NOT NULL,
+    photo bytea,
+    phone character varying(100) NOT NULL,
+    email character varying(256) NOT NULL,
+    password character(32) NOT NULL,
+    created timestamp without time zone NOT NULL,
+    user_type_id integer NOT NULL,
+    role integer NOT NULL
+);
+
+
+--
+-- TOC entry 190 (class 1259 OID 17528)
+-- Name: user_2_car; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE user_2_car (
+    user_id integer NOT NULL,
+    car_id integer NOT NULL
+);
+
+
+--
+-- TOC entry 182 (class 1259 OID 17490)
+-- Name: user_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE user_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 2324 (class 0 OID 0)
+-- Dependencies: 182
+-- Name: user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE user_id_seq OWNED BY "user".id;
+
+
+--
+-- TOC entry 205 (class 1259 OID 17602)
+-- Name: user_type; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE user_type (
+    id integer NOT NULL,
+    name character varying(100) NOT NULL
+);
+
+
+--
+-- TOC entry 203 (class 1259 OID 17595)
+-- Name: user_type_2_section; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE user_type_2_section (
+    user_type_id integer NOT NULL,
+    section_id integer NOT NULL
+);
+
+
+--
+-- TOC entry 204 (class 1259 OID 17600)
+-- Name: user_type_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE user_type_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 2325 (class 0 OID 0)
+-- Dependencies: 204
+-- Name: user_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE user_type_id_seq OWNED BY user_type.id;
+
+
+--
+-- TOC entry 2125 (class 2604 OID 17729)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY brand ALTER COLUMN id SET DEFAULT nextval('make_id_seq'::regclass);
+
+
+--
+-- TOC entry 2119 (class 2604 OID 17730)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY car ALTER COLUMN id SET DEFAULT nextval('car_id_seq'::regclass);
+
+
+--
+-- TOC entry 2127 (class 2604 OID 17731)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY car_photo ALTER COLUMN id SET DEFAULT nextval('car_photo_id_seq'::regclass);
+
+
+--
+-- TOC entry 2124 (class 2604 OID 17732)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY car_type ALTER COLUMN id SET DEFAULT nextval('car_type_id_seq'::regclass);
+
+
+--
+-- TOC entry 2122 (class 2604 OID 17733)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY color ALTER COLUMN id SET DEFAULT nextval('color_id_seq'::regclass);
+
+
+--
+-- TOC entry 2123 (class 2604 OID 17734)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY model ALTER COLUMN id SET DEFAULT nextval('model_id_seq'::regclass);
+
+
+--
+-- TOC entry 2126 (class 2604 OID 17735)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY place ALTER COLUMN id SET DEFAULT nextval('place_id_seq'::regclass);
+
+
+--
+-- TOC entry 2121 (class 2604 OID 17736)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY registry ALTER COLUMN id SET DEFAULT nextval('registry_id_seq'::regclass);
+
+
+--
+-- TOC entry 2120 (class 2604 OID 17737)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY section ALTER COLUMN id SET DEFAULT nextval('section_id_seq'::regclass);
+
+
+--
+-- TOC entry 2118 (class 2604 OID 17738)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "user" ALTER COLUMN id SET DEFAULT nextval('user_id_seq'::regclass);
+
+
+--
+-- TOC entry 2128 (class 2604 OID 17739)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY user_type ALTER COLUMN id SET DEFAULT nextval('user_type_id_seq'::regclass);
+
+
+--
+-- TOC entry 2303 (class 0 OID 17559)
+-- Dependencies: 198
+-- Data for Name: brand; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO brand (id, name) VALUES (1, 'Peugeot');
+INSERT INTO brand (id, name) VALUES (2, 'Volvo');
+
+
+--
+-- TOC entry 2290 (class 0 OID 17503)
+-- Dependencies: 185
+-- Data for Name: car; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO car (id, reg_number, model_id, year_produced, color_id) VALUES (1, '4567 KI-4', 2, 2000, 1);
+INSERT INTO car (id, reg_number, model_id, year_produced, color_id) VALUES (2, '5673 ЕЕ -2', 3, 2010, 1);
+INSERT INTO car (id, reg_number, model_id, year_produced, color_id) VALUES (3, '6574 KI-4', 1, 2015, 2);
+
+
+--
+-- TOC entry 2326 (class 0 OID 0)
+-- Dependencies: 184
+-- Name: car_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('car_id_seq', 1, false);
+
+
+--
+-- TOC entry 2307 (class 0 OID 17575)
+-- Dependencies: 202
+-- Data for Name: car_photo; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+
+
+--
+-- TOC entry 2327 (class 0 OID 0)
+-- Dependencies: 201
+-- Name: car_photo_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('car_photo_id_seq', 1, false);
+
+
+--
+-- TOC entry 2301 (class 0 OID 17551)
+-- Dependencies: 196
+-- Data for Name: car_type; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO car_type (id, name, size_rank) VALUES (0, 'легковой автомобиль', 10);
+INSERT INTO car_type (id, name, size_rank) VALUES (1, 'грузовой автомобиль', 20);
+INSERT INTO car_type (id, name, size_rank) VALUES (2, 'автобус', 30);
+
+
+--
+-- TOC entry 2328 (class 0 OID 0)
+-- Dependencies: 195
+-- Name: car_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('car_type_id_seq', 1, false);
+
+
+--
+-- TOC entry 2297 (class 0 OID 17535)
+-- Dependencies: 192
+-- Data for Name: color; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO color (id, name) VALUES (1, 'черный');
+INSERT INTO color (id, name) VALUES (2, 'белый');
+
+
+--
+-- TOC entry 2329 (class 0 OID 0)
+-- Dependencies: 191
+-- Name: color_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('color_id_seq', 1, false);
+
+
+--
+-- TOC entry 2330 (class 0 OID 0)
+-- Dependencies: 197
+-- Name: make_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('make_id_seq', 1, false);
+
+
+--
+-- TOC entry 2299 (class 0 OID 17543)
+-- Dependencies: 194
+-- Data for Name: model; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO model (id, brand_id, name, car_type_id, length, width) VALUES (1, 1, '307', 0, 4.2, 1.7);
+INSERT INTO model (id, brand_id, name, car_type_id, length, width) VALUES (2, 1, '206', 0, 3.8, 1.6);
+INSERT INTO model (id, brand_id, name, car_type_id, length, width) VALUES (3, 2, 'FL', 1, 5.9, 2.6);
+
+
+--
+-- TOC entry 2331 (class 0 OID 0)
+-- Dependencies: 193
+-- Name: model_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('model_id_seq', 1, false);
+
+
+--
+-- TOC entry 2305 (class 0 OID 17567)
+-- Dependencies: 200
+-- Data for Name: place; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO place (id, section_id, number, car_type_id) VALUES (1, 1, 1, 0);
+INSERT INTO place (id, section_id, number, car_type_id) VALUES (2, 1, 2, 0);
+INSERT INTO place (id, section_id, number, car_type_id) VALUES (3, 1, 3, 0);
+INSERT INTO place (id, section_id, number, car_type_id) VALUES (4, 1, 4, 1);
+INSERT INTO place (id, section_id, number, car_type_id) VALUES (5, 1, 5, 0);
+INSERT INTO place (id, section_id, number, car_type_id) VALUES (6, 1, 6, 0);
+INSERT INTO place (id, section_id, number, car_type_id) VALUES (7, 1, 7, 0);
+INSERT INTO place (id, section_id, number, car_type_id) VALUES (8, 1, 8, 0);
+INSERT INTO place (id, section_id, number, car_type_id) VALUES (9, 1, 9, 0);
+INSERT INTO place (id, section_id, number, car_type_id) VALUES (10, 1, 10, 1);
+INSERT INTO place (id, section_id, number, car_type_id) VALUES (11, 2, 1, 0);
+INSERT INTO place (id, section_id, number, car_type_id) VALUES (12, 2, 2, 0);
+INSERT INTO place (id, section_id, number, car_type_id) VALUES (13, 2, 3, 2);
+INSERT INTO place (id, section_id, number, car_type_id) VALUES (14, 2, 4, 0);
+INSERT INTO place (id, section_id, number, car_type_id) VALUES (15, 2, 5, 0);
+INSERT INTO place (id, section_id, number, car_type_id) VALUES (16, 2, 6, 0);
+INSERT INTO place (id, section_id, number, car_type_id) VALUES (17, 2, 7, 0);
+INSERT INTO place (id, section_id, number, car_type_id) VALUES (18, 2, 8, 0);
+INSERT INTO place (id, section_id, number, car_type_id) VALUES (19, 2, 9, 0);
+INSERT INTO place (id, section_id, number, car_type_id) VALUES (20, 2, 10, 2);
+
+
+--
+-- TOC entry 2332 (class 0 OID 0)
+-- Dependencies: 199
+-- Name: place_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('place_id_seq', 1, false);
+
+
+--
+-- TOC entry 2294 (class 0 OID 17522)
+-- Dependencies: 189
+-- Data for Name: registry; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+
+
+--
+-- TOC entry 2333 (class 0 OID 0)
+-- Dependencies: 188
+-- Name: registry_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('registry_id_seq', 1, false);
+
+
+--
+-- TOC entry 2292 (class 0 OID 17511)
+-- Dependencies: 187
+-- Data for Name: section; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO section (id, name, description, plan) VALUES (1, 'А', 'Центральная секция', NULL);
+INSERT INTO section (id, name, description, plan) VALUES (2, 'B', 'Левая секция', NULL);
+
+
+--
+-- TOC entry 2334 (class 0 OID 0)
+-- Dependencies: 186
+-- Name: section_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('section_id_seq', 1, false);
+
+
+--
+-- TOC entry 2288 (class 0 OID 17492)
+-- Dependencies: 183
+-- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO "user" (id, first_name, last_name, photo, phone, email, password, created, user_type_id, role) VALUES (0, 'Иван', 'Иванов', NULL, '+375 55555', 'ivan@mail.ru', '111                             ', '2015-10-10 00:00:00', 1, 1);
+INSERT INTO "user" (id, first_name, last_name, photo, phone, email, password, created, user_type_id, role) VALUES (4, 'Ольга', 'Иванова', NULL, '+77777432', 'упуц', '6                               ', '2015-03-01 00:00:00', 1, 1);
+INSERT INTO "user" (id, first_name, last_name, photo, phone, email, password, created, user_type_id, role) VALUES (5, 'Семен', 'Семенов', NULL, '+67843292400', '4п54', '56346                           ', '2015-01-08 00:00:00', 1, 2);
+INSERT INTO "user" (id, first_name, last_name, photo, phone, email, password, created, user_type_id, role) VALUES (7, 'Федор', 'Федоров', NULL, '+758399', 'купуцпрцупу', 'цупайуц                         ', '2015-04-02 00:00:00', 1, 3);
+INSERT INTO "user" (id, first_name, last_name, photo, phone, email, password, created, user_type_id, role) VALUES (9, 'Светлана', 'Жукова', NULL, '+5472389', 'шцупацломир', 'а778к                           ', '2015-01-15 00:00:00', 1, 2);
+INSERT INTO "user" (id, first_name, last_name, photo, phone, email, password, created, user_type_id, role) VALUES (11, 'Эдуард', 'Авдошин', NULL, '+674839', 'упатуцлд', 'цеуц                            ', '2015-01-05 00:00:00', 1, 2);
+INSERT INTO "user" (id, first_name, last_name, photo, phone, email, password, created, user_type_id, role) VALUES (2, 'Сидор', 'Сидоров', NULL, '+385 56832756', 'sidorov@111', '111                             ', '2016-02-02 00:00:00', 1, 1);
+INSERT INTO "user" (id, first_name, last_name, photo, phone, email, password, created, user_type_id, role) VALUES (1, 'Петр', 'Петров', NULL, '+375 3467845', 'petrov@222', '222                             ', '2016-01-01 00:00:00', 1, 0);
+INSERT INTO "user" (id, first_name, last_name, photo, phone, email, password, created, user_type_id, role) VALUES (13, 'Ольга', 'Боярская', NULL, '+375 5986532', 'olga@mail.ru', '333                             ', '2016-06-02 00:00:00', 1, 0);
+INSERT INTO "user" (id, first_name, last_name, photo, phone, email, password, created, user_type_id, role) VALUES (6, 'Егор', 'Егоров', NULL, '+56858', 'енуцщепруцпр', '4пцив                           ', '2014-02-05 00:00:00', 1, 2);
+INSERT INTO "user" (id, first_name, last_name, photo, phone, email, password, created, user_type_id, role) VALUES (10, 'Виктор', 'Шульгин', NULL, '65749', 'упшоуцпо', 'уорпауо                         ', '2015-02-19 00:00:00', 1, 1);
+INSERT INTO "user" (id, first_name, last_name, photo, phone, email, password, created, user_type_id, role) VALUES (14, 'Светлана', 'Соловьева', NULL, '+7463259', '6567', '4                               ', '2016-06-03 00:00:00', 2, 3);
+
+
+--
+-- TOC entry 2295 (class 0 OID 17528)
+-- Dependencies: 190
+-- Data for Name: user_2_car; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO user_2_car (user_id, car_id) VALUES (0, 1);
+INSERT INTO user_2_car (user_id, car_id) VALUES (0, 2);
+
+
+--
+-- TOC entry 2335 (class 0 OID 0)
+-- Dependencies: 182
+-- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('user_id_seq', 14, true);
+
+
+--
+-- TOC entry 2310 (class 0 OID 17602)
+-- Dependencies: 205
+-- Data for Name: user_type; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO user_type (id, name) VALUES (1, 'employee');
+INSERT INTO user_type (id, name) VALUES (2, 'visitor');
+
+
+--
+-- TOC entry 2308 (class 0 OID 17595)
+-- Dependencies: 203
+-- Data for Name: user_type_2_section; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO user_type_2_section (user_type_id, section_id) VALUES (1, 1);
+INSERT INTO user_type_2_section (user_type_id, section_id) VALUES (2, 1);
+INSERT INTO user_type_2_section (user_type_id, section_id) VALUES (1, 2);
+
+
+--
+-- TOC entry 2336 (class 0 OID 0)
+-- Dependencies: 204
+-- Name: user_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('user_type_id_seq', 1, true);
+
+
+--
+-- TOC entry 2153 (class 2606 OID 17583)
+-- Name: car_photo_pk; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY car_photo
+    ADD CONSTRAINT car_photo_pk PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2132 (class 2606 OID 17508)
+-- Name: car_pk; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY car
+    ADD CONSTRAINT car_pk PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2146 (class 2606 OID 17556)
+-- Name: car_type_pk; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY car_type
+    ADD CONSTRAINT car_type_pk PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2141 (class 2606 OID 17540)
+-- Name: color_pk; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY color
+    ADD CONSTRAINT color_pk PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2148 (class 2606 OID 17564)
+-- Name: make_pk; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY brand
+    ADD CONSTRAINT make_pk PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2144 (class 2606 OID 17548)
+-- Name: model_pk; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY model
+    ADD CONSTRAINT model_pk PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2151 (class 2606 OID 17572)
+-- Name: place_pk; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY place
+    ADD CONSTRAINT place_pk PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2137 (class 2606 OID 17527)
+-- Name: registry_pk; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY registry
+    ADD CONSTRAINT registry_pk PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2134 (class 2606 OID 17519)
+-- Name: section_pk; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY section
+    ADD CONSTRAINT section_pk PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2139 (class 2606 OID 17532)
+-- Name: user_2_car_pk; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY user_2_car
+    ADD CONSTRAINT user_2_car_pk PRIMARY KEY (user_id, car_id);
+
+
+--
+-- TOC entry 2130 (class 2606 OID 17500)
+-- Name: user_pk; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "user"
+    ADD CONSTRAINT user_pk PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2155 (class 2606 OID 17599)
+-- Name: user_type_2_section_pk; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY user_type_2_section
+    ADD CONSTRAINT user_type_2_section_pk PRIMARY KEY (user_type_id, section_id);
+
+
+--
+-- TOC entry 2157 (class 2606 OID 17607)
+-- Name: user_type_pk; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY user_type
+    ADD CONSTRAINT user_type_pk PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2142 (class 1259 OID 17718)
+-- Name: fki_model_fk1; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX fki_model_fk1 ON model USING btree (car_type_id);
+
+
+--
+-- TOC entry 2149 (class 1259 OID 17727)
+-- Name: fki_place_fk_1; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX fki_place_fk_1 ON place USING btree (car_type_id);
+
+
+--
+-- TOC entry 2135 (class 1259 OID 17712)
+-- Name: fki_registry_fk2; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX fki_registry_fk2 ON registry USING btree (user_id);
+
+
+--
+-- TOC entry 2159 (class 2606 OID 17626)
+-- Name: car_fk1; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY car
+    ADD CONSTRAINT car_fk1 FOREIGN KEY (model_id) REFERENCES model(id);
+
+
+--
+-- TOC entry 2160 (class 2606 OID 17636)
+-- Name: car_fk3; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY car
+    ADD CONSTRAINT car_fk3 FOREIGN KEY (color_id) REFERENCES color(id);
+
+
+--
+-- TOC entry 2170 (class 2606 OID 17681)
+-- Name: car_photo_fk0; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY car_photo
+    ADD CONSTRAINT car_photo_fk0 FOREIGN KEY (car_id) REFERENCES car(id);
+
+
+--
+-- TOC entry 2166 (class 2606 OID 17661)
+-- Name: model_fk0; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY model
+    ADD CONSTRAINT model_fk0 FOREIGN KEY (brand_id) REFERENCES brand(id);
+
+
+--
+-- TOC entry 2167 (class 2606 OID 17713)
+-- Name: model_fk1; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY model
+    ADD CONSTRAINT model_fk1 FOREIGN KEY (car_type_id) REFERENCES car_type(id);
+
+
+--
+-- TOC entry 2168 (class 2606 OID 17671)
+-- Name: place_fk0; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY place
+    ADD CONSTRAINT place_fk0 FOREIGN KEY (section_id) REFERENCES section(id);
+
+
+--
+-- TOC entry 2169 (class 2606 OID 17722)
+-- Name: place_fk_1; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY place
+    ADD CONSTRAINT place_fk_1 FOREIGN KEY (car_type_id) REFERENCES car_type(id);
+
+
+--
+-- TOC entry 2161 (class 2606 OID 17641)
+-- Name: registry_fk0; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY registry
+    ADD CONSTRAINT registry_fk0 FOREIGN KEY (car_id) REFERENCES car(id);
+
+
+--
+-- TOC entry 2162 (class 2606 OID 17646)
+-- Name: registry_fk1; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY registry
+    ADD CONSTRAINT registry_fk1 FOREIGN KEY (place_id) REFERENCES place(id);
+
+
+--
+-- TOC entry 2163 (class 2606 OID 17707)
+-- Name: registry_fk2; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY registry
+    ADD CONSTRAINT registry_fk2 FOREIGN KEY (user_id) REFERENCES "user"(id);
+
+
+--
+-- TOC entry 2164 (class 2606 OID 17651)
+-- Name: user_2_car_fk0; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY user_2_car
+    ADD CONSTRAINT user_2_car_fk0 FOREIGN KEY (user_id) REFERENCES "user"(id);
+
+
+--
+-- TOC entry 2165 (class 2606 OID 17656)
+-- Name: user_2_car_fk1; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY user_2_car
+    ADD CONSTRAINT user_2_car_fk1 FOREIGN KEY (car_id) REFERENCES car(id);
+
+
+--
+-- TOC entry 2158 (class 2606 OID 17616)
+-- Name: user_fk0; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "user"
+    ADD CONSTRAINT user_fk0 FOREIGN KEY (user_type_id) REFERENCES user_type(id);
+
+
+--
+-- TOC entry 2171 (class 2606 OID 17686)
+-- Name: user_type_2_section_fk0; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY user_type_2_section
+    ADD CONSTRAINT user_type_2_section_fk0 FOREIGN KEY (user_type_id) REFERENCES user_type(id);
+
+
+--
+-- TOC entry 2172 (class 2606 OID 17691)
+-- Name: user_type_2_section_fk1; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY user_type_2_section
+    ADD CONSTRAINT user_type_2_section_fk1 FOREIGN KEY (section_id) REFERENCES section(id);
+
+
+-- Completed on 2016-06-03 15:22:08
+
+--
+-- PostgreSQL database dump complete
+--
+
