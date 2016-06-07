@@ -47,10 +47,19 @@
 			<div class="col-2">
 				<label>
 					<strong>Фото:</strong>
-<!-- -					<img wicket:id="photo"> -->
+					<form wicket:id="imageForm" id="imageForm">
+						<img height="133" title="Photo" wicket:id="orig_photo"/>
+						<label>
+							<input wicket:id="photo" size="40" type="file"/>
+						</label> 
+ 		 				<a class="button-1 top-1" type="submit" wicket:id="load">Загрузить</a> 
+ 					</form> 	
+ 		<!-- -					<img wicket:id="photo">  -->
 				</label>
 				<label>
-					<a class="button-1 top-1" type="submit" wicket:id="load">Загрузить</a>
+	<!-- 				<a class="button-1 top-1" type="submit" wicket:id="load">Загрузить</a> -->
+	<!--  				<input wicket:id="photo" size="40" type="file"/> --> 
+ 		
 				</label>
 	
 	
