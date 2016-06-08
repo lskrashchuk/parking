@@ -1,82 +1,57 @@
 <wicket:extend xmlns:wicket="http://wicket.apache.org">
-<meta charset="utf-8">
-<form wicket:id="form" id="form">
-<section class="content-subpage" id="content">
-		<div class="wrap">
-			<div class="col-1 border-2">
-	<h2>Сведения о пользователе</h2>
+	<meta charset="utf-8">
+	<form wicket:id="form" id="form">
+		<section class="content-subpage" id="content">
+			<div class="wrap">
+				<div class="col-1 border-2">
+					<form wicket:id="textForm" id="textForm">
+						<h2><wicket:message key="label.user.edit"/></h2>
 
-			<label>
-				<strong>Имя:</strong>
-				<input type="text" wicket:id="firstName" />
-			</label>
-			<label>
-				<strong>Фамилия:</strong>
-				<input type="text" wicket:id="lastName" />
-			</label>
-			<label>
-				<strong>Создан:</strong>
-				<input type="text" wicket:id="created" />
-			</label>   
-			<label>
-				<strong>Телефон:</strong>
-				<input type="text" wicket:id="phone" />
-			</label> 
-			<label>
-				<strong>E-mail:</strong>
-				<input type="text" wicket:id="email" />
-			</label>   
-			<label>
-				<strong>Пароль:</strong>
-				<input type="text" wicket:id="password" />
-			</label>   
-			<label>
-				<strong>Тип:</strong>
-				<select wicket:id="userType"></select>
-			</label>   
-			
-			<label>
-				<strong>Права:</strong>
-				<select wicket:id="role"></select>
-			</label>
-			<label>
-				<a class="button-2" type="submit" wicket:id="save">Сохранить</a>
-			</label>
-
-			</div>
-			<div class="col-2">
-				<label>
-					<strong>Фото:</strong>
-					<form wicket:id="imageForm" id="imageForm">
-						<img height="133" title="Photo" wicket:id="orig_photo"/>
-						<label>
-							<input wicket:id="photo" size="40" type="file"/>
+						<label> <strong><wicket:message key="user.fname"/>:</strong> <input type="text"
+							wicket:id="firstName" />
+						</label> <label> <strong><wicket:message key="user.lname"/>:</strong> <input type="text"
+							wicket:id="lastName" />
+						</label> <label> <strong><wicket:message key="user.created"/>:</strong> <input type="text"
+							wicket:id="created" />
+						</label> <label> <strong><wicket:message key="user.phone"/>:</strong> <input type="text"
+							wicket:id="phone" />
+						</label> <label> <strong><wicket:message key="user.email"/>:</strong> <input type="text"
+							wicket:id="email" />
+						</label> <label> <strong><wicket:message key="user.password"/>:</strong> <input type="text"
+							wicket:id="password" />
+						</label> <label> <strong><wicket:message key="user.type"/>:</strong> <select
+							wicket:id="userType"></select>
+						</label> <label> <strong><wicket:message key="user.role"/>:</strong> <select wicket:id="role"></select>
 						</label> 
- 		 				<a class="button-1 top-1" type="submit" wicket:id="load">Загрузить</a> 
- 					</form> 	
- 		<!-- -					<img wicket:id="photo">  -->
-				</label>
-				<label>
-	<!-- 				<a class="button-1 top-1" type="submit" wicket:id="load">Загрузить</a> -->
-	<!--  				<input wicket:id="photo" size="40" type="file"/> --> 
- 		
-				</label>
-	
-	
-				<label>
-					<strong>ТC:</strong>
-                    <wicket:container wicket:id="carlist-panel"></wicket:container>  				
-                </label>
- 				<label>
-					<a class="button-1 top-1" type="submit" wicket:id="editlist">Редактировать список ТС</a>
-				</label>
-                
+						<br></br>
+						<label> <a class="button-2" type="submit"
+							wicket:id="save"><wicket:message key="btn.save"/></a>
+						</label>
+					</form>
+				</div>
 
+				<div class="col-2">
+					<label> <strong><wicket:message key="user.photo"/>:</strong>
+						<form wicket:id="imageForm" id="imageForm">
+							<img height="133" title="Photo" wicket:id="orig_photo" /> <label>
+								<input wicket:id="photoUpload" size="40" type="file" />
+							</label> <a class="button-1 top-1" type="submit" wicket:id="load"><wicket:message key="btn.upload"/></a>
+						</form>
+					</label> 
+					<label> <strong>ТC:</strong> <wicket:container
+							wicket:id="carlist-panel"></wicket:container>
+					</label> <label> <a class="button-1 top-1" type="submit"
+						wicket:id="editlist">Редактировать список ТС</a>
+					</label>
+
+
+				</div>
 			</div>
-	</div>
+		</section>
 
-</section>
-</form>
+
+	</form>
+
 	<div wicket:id="feedback"></div>
-	
+
 </wicket:extend>

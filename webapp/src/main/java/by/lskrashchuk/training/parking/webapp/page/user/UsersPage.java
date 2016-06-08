@@ -3,6 +3,7 @@ package by.lskrashchuk.training.parking.webapp.page.user;
 import javax.inject.Inject;
 
 import org.apache.wicket.markup.html.link.Link;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 
 import by.lskrashchuk.training.parking.datamodel.User;
 import by.lskrashchuk.training.parking.service.UserService;
@@ -24,6 +25,8 @@ public class UsersPage extends AbstractPage{
                 setResponsePage(new UserEditPage(new User()));
             }
         });
+        
+        add(new FeedbackPanel("feedback"));
  
 	}
 

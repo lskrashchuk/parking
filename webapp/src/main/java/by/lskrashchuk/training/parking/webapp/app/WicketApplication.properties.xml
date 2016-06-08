@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-	<entry key="btn.create.product">Create product</entry>
+	<entry key="btn.create">Create</entry>
+	<entry key="btn.save">Save</entry>
+	<entry key="btn.upload">Upload</entry>
 
 	<entry key="menu.home">Home</entry>
 	<entry key="menu.users">Users</entry>
@@ -10,12 +12,29 @@
 	<entry key="menu.events">Events</entry>
 	<entry key="menu.reports">Reports</entry>
 
+	<entry key="label.user.edit">User information</entry>
+	<entry key="label.users">Users</entry>
+	<entry key="label.actions">Actions</entry>
+	<entry key="label.edit">Edit</entry>
+	<entry key="label.delete">Delete</entry>
+	
+	
 	<entry key="loging.err.auth">authorization error</entry>
 
-	<entry key="product.saved">Product saved</entry>
+	<entry key="user.photo.loaded">File uploaded and will be saved</entry>
+	<entry key="user.saved">User saved</entry>
+	
 
 
-	<entry key="products.price">Base price</entry>
+	<entry key="user.fname">Name</entry>
+	<entry key="user.lname">Surname</entry>
+	<entry key="user.created">Created</entry>
+	<entry key="user.email">E-mail</entry>
+	<entry key="user.password">Password</entry>
+	<entry key="user.phone">Phone</entry>
+	<entry key="user.type">Type</entry>
+	<entry key="user.role">Access</entry>
+	<entry key="user.photo">Photo</entry>
 	
 	<entry key="US">English</entry>
 	<entry key="RU">Russian</entry>

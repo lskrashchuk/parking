@@ -1,13 +1,15 @@
 package by.lskrashchuk.training.parking.webapp.page.user;
 
 
+
 import java.util.Arrays;
 
 import javax.inject.Inject;
 
-
+import org.apache.wicket.Session;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
+import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
 import org.apache.wicket.event.IEvent;
 import org.apache.wicket.extensions.markup.html.form.DateTextField;
 import org.apache.wicket.extensions.yui.calendar.DatePicker;
@@ -20,12 +22,14 @@ import org.apache.wicket.markup.html.form.upload.FileUpload;
 import org.apache.wicket.markup.html.form.upload.FileUploadField;
 import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.markup.html.image.NonCachingImage;
+import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.AbstractReadOnlyModel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
+import org.apache.wicket.model.ResourceModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.request.resource.ByteArrayResource;
 import org.apache.wicket.request.resource.DynamicImageResource;
@@ -83,18 +87,23 @@ public class UserEditPage extends AbstractPage {
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
-
-		Form<User> form = new Form<User>("form", new CompoundPropertyModel<User>(user));
-
+		
+		Form form = new Form("form");
 		add(form);
 
+		Form<User> textForm = new Form<User>("textForm", new CompoundPropertyModel<User>(user));
+
+		form.add(textForm);
+
 		TextField<String> fnameField = new TextField<>("firstName");
+        fnameField.setLabel(new ResourceModel("user.fname"));
 		fnameField.setRequired(true);
-		form.add(fnameField);
+		textForm.add(fnameField);
 
 		TextField<String> lnameField = new TextField<>("lastName");
+        lnameField.setLabel(new ResourceModel("user.lname"));
 		lnameField.setRequired(true);
-		form.add(lnameField);
+		textForm.add(lnameField);
 
 		/*
 		 * TextField<Double> basePriceField = new TextField<>("basePrice");
@@ -104,8 +113,9 @@ public class UserEditPage extends AbstractPage {
 
 		DateTextField createdField = new DateTextField("created", "dd-MM-yyyy");
 		createdField.add(new DatePicker());
+        createdField.setLabel(new ResourceModel("user.created"));
 		createdField.setRequired(true);
-		form.add(createdField);
+		textForm.add(createdField);
 
 		/*
 		 * form.add(basePriceField);
@@ -114,16 +124,19 @@ public class UserEditPage extends AbstractPage {
 		 */
 
 		TextField<String> phoneField = new TextField<>("phone");
+        phoneField.setLabel(new ResourceModel("user.phone"));
 		phoneField.setRequired(true);
-		form.add(phoneField);
+		textForm.add(phoneField);
 
 		TextField<String> emailField = new TextField<>("email");
+        emailField.setLabel(new ResourceModel("user.email"));
 		emailField.setRequired(true);
-		form.add(emailField);
+		textForm.add(emailField);
 
 		TextField<String> passwordField = new TextField<>("password");
+        passwordField.setLabel(new ResourceModel("user.password"));
 		passwordField.setRequired(true);
-		form.add(passwordField);
+		textForm.add(passwordField);
 
 		// List<UserType> allUserTypes = userTypeService.find(new
 		// UserTypeFilter());
@@ -133,14 +146,15 @@ public class UserEditPage extends AbstractPage {
 		// userTypeService.getAll(), UserTypeChoiceRenderer.INSTANCE);;
 		DropDownChoice<UserType> typeField = new DropDownChoice<>("userType", userService.getAllUserTypes(),
 				UserTypeChoiceRenderer.INSTANCE);
-		;
+        typeField.setLabel(new ResourceModel("user.type"));
 		typeField.setRequired(true);
-		form.add(typeField);
+		textForm.add(typeField);
 
 		DropDownChoice<Role> roleField = new DropDownChoice<>("role", Arrays.asList(Role.values()),
 				UserRoleChoiceRenderer.INSTANCE);
+        roleField.setLabel(new ResourceModel("user.role"));
 		roleField.setRequired(true);
-		form.add(roleField);
+		textForm.add(roleField);
 
 		/*
 		 * form.add(new SubmitLink("load") {
@@ -164,7 +178,7 @@ public class UserEditPage extends AbstractPage {
 			}
 		});
 
-		form.add(new SubmitLink("save") {
+		textForm.add(new SubmitLink("save") {
 			private static final long serialVersionUID = 1L;
 
 			@Override
@@ -172,12 +186,16 @@ public class UserEditPage extends AbstractPage {
 				super.onSubmit();
 
 				userService.saveOrUpdate(user);
-				setResponsePage(new UsersPage());
+				UsersPage page = new UsersPage();
+				String localizedMessage = getString("user.saved");
+                page.info(localizedMessage);
+				setResponsePage(page);
 			}
 		});
 
-		Form<Void> imageForm = new Form<Void>("imageForm");
+		Form<User> imageForm = new Form<User>("imageForm", new PropertyModel<User>(user, "photo"));
 		imageForm.setOutputMarkupId(true);
+		
 		// Enable multipart mode (need for uploads file)
 		imageForm.setMultiPart(true);
 
@@ -198,20 +216,49 @@ public class UserEditPage extends AbstractPage {
 
 		imageForm.addOrReplace(img);
 
-		FileUploadField photoUpload = new FileUploadField("photo");
+		FileUploadField photoUpload = new FileUploadField("photoUpload");
 		imageForm.add(photoUpload);
 
 
-		Model<Image> imageModel = new Model<Image>();
-        imageModel.setObject(img);
+/*		Model<Image> imageModel = new Model<Image>();
+        imageModel.setObject(img);*/
         
-        imageForm.add(new AjaxLink<Void>("load") {
-			private static final long serialVersionUID = 1L;
+        imageForm.add(new AjaxSubmitLink("load") {
+        	
 
-				@Override
-	            public void onClick(AjaxRequestTarget target) {
-	                loadAndUpdate(imageModel, img, photoUpload, target);
-	            }
+        	@Override
+			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
+				// TODO Auto-generated method stub
+				try {
+				super.onSubmit(target, form);
+				FileUpload uploadedFile = photoUpload.getFileUpload();
+		
+			
+				if (uploadedFile != null) {
+					user.setPhoto(uploadedFile.getBytes());
+					String localizedMessage = getString("user.photo.loaded");
+	                this.info(localizedMessage);
+	                target.addChildren(getPage(), FeedbackPanel.class);
+				};
+				}
+				catch (Exception e) {
+					this.error(e.getMessage());
+					target.addChildren(getPage(), FeedbackPanel.class);
+				};
+				
+				
+
+			}
+
+
+/*				@Override
+				public void onSubmit() {
+					FileUpload uploadedFile = photoUpload.getFileUpload();
+					if (uploadedFile != null) {
+						user.setPhoto(uploadedFile.getBytes());
+					};
+					
+				}*/
 	        });
 
 
@@ -251,13 +298,16 @@ public class UserEditPage extends AbstractPage {
 		 * incrementAndUpdate(counterModel, label, target); } });
 		 */
 
-		form.add(imageForm);
+        form.add(imageForm);
 
-		add(new FeedbackPanel("feedback"));
+		FeedbackPanel feedback = new FeedbackPanel("feedback");
+        add(feedback);
+		feedback.setOutputMarkupId(true);
+		
 
 	}
 	
-    private void loadAndUpdate(Model<Image> imageModel, Image img, FileUploadField photoUpload, AjaxRequestTarget target) {
+/*    private void loadAndUpdate(Model<Image> imageModel, Image img, FileUploadField photoUpload, AjaxRequestTarget target) {
 		if (photoUpload != null) {
 			user.setPhoto(photoUpload.getFileUpload().getBytes());
 		};
@@ -265,7 +315,7 @@ public class UserEditPage extends AbstractPage {
         target.add(img);
 		setResponsePage(new UsersPage());
 
-    }
+    }*/
 
 
 }

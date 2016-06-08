@@ -4,11 +4,11 @@
 		<thead>
 			<tr>
 				<th><a wicket:id="sort-id">id</a></th>
-				<th><a wicket:id="sort-fname">Имя</a></th>
-				<th><a wicket:id="sort-lname">Фамилия</a></th>
-				<th>Дата регистрации</th>
+				<th><a wicket:id="sort-fname"><wicket:message key="user.fname"/></a></th>
+				<th><a wicket:id="sort-lname"><wicket:message key="user.lname"/></a></th>
+				<th><wicket:message key="user.created"/></th>
 <!-- 				<th>is active</th>  -->
-				<th>Действия</th>
+				<th><wicket:message key="label.actions"/></th>
 			</tr>
 		
 		</thead>
@@ -19,7 +19,7 @@
 				<td><span wicket:id="lname"/></td>
 				<td><span wicket:id="created"/></td>
 <!-- 				<td><input wicket:id="active" type="checkbox" /></td>   -->
-				<td><a wicket:id="delete-link">удалить</a>/<a wicket:id="edit-link">редактировать</a></td>
+				<td><a wicket:id="delete-link"><wicket:message key="label.delete"/></a>/<a wicket:id="edit-link"><wicket:message key="label.edit"/></a></td>
 			</tr>
 		</tbody>
 	</table>

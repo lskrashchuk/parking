@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-	<entry key="btn.create.product">Создать продукт</entry>
+	<entry key="btn.create">Создать</entry>
+	<entry key="btn.save">Сохранить</entry>
+	<entry key="btn.upload">Загрузить</entry>
+	
+	
 
 	<entry key="menu.home">Старт</entry>
 	<entry key="menu.users">Пользователи</entry>
@@ -10,12 +14,30 @@
 	<entry key="menu.events">События</entry>
 	<entry key="menu.reports">Отчеты</entry>
 
+	<entry key="label.user.edit">Сведения о пользователе</entry>
+	<entry key="label.users">Пользователи</entry>
+	<entry key="label.actions">Действия</entry>
+	<entry key="label.edit">Редактировать</entry>
+	<entry key="label.delete">Удалить</entry>
+
+
 	<entry key="loging.err.auth">ошибка авторизации</entry>
 
-	<entry key="product.saved">Продукт сохранен</entry>
+	<entry key="user.photo.loaded">Файл загружен и будет сохранен</entry>
+	<entry key="user.saved">Пользователь сохранен</entry>
+	<entry key="user.empty"></entry>
 
 
-	<entry key="products.price">Базовая цена</entry>
+	<entry key="user.fname">Имя</entry>
+	<entry key="user.lname">Фамилия</entry>
+	<entry key="user.created">Создан</entry>
+	<entry key="user.email">E-mail</entry>
+	<entry key="user.password">Пароль</entry>
+	<entry key="user.phone">Телефон</entry>
+	<entry key="user.type">Тип</entry>
+	<entry key="user.role">Права</entry>
+	<entry key="user.photo">Фото</entry>
+	
 
 	<entry key="US">Английский</entry>
 	<entry key="RU">Русский</entry>
