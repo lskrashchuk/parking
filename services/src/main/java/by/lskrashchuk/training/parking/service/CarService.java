@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import by.lskrashchuk.training.parking.dataaccess.filters.CarFilter;
 import by.lskrashchuk.training.parking.dataaccess.filters.UserFilter;
 import by.lskrashchuk.training.parking.datamodel.Car;
+import by.lskrashchuk.training.parking.datamodel.User;
 
 public interface CarService {
 	
@@ -16,7 +17,7 @@ public interface CarService {
 	Car getCar(Long id);
 	
 	@Transactional
-	void update(Car car);
+	void saveOrUpdate(Car car);
 	
 	@Transactional
 	void delete(Car car);

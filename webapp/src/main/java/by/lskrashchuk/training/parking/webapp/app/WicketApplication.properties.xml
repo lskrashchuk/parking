@@ -8,7 +8,7 @@
 	<entry key="menu.home">Home</entry>
 	<entry key="menu.users">Users</entry>
 	<entry key="menu.places">Places</entry>
-	<entry key="menu.cars">Cars</entry>
+	<entry key="menu.cars">Vehicles</entry>
 	<entry key="menu.events">Events</entry>
 	<entry key="menu.reports">Reports</entry>
 
@@ -17,6 +17,7 @@
 	<entry key="label.actions">Actions</entry>
 	<entry key="label.edit">Edit</entry>
 	<entry key="label.delete">Delete</entry>
+	<entry key="label.cars">Vehicles</entry>
 	
 	
 	<entry key="loging.err.auth">authorization error</entry>
@@ -35,6 +36,15 @@
 	<entry key="user.type">Type</entry>
 	<entry key="user.role">Access</entry>
 	<entry key="user.photo">Photo</entry>
+	<entry key="user.vehicles">Vehicles</entry>
+
+	<entry key="car.regnumber">Registration number</entry>
+	<entry key="car.brand">Brand</entry>
+	<entry key="car.model">Model</entry>
+
+
+
+
 	
 	<entry key="US">English</entry>
 	<entry key="RU">Russian</entry>

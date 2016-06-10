@@ -11,28 +11,34 @@ import org.springframework.stereotype.Service;
 import by.lskrashchuk.training.parking.dataaccess.CarDao;
 import by.lskrashchuk.training.parking.dataaccess.filters.CarFilter;
 import by.lskrashchuk.training.parking.datamodel.Car;
+import by.lskrashchuk.training.parking.datamodel.User;
 import by.lskrashchuk.training.parking.service.CarService;
 
 @Service
-public class CarServiceImpl implements CarService{
-    private static Logger LOGGER = LoggerFactory.getLogger(CarServiceImpl.class);
+public class CarServiceImpl implements CarService {
+	private static Logger LOGGER = LoggerFactory.getLogger(CarServiceImpl.class);
 
 	@Inject
 	private CarDao carDao;
 
-    @Override
+	@Override
 	public void register(Car car) {
 		carDao.insert(car);
-        LOGGER.info("Car regirstred: {}", car);
+		LOGGER.info("Car regirstred: {}", car);
 	}
 
 	@Override
 	public Car getCar(Long id) {
-		return carDao.get(id);
+		return carDao.getWithAll(id);
 	}
 
 	@Override
-	public void update(Car car) {
+	public void saveOrUpdate(Car car) {
+		if (car.getId() == null) {
+			carDao.insert(car);
+		} else {
+			carDao.update(car);
+		}
 		carDao.update(car);
 		LOGGER.info("Car updated: {}", car);
 	}
@@ -50,14 +56,13 @@ public class CarServiceImpl implements CarService{
 	@Override
 	public void delete(Car car) {
 		carDao.delete(car.getId());
-        LOGGER.info("Car deleted: {}", car);
-		
+		LOGGER.info("Car deleted: {}", car);
+
 	}
 
 	@Override
 	public Long count(CarFilter filter) {
-        return carDao.count(filter);
+		return carDao.count(filter);
 	}
-
 
 }

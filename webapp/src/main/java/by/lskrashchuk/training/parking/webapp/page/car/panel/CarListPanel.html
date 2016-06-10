@@ -4,10 +4,10 @@
 		<thead>
 			<tr>
 				<th><a wicket:id="sort-id">id</a></th>
-				<th><a wicket:id="sort-regnumber">Регистрационный номер</a></th>
-				<th><a wicket:id="sort-brand">Марка</a></th>
-				<th><a wicket:id="sort-model">Модель</a></th>
-				<th>Действия</th>
+				<th><a wicket:id="sort-regnumber"><wicket:message key="car.regnumber"/></a></th>
+				<th><a wicket:id="sort-brand"><wicket:message key="car.brand"/></a></th>
+				<th><a wicket:id="sort-model"><wicket:message key="car.model"/></a></th>
+				<th><wicket:message key="label.actions"/></th>
 			</tr>
 		
 		</thead>
@@ -17,7 +17,7 @@
 				<td><span wicket:id="regnumber"/></td>
 				<td><span wicket:id="brand"/></td>
 				<td><span wicket:id="model"/></td>
-				<td><a wicket:id="delete-link">удалить</a>/<a wicket:id="edit-link">редактировать</a></td>
+				<td><a wicket:id="delete-link"><wicket:message key="label.delete"/></a>/<a wicket:id="edit-link"><wicket:message key="label.edit"/></a></td>
 			</tr>
 		</tbody>
 	</table>

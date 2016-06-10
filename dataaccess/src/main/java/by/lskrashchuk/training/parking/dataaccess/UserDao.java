@@ -13,6 +13,7 @@ public interface UserDao extends AbstractDao<User, Long>{
 	
 	User find(String userName, String password);
 	
-	User getWithUserType(Long id);
+	User getWithAll(Long id);
 
+	
 }

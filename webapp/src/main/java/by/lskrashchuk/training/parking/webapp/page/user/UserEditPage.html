@@ -33,12 +33,19 @@
 				<div class="col-2">
 					<label> <strong><wicket:message key="user.photo"/>:</strong>
 						<form wicket:id="imageForm" id="imageForm">
-							<img height="133" title="Photo" wicket:id="orig_photo" /> <label>
+				  	    	<wicket:enclosure>
+				  	    		<img height="133"  wicket:id="null_photo"/> 
+							</wicket:enclosure>
+							<wicket:enclosure>
+								<img height="133" title="Photo" wicket:id="orig_photo" /> 
+							</wicket:enclosure>
+							<label>
 								<input wicket:id="photoUpload" size="40" type="file" />
-							</label> <a class="button-1 top-1" type="submit" wicket:id="load"><wicket:message key="btn.upload"/></a>
+							</label> 
+							<a class="button-1 top-1" type="submit" wicket:id="load"><wicket:message key="btn.upload"/></a>
 						</form>
 					</label> 
-					<label> <strong>ТC:</strong> <wicket:container
+					<label> <strong><wicket:message key="user.vehicles"/>:</strong> <wicket:container
 							wicket:id="carlist-panel"></wicket:container>
 					</label> <label> <a class="button-1 top-1" type="submit"
 						wicket:id="editlist">Редактировать список ТС</a>

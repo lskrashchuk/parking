@@ -19,6 +19,7 @@
 	<entry key="label.actions">Действия</entry>
 	<entry key="label.edit">Редактировать</entry>
 	<entry key="label.delete">Удалить</entry>
+	<entry key="label.cars">Транспортные средства</entry>
 
 
 	<entry key="loging.err.auth">ошибка авторизации</entry>
@@ -37,6 +38,11 @@
 	<entry key="user.type">Тип</entry>
 	<entry key="user.role">Права</entry>
 	<entry key="user.photo">Фото</entry>
+	<entry key="user.vehicles">ТC</entry>
+
+	<entry key="car.regnumber">Регистрационный номер</entry>
+	<entry key="car.brand">Марка</entry>
+	<entry key="car.model">Модель</entry>
 	
 
 	<entry key="US">Английский</entry>

@@ -3,7 +3,6 @@ package by.lskrashchuk.training.parking.dataaccess;
 import java.util.List;
 
 import by.lskrashchuk.training.parking.dataaccess.filters.CarFilter;
-import by.lskrashchuk.training.parking.dataaccess.filters.UserFilter;
 import by.lskrashchuk.training.parking.datamodel.Car;
 
 public interface CarDao extends AbstractDao<Car, Long>{
@@ -14,5 +13,5 @@ public interface CarDao extends AbstractDao<Car, Long>{
 	
     Long count(CarFilter filter);
 
-
+	Car getWithAll(Long id);
 }

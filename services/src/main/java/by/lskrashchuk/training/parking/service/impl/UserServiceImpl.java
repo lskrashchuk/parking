@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public User getUser(Long id) {
-		return userDao.getWithUserType(id);
+		return userDao.getWithAll(id);
 	}
 
 	@Override

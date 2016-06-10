@@ -29,6 +29,8 @@ import by.lskrashchuk.training.parking.datamodel.Model_;
 import by.lskrashchuk.training.parking.service.BrandService;
 import by.lskrashchuk.training.parking.service.CarService;
 import by.lskrashchuk.training.parking.service.ModelService;
+import by.lskrashchuk.training.parking.webapp.page.car.CarEditPage;
+import by.lskrashchuk.training.parking.webapp.page.car.CarsPage;
 
 
 public class CarListPanel extends Panel{
@@ -46,7 +48,7 @@ public class CarListPanel extends Panel{
 	public CarListPanel(String id) {
 		super(id);
         CarDataProvider carDataProvider = new CarDataProvider();
-        DataView<Car> dataView = new DataView<Car>("rows", carDataProvider, 5) {
+        DataView<Car> dataView = new DataView<Car>("rows", carDataProvider, 10) {
             @Override
             protected void populateItem(Item<Car> item) {
                 Car car = item.getModelObject();
@@ -59,7 +61,7 @@ public class CarListPanel extends Panel{
                 item.add(new Link<Void>("edit-link") {
                     @Override
                     public void onClick() {
-   //                     setResponsePage(new CarEditPage(car));
+                        setResponsePage(new CarEditPage(car));
                     }
                 });
 
@@ -72,7 +74,7 @@ public class CarListPanel extends Panel{
                             System.out.println("caughth persistance exception");
                         }
 
-    //                    setResponsePage(new UsersPage());
+                        setResponsePage(new CarsPage());
                     }
                 });
 

@@ -6,11 +6,8 @@ import java.util.Arrays;
 
 import javax.inject.Inject;
 
-import org.apache.wicket.Session;
 import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
-import org.apache.wicket.event.IEvent;
 import org.apache.wicket.extensions.markup.html.form.DateTextField;
 import org.apache.wicket.extensions.yui.calendar.DatePicker;
 
@@ -21,29 +18,17 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.form.upload.FileUpload;
 import org.apache.wicket.markup.html.form.upload.FileUploadField;
 import org.apache.wicket.markup.html.image.Image;
-import org.apache.wicket.markup.html.image.NonCachingImage;
-import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
-import org.apache.wicket.model.AbstractReadOnlyModel;
 import org.apache.wicket.model.CompoundPropertyModel;
-import org.apache.wicket.model.IModel;
-import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.model.ResourceModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
-import org.apache.wicket.request.resource.ByteArrayResource;
-import org.apache.wicket.request.resource.DynamicImageResource;
-import org.apache.wicket.request.resource.IResource;
-import org.apache.wicket.util.file.Files;
+import org.apache.wicket.request.resource.ContextRelativeResource;
 import org.apache.wicket.util.lang.Bytes;
-import org.apache.wicket.validation.validator.RangeValidator;
 
-import by.lskrashchuk.training.parking.dataaccess.filters.UserTypeFilter;
 import by.lskrashchuk.training.parking.datamodel.Role;
 import by.lskrashchuk.training.parking.datamodel.User;
 import by.lskrashchuk.training.parking.datamodel.UserType;
-import by.lskrashchuk.training.parking.datamodel.UserType_;
-import by.lskrashchuk.training.parking.datamodel.User_;
 import by.lskrashchuk.training.parking.service.UserService;
 import by.lskrashchuk.training.parking.service.UserTypeService;
 
@@ -167,7 +152,7 @@ public class UserEditPage extends AbstractPage {
 		// FileUploadField photoUpload = new FileUploadField("photo");
 		// form.add(photoUpload);
 
-		form.add(new CarListPanel("carlist-panel"));
+		form.add(new CarListPanel("carlist-panel", user));
 
 		form.add(new SubmitLink("editlist") {
 			@Override
@@ -202,12 +187,17 @@ public class UserEditPage extends AbstractPage {
 		// max upload size, 100k
 		imageForm.setMaxSize(Bytes.kilobytes(100));
 
-		/*
-		 * File file = new File("d:\\photo3f.jpg"); try {
-		 * user.setPhoto(ImageResource.getBytesFromFile(file)); } catch
-		 * (IOException e) { // TODO Auto-generated catch block
-		 * e.printStackTrace(); }
-		 */
+
+/*		File file = new File("images/icon-car.png"); 
+		try {
+		  user.setPhoto(ImageResource.getBytesFromFile(file));
+		  } catch (IOException e) { 
+			  // TODO Auto-generated catch block
+			  e.printStackTrace(); 
+			  };*/
+		
+		Image nullImg = new Image("null_photo", new ContextRelativeResource("images/user-null.png"));
+		imageForm.add(nullImg);
 
 		byte[] data = user.getPhoto();
 		Image img = ImageResource.createImage("orig_photo", data);
@@ -215,21 +205,24 @@ public class UserEditPage extends AbstractPage {
 		img.setOutputMarkupPlaceholderTag(true);
 
 		imageForm.addOrReplace(img);
+		
+		if (user.getPhoto()==null) {
+			img.setVisible(false);
+		}
+		else {
+			nullImg.setVisible(false);
+		}
 
 		FileUploadField photoUpload = new FileUploadField("photoUpload");
 		imageForm.add(photoUpload);
 
 
-/*		Model<Image> imageModel = new Model<Image>();
-        imageModel.setObject(img);*/
-        
+      
         imageForm.add(new AjaxSubmitLink("load") {
         	
-
         	@Override
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
 				// TODO Auto-generated method stub
-				try {
 				super.onSubmit(target, form);
 				FileUpload uploadedFile = photoUpload.getFileUpload();
 		
@@ -240,63 +233,10 @@ public class UserEditPage extends AbstractPage {
 	                this.info(localizedMessage);
 	                target.addChildren(getPage(), FeedbackPanel.class);
 				};
-				}
-				catch (Exception e) {
-					this.error(e.getMessage());
-					target.addChildren(getPage(), FeedbackPanel.class);
-				};
-				
-				
-
 			}
+       });
 
 
-/*				@Override
-				public void onSubmit() {
-					FileUpload uploadedFile = photoUpload.getFileUpload();
-					if (uploadedFile != null) {
-						user.setPhoto(uploadedFile.getBytes());
-					};
-					
-				}*/
-	        });
-
-
-	       
-
-		/*
-		 * photoUpload.add(new AjaxEventBehavior("onchange") {
-		 * 
-		 * @Override protected void onEvent(AjaxRequestTarget target) { byte[] b
-		 * = photoUpload.getFileUpload().getBytes(); Image img1 =
-		 * ImageResource.createImage("orig_photo",
-		 * photoUpload.getFileUpload().getBytes());
-		 * 
-		 * imageForm.addOrReplace(img1);
-		 * img.add(AttributeModifier.replace("src", "d://photo3f.jpg"));
-		 * imageForm.addOrReplace(img);
-		 * 
-		 * target.add(img);
-		 * 
-		 * 
-		 * } });
-		 */
-
-		/*
-		 * Model<Integer> counterModel = new Model<Integer>();
-		 * counterModel.setObject(0); Label label = new Label("counter",
-		 * counterModel) {
-		 * 
-		 * @Override public void onEvent(IEvent<?> event) { if
-		 * (event.getPayload() instanceof ProductChangeEvent) {
-		 * counterModel.setObject(0); } } }; label.setOutputMarkupId(true);
-		 * label.setOutputMarkupPlaceholderTag(true); add(label);
-		 * 
-		 * add(new AjaxLink<Void>("btn-increment") {
-		 * 
-		 * @Override public void onClick(AjaxRequestTarget target) {
-		 * incrementAndUpdate(counterModel, label, target); } });
-		 */
 
         form.add(imageForm);
 
@@ -307,15 +247,6 @@ public class UserEditPage extends AbstractPage {
 
 	}
 	
-/*    private void loadAndUpdate(Model<Image> imageModel, Image img, FileUploadField photoUpload, AjaxRequestTarget target) {
-		if (photoUpload != null) {
-			user.setPhoto(photoUpload.getFileUpload().getBytes());
-		};
-
-        target.add(img);
-		setResponsePage(new UsersPage());
-
-    }*/
 
 
 }

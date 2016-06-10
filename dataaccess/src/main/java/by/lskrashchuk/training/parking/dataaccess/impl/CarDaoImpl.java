@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
@@ -14,10 +15,8 @@ import org.springframework.stereotype.Repository;
 
 import by.lskrashchuk.training.parking.dataaccess.CarDao;
 import by.lskrashchuk.training.parking.dataaccess.filters.CarFilter;
-import by.lskrashchuk.training.parking.dataaccess.filters.UserFilter;
 import by.lskrashchuk.training.parking.datamodel.Car;
 import by.lskrashchuk.training.parking.datamodel.Car_;
-import by.lskrashchuk.training.parking.datamodel.User;
 
 @Repository
 public class CarDaoImpl extends AbstractDaoImpl<Car, Long> implements CarDao{
@@ -74,6 +73,33 @@ public class CarDaoImpl extends AbstractDaoImpl<Car, Long> implements CarDao{
         cq.select(cb.count(from));
         TypedQuery<Long> q = em.createQuery(cq);
         return q.getSingleResult();
+	}
+
+	@Override
+	public Car getWithAll(Long id) {
+	       EntityManager em = getEntityManager();
+
+	        CriteriaBuilder cb = em.getCriteriaBuilder();
+
+	        CriteriaQuery<Car> cq = cb.createQuery(Car.class);
+
+	        Root<Car> from = cq.from(Car.class);
+
+	        // set selection
+	        cq.select(from);
+
+
+	        from.fetch(Car_.carPhotos, JoinType.LEFT);
+	        
+	        
+	        cq.where(cb.equal(from.get(Car_.id), id));
+	        cq.distinct(true);
+
+	        TypedQuery<Car> q = em.createQuery(cq);
+
+
+	        // set execute query
+	        return q.getSingleResult();
 	}
 	
 	

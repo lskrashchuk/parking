@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Car extends AbstractModel{
@@ -28,6 +29,10 @@ public class Car extends AbstractModel{
 	@JoinTable(name = "user_2_car", joinColumns = {@JoinColumn(name = "car_id")}, inverseJoinColumns = {@JoinColumn(name = "user_id")})
 	@ManyToMany(targetEntity = User.class,fetch = FetchType.LAZY)
 	private List<User> users;
+	
+	@OneToMany(mappedBy = "car", fetch = FetchType.LAZY)
+	private List<CarPhoto> carPhotos;
+
 	
 	public String getRegNumber() {
 		return regNumber;
@@ -67,6 +72,14 @@ public class Car extends AbstractModel{
 
 	public void setUsers(List<User> users) {
 		this.users = users;
+	}
+
+	public List<CarPhoto> getCarPhotos() {
+		return carPhotos;
+	}
+
+	public void setCarPhotos(List<CarPhoto> carPhotos) {
+		this.carPhotos = carPhotos;
 	}
 	
 	

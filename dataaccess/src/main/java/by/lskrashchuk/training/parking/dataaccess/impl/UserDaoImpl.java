@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Repository;
 
 import by.lskrashchuk.training.parking.dataaccess.UserDao;
 import by.lskrashchuk.training.parking.dataaccess.filters.UserFilter;
+import by.lskrashchuk.training.parking.datamodel.Car;
 import by.lskrashchuk.training.parking.datamodel.User;
 import by.lskrashchuk.training.parking.datamodel.User_;
 
@@ -105,8 +107,10 @@ public class UserDaoImpl extends AbstractDaoImpl<User, Long> implements UserDao{
         }
 	}
 
+
+
 	@Override
-	public User getWithUserType(Long id) {
+	public User getWithAll(Long id) {
 	       EntityManager em = getEntityManager();
 
 	        CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -118,16 +122,23 @@ public class UserDaoImpl extends AbstractDaoImpl<User, Long> implements UserDao{
 	        // set selection
 	        cq.select(from);
 
-	        from.fetch(User_.userType, JoinType.LEFT);
 
+	        from.fetch(User_.userType, JoinType.LEFT);
+	        from.fetch(User_.cars, JoinType.LEFT);
+
+//	        Predicate userType = cb.equal(from.get(User_.email), userName);
+//	        Predicate passwEqualCondition = cb.equal(from.get(User_.password), password);
+	        
+	        
 	        cq.where(cb.equal(from.get(User_.id), id));
 	        cq.distinct(true);
 
 	        TypedQuery<User> q = em.createQuery(cq);
 
+
 	        // set execute query
 	        return q.getSingleResult();
-	    }
+	}
 }
 		
 

@@ -5,7 +5,7 @@ import javax.persistence.metamodel.SingularAttribute;
 public class CarFilter {
     
 	private String carRegNumber;
-    
+  
 	private SingularAttribute sortProperty;
     
 	private boolean sortOrder;
