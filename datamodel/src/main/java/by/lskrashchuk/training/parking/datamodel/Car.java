@@ -82,6 +82,13 @@ public class Car extends AbstractModel{
 		this.carPhotos = carPhotos;
 	}
 	
+	public Brand getBrand() {
+		return model.getBrand();
+	}
+	
+	public void setBrand(Brand brand) {
+		this.model.setBrand(brand);
+	}
 	
 
 }

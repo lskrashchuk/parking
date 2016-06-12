@@ -19,6 +19,7 @@
 	<entry key="label.actions">Действия</entry>
 	<entry key="label.edit">Редактировать</entry>
 	<entry key="label.delete">Удалить</entry>
+	<entry key="label.car.edit">Сведения о транспортном средстве</entry>
 	<entry key="label.cars">Транспортные средства</entry>
 
 
@@ -40,9 +41,10 @@
 	<entry key="user.photo">Фото</entry>
 	<entry key="user.vehicles">ТC</entry>
 
-	<entry key="car.regnumber">Регистрационный номер</entry>
+	<entry key="car.regnumber">Регномер</entry>
 	<entry key="car.brand">Марка</entry>
 	<entry key="car.model">Модель</entry>
+	<entry key="car.yearproduced">Год</entry>
 	
 
 	<entry key="US">Английский</entry>

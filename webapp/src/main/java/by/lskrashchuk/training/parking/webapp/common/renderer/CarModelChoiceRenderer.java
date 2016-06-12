@@ -7,7 +7,7 @@ import by.lskrashchuk.training.parking.datamodel.UserType;
 
 public class CarModelChoiceRenderer extends ChoiceRenderer<Model>{
 	
-	public static final UserTypeChoiceRenderer INSTANCE = new UserTypeChoiceRenderer();
+	public static final CarModelChoiceRenderer INSTANCE = new CarModelChoiceRenderer();
 
 	
 	public CarModelChoiceRenderer() {

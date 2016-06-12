@@ -18,28 +18,27 @@ import by.lskrashchuk.training.parking.service.CarPhotoService;
 import by.lskrashchuk.training.parking.service.CarService;
 import by.lskrashchuk.training.parking.webapp.common.image.ImageResource;
 
-public class CarPhotoListPanel extends Panel{
-	
-		
-		@Inject
-		private CarPhotoService carPhotoService;
+public class CarPhotoListPanel extends Panel {
 
-		public CarPhotoListPanel(String id, Car car) {
-			super(id);
-			List<Image> list = new ArrayList<Image>();
-			for(CarPhoto carPhoto : car.getCarPhotos()){
+	@Inject
+	private CarPhotoService carPhotoService;
+
+	public CarPhotoListPanel(String id, Car car) {
+		super(id);
+		List<Image> list = new ArrayList<Image>();
+		List<CarPhoto> carPhotos = car.getCarPhotos();
+		if (carPhotos.size() != 0) {
+			for (CarPhoto carPhoto : carPhotos) {
 				list.add(ImageResource.createImage(id, carPhoto.getPhoto()));
 			}
-
-			ListView listview = new ListView("carphotolist", list) {
-			    protected void populateItem(ListItem item) {
-			        item.add(new Image("carphoto", item.getModel()));
-			    }
-			};
-			add(listview);
 		}
 
-	
-
+		ListView listview = new ListView("carphotolist", list) {
+			protected void populateItem(ListItem item) {
+				item.add(new Image("carphoto", item.getModel()));
+			}
+		};
+		add(listview);
+	}
 
 }

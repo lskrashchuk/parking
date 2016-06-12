@@ -44,12 +44,13 @@ public class UserServiceImpl implements UserService{
 	public void saveOrUpdate(User user) {
 	       if (user.getId() == null) {
 	            userDao.insert(user);
+	            LOGGER.info("User inserted: {}", user);
 	        } else {
 	            userDao.update(user);
+	            LOGGER.info("User updated: {}", user);
 	        }
 
-        LOGGER.info("User updated: {}", user);
-	}
+ 	}
 
 	@Override
 	public void delete(User user) {

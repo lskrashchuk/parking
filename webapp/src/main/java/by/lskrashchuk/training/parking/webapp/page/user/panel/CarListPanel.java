@@ -16,23 +16,27 @@ import by.lskrashchuk.training.parking.datamodel.Car;
 import by.lskrashchuk.training.parking.datamodel.User;
 import by.lskrashchuk.training.parking.service.CarService;
 
-public class CarListPanel extends Panel{
-	
+public class CarListPanel extends Panel {
+
 	@Inject
 	private CarService carService;
 
 	public CarListPanel(String id, User user) {
 		super(id);
-//		List list = Arrays.asList(new String[] { "Volvo FL, 6578 FT-3", "Peugeot 307, 7489 KI-4" });
+		// List list = Arrays.asList(new String[] { "Volvo FL, 6578 FT-3",
+		// "Peugeot 307, 7489 KI-4" });
 		List<String> list = new ArrayList<String>();
-		for(Car car : user.getCars()){
-			list.add(car.getModel().getBrand().getName() +" "+car.getModel().getName()+" "+car.getRegNumber());
+		if (user.getCars() != null) {
+			for (Car car : user.getCars()) {
+				list.add(car.getModel().getBrand().getName() + " " + car.getModel().getName() + " "
+						+ car.getRegNumber());
+			}
 		}
 
 		ListView listview = new ListView("carlist", list) {
-		    protected void populateItem(ListItem item) {
-		        item.add(new Label("car", item.getModel()));
-		    }
+			protected void populateItem(ListItem item) {
+				item.add(new Label("car", item.getModel()));
+			}
 		};
 		add(listview);
 	}

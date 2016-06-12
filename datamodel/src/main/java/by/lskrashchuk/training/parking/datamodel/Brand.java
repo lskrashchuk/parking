@@ -23,6 +23,14 @@ public class Brand extends AbstractModel{
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public List<Model> getModels() {
+		return models;
+	}
+
+	public void setModels(List<Model> models) {
+		this.models = models;
+	}
 	
 	
 

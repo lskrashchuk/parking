@@ -11,6 +11,7 @@ import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
+import by.lskrashchuk.training.parking.webapp.page.car.CarEditPage;
 import by.lskrashchuk.training.parking.webapp.page.home.HomePage;
 import by.lskrashchuk.training.parking.webapp.page.login.LoginPage;
 import by.lskrashchuk.training.parking.webapp.page.user.UserEditPage;
@@ -42,6 +43,7 @@ public class WicketApplication extends AuthenticatedWebApplication {
         getSecuritySettings().setAuthorizationStrategy(new AnnotationsRoleAuthorizationStrategy(this));
         // mount
         mountPage("/userDetails", UserEditPage.class);
+        mountPage("/carDetails", CarEditPage.class);
  
 
     }

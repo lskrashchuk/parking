@@ -8,9 +8,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import by.lskrashchuk.training.parking.dataaccess.BrandDao;
 import by.lskrashchuk.training.parking.dataaccess.CarDao;
+import by.lskrashchuk.training.parking.dataaccess.ModelDao;
 import by.lskrashchuk.training.parking.dataaccess.filters.CarFilter;
+import by.lskrashchuk.training.parking.datamodel.Brand;
 import by.lskrashchuk.training.parking.datamodel.Car;
+import by.lskrashchuk.training.parking.datamodel.Model;
 import by.lskrashchuk.training.parking.datamodel.User;
 import by.lskrashchuk.training.parking.service.CarService;
 
@@ -20,6 +24,12 @@ public class CarServiceImpl implements CarService {
 
 	@Inject
 	private CarDao carDao;
+
+	@Inject
+	private BrandDao brandDao;
+
+	@Inject
+	private ModelDao modelDao;
 
 	@Override
 	public void register(Car car) {
@@ -36,11 +46,11 @@ public class CarServiceImpl implements CarService {
 	public void saveOrUpdate(Car car) {
 		if (car.getId() == null) {
 			carDao.insert(car);
+			LOGGER.info("Car inserted: {}", car);
 		} else {
 			carDao.update(car);
+			LOGGER.info("Car updated: {}", car);
 		}
-		carDao.update(car);
-		LOGGER.info("Car updated: {}", car);
 	}
 
 	@Override
@@ -63,6 +73,16 @@ public class CarServiceImpl implements CarService {
 	@Override
 	public Long count(CarFilter filter) {
 		return carDao.count(filter);
+	}
+
+	@Override
+	public List<Brand> getAllBrands() {
+		return brandDao.getAll();
+	}
+
+	@Override
+	public List<Model> getAllModels(Brand brand) {
+		return brand.getModels();
 	}
 
 }

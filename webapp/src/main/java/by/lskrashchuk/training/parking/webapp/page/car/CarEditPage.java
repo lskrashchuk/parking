@@ -2,7 +2,9 @@ package by.lskrashchuk.training.parking.webapp.page.car;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -24,6 +26,7 @@ import org.apache.wicket.model.ResourceModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.request.resource.ContextRelativeResource;
 import org.apache.wicket.util.lang.Bytes;
+import org.apache.wicket.validation.validator.RangeValidator;
 
 import by.lskrashchuk.training.parking.datamodel.Brand;
 import by.lskrashchuk.training.parking.datamodel.Car;
@@ -90,20 +93,23 @@ public class CarEditPage extends AbstractPage{
 		regnumberField.setRequired(true);
 		textForm.add(regnumberField);
 
-		DropDownChoice<Brand> brandField = new DropDownChoice<>("brand", brandService.getAll(),
+		DropDownChoice<Brand> brandField = new DropDownChoice<>("brand", carService.getAllBrands(),
 				CarBrandChoiceRenderer.INSTANCE);
         brandField.setLabel(new ResourceModel("car.brand"));
 		brandField.setRequired(true);
 		textForm.add(brandField);
 
-/*		DropDownChoice<Model> modelField = new DropDownChoice<>("model", modelService.getAll(),
+		DropDownChoice<Model> modelField = new DropDownChoice<>("model", carService.getAllModels(brandService.getBrand(car.getBrand().getId())),
 				CarModelChoiceRenderer.INSTANCE);
         modelField.setLabel(new ResourceModel("car.model"));
 		modelField.setRequired(true);
-		textForm.add(modelField);*/
+		textForm.add(modelField); 
 
-		DateTextField yearproducedField = new DateTextField("yearProduced", "yyyy");
-		yearproducedField.add(new DatePicker());
+		TextField yearproducedField = new TextField("yearProduced");
+		Calendar calendar = Calendar.getInstance(java.util.TimeZone.getDefault(), java.util.Locale.getDefault());
+		calendar.setTime(new Date());
+		int currentYear = calendar.get(java.util.Calendar.YEAR); 
+		yearproducedField.add(RangeValidator.<Integer> range(1900, currentYear));
         yearproducedField.setLabel(new ResourceModel("car.yearproduced"));
 		yearproducedField.setRequired(true);
 		textForm.add(yearproducedField);
@@ -138,13 +144,15 @@ public class CarEditPage extends AbstractPage{
 
 		CarPhotoListPanel carPhotoListPanel = new CarPhotoListPanel("carlist-panel", car);
 		imageForm.add(carPhotoListPanel);
+
 		
-		if (car.getCarPhotos()==null) {
+		List<CarPhoto> carPhotos = car.getCarPhotos();
+		if (car.getCarPhotos().size()==0) {
 			carPhotoListPanel.setVisible(false);
 		}
 		else {
 			nullImg.setVisible(false);
-		}
+		} 
 
 		FileUploadField photoUpload = new FileUploadField("photoUpload");
 		imageForm.add(photoUpload);
