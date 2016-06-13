@@ -1,3 +1,29 @@
 <wicket:extend>
 	<h2>Registry</h2>
+	<table>
+		<thead>
+			<tr>
+				<th><a wicket:id="sort-id">id</a></th>
+				<th><a wicket:id="sort-place">place</a></th>
+				<th><a wicket:id="sort-car">car</a></th>
+				<th><a wicket:id="sort-event">eventtype</a></th>
+				<th><a wicket:id="sort-time">eventtime</a></th>
+				<th><wicket:message key="label.actions"/></th>
+			</tr>
+		
+		</thead>
+		<tbody>
+			<tr wicket:id="rows">
+				<td><span wicket:id="id"/></td>
+				<td><span wicket:id="place"/></td>
+				<td><span wicket:id="car"/></td>
+				<td><span wicket:id="event"/></td>
+				<td><span wicket:id="time"/></td>
+				<td><a wicket:id="delete-link"><wicket:message key="label.delete"/></a>/<a wicket:id="edit-link"><wicket:message key="label.edit"/></a></td>
+			</tr>
+		</tbody>
+	</table>
+
+<div wicket:id="paging"></div>
+
 </wicket:extend>

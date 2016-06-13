@@ -1,3 +1,19 @@
 <wicket:extend>
 	<h2>Places</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>number</th>
+				<th><wicket:message key="label.actions"/></th>
+			</tr>
+		
+		</thead>
+		<tbody>
+			<tr wicket:id="rows">
+				<td><span wicket:id="number"/></td>
+				<td><a wicket:id="delete-link"><wicket:message key="label.delete"/></a>/<a wicket:id="edit-link"><wicket:message key="label.edit"/></a></td>
+			</tr>
+		</tbody>
+	</table>
+
 </wicket:extend>

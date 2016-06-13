@@ -1,5 +1,7 @@
 package by.lskrashchuk.training.parking.service.impl;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -7,7 +9,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import by.lskrashchuk.training.parking.dataaccess.PlaceDao;
+import by.lskrashchuk.training.parking.dataaccess.SectionDao;
+import by.lskrashchuk.training.parking.dataaccess.filters.PlaceFilter;
 import by.lskrashchuk.training.parking.datamodel.Place;
+import by.lskrashchuk.training.parking.datamodel.Section;
 import by.lskrashchuk.training.parking.service.PlaceService;
 
 @Service
@@ -16,6 +21,9 @@ public class PlaceServiceImpl implements PlaceService{
 
     @Inject
     private PlaceDao placeDao;
+
+    @Inject
+    private SectionDao sectionDao;
     
 	@Override
 	public void register(Place place) {
@@ -39,6 +47,26 @@ public class PlaceServiceImpl implements PlaceService{
 		placeDao.delete(id);
         LOGGER.info("Place deleted, id: {}", id);
 		
+	}
+
+	@Override
+	public List<Place> getAll() {
+		return placeDao.getAll();
+	}
+
+	@Override
+	public List<Section> getAllSections() {
+		return sectionDao.getAll();
+	}
+
+	@Override
+	public List<Place> find(PlaceFilter filter) {
+		return placeDao.find(filter);
+	}
+
+	@Override
+	public Long count(PlaceFilter filter) {
+		return placeDao.count(filter);
 	}
 
 }

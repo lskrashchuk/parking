@@ -12,10 +12,10 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Registry extends AbstractModel{
 	
-	@ManyToOne(targetEntity = Car.class, fetch = FetchType.LAZY)
+	@ManyToOne(targetEntity = Car.class, fetch = FetchType.EAGER)
 	private Car car;
 	
-	@ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
+	@ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)
 	private User user;
 	
 	@Column
@@ -25,7 +25,7 @@ public class Registry extends AbstractModel{
 	@Column
 	private Date eventTime;
 	
-	@ManyToOne(targetEntity = Place.class, fetch = FetchType.LAZY)
+	@ManyToOne(targetEntity = Place.class, fetch = FetchType.EAGER)
 	private Place place;
 	
 	public Car getCar() {

@@ -1,5 +1,7 @@
 package by.lskrashchuk.training.parking.service.impl;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -7,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import by.lskrashchuk.training.parking.dataaccess.RegistryDao;
+import by.lskrashchuk.training.parking.dataaccess.filters.RegistryFilter;
 import by.lskrashchuk.training.parking.datamodel.Place;
 import by.lskrashchuk.training.parking.datamodel.Registry;
 import by.lskrashchuk.training.parking.service.RegistryService;
@@ -42,6 +45,16 @@ public class RegistryServiceImpl implements RegistryService{
 		registryDao.delete(id);
         LOGGER.info("Registry deleted, id: {}", id);
 		
+	}
+
+	@Override
+	public Long count(RegistryFilter filter) {
+        return registryDao.count(filter);
+	}
+
+	@Override
+	public List<Registry> find(RegistryFilter filter) {
+		return registryDao.find(filter);
 	}
 
 
