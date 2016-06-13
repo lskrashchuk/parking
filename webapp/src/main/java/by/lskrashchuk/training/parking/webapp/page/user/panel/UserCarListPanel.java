@@ -16,12 +16,12 @@ import by.lskrashchuk.training.parking.datamodel.Car;
 import by.lskrashchuk.training.parking.datamodel.User;
 import by.lskrashchuk.training.parking.service.CarService;
 
-public class CarListPanel extends Panel {
+public class UserCarListPanel extends Panel {
 
 	@Inject
 	private CarService carService;
 
-	public CarListPanel(String id, User user) {
+	public UserCarListPanel(String id, User user) {
 		super(id);
 		// List list = Arrays.asList(new String[] { "Volvo FL, 6578 FT-3",
 		// "Peugeot 307, 7489 KI-4" });

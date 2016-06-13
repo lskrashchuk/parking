@@ -13,10 +13,17 @@ import org.apache.wicket.markup.html.panel.Panel;
 
 import by.lskrashchuk.training.parking.datamodel.Car;
 import by.lskrashchuk.training.parking.datamodel.CarPhoto;
+import by.lskrashchuk.training.parking.service.CarPhotoService;
+import by.lskrashchuk.training.parking.service.CarService;
 import by.lskrashchuk.training.parking.webapp.common.image.ImageResource;
 
 public class CarPhotoListPanel extends Panel {
 
+	@Inject
+	private CarService carService;
+
+	@Inject
+	private CarPhotoService carPhotoService;
 
 	public CarPhotoListPanel(String id, Car car) {
 		super(id);

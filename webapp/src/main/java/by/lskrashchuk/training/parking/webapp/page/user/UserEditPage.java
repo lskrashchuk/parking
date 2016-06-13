@@ -38,7 +38,7 @@ import by.lskrashchuk.training.parking.webapp.common.renderer.UserTypeChoiceRend
 
 import by.lskrashchuk.training.parking.webapp.page.AbstractPage;
 
-import by.lskrashchuk.training.parking.webapp.page.user.panel.CarListPanel;
+import by.lskrashchuk.training.parking.webapp.page.user.panel.UserCarListPanel;
 
 public class UserEditPage extends AbstractPage {
 
@@ -152,7 +152,7 @@ public class UserEditPage extends AbstractPage {
 		// FileUploadField photoUpload = new FileUploadField("photo");
 		// form.add(photoUpload);
 
-		form.add(new CarListPanel("carlist-panel", user));
+		form.add(new UserCarListPanel("carlist-panel", user));
 
 		form.add(new SubmitLink("editlist") {
 			@Override

@@ -44,6 +44,7 @@ import by.lskrashchuk.training.parking.service.BrandService;
 import by.lskrashchuk.training.parking.service.CarPhotoService;
 import by.lskrashchuk.training.parking.service.CarService;
 import by.lskrashchuk.training.parking.service.ModelService;
+import by.lskrashchuk.training.parking.webapp.common.image.ImageResource;
 import by.lskrashchuk.training.parking.webapp.common.renderer.CarBrandChoiceRenderer;
 import by.lskrashchuk.training.parking.webapp.common.renderer.CarColorChoiceRenderer;
 import by.lskrashchuk.training.parking.webapp.common.renderer.CarModelChoiceRenderer;
@@ -91,11 +92,11 @@ public class CarEditPage extends AbstractPage {
 	protected void onInitialize() {
 		super.onInitialize();
 		ifPhotoUpload = false;
-
+		
 		Form form = new Form("form");
 		add(form);
 
-		CompoundPropertyModel baseModel = new CompoundPropertyModel<Car>(car);
+		CompoundPropertyModel<Car> baseModel = new CompoundPropertyModel<Car>(car);
 
 		Form<Car> textForm = new Form<Car>("textForm", baseModel);
 
@@ -114,6 +115,14 @@ public class CarEditPage extends AbstractPage {
 		yearproducedField.setLabel(new ResourceModel("car.yearproduced"));
 		yearproducedField.setRequired(true);
 		textForm.add(yearproducedField);
+		
+		List<Color> lc = carService.getAllColors();
+		DropDownChoice<Color> colorField = new DropDownChoice<>("color", carService.getAllColors(),
+				CarColorChoiceRenderer.INSTANCE);
+		colorField.setLabel(new ResourceModel("car.color"));
+		colorField.setRequired(true);
+		textForm.add(colorField);
+
 
 		IModel modelChoiceModel = new AbstractReadOnlyModel() {
 
@@ -152,11 +161,6 @@ public class CarEditPage extends AbstractPage {
 			}
 		});
 
-		DropDownChoice<Color> colorField = new DropDownChoice<>("color", carService.getAllColors(),
-				CarColorChoiceRenderer.INSTANCE);
-		colorField.setLabel(new ResourceModel("car.color"));
-		colorField.setRequired(true);
-		textForm.add(colorField);
 
 
 		textForm.add(new SubmitLink("saveCar") {
@@ -168,9 +172,9 @@ public class CarEditPage extends AbstractPage {
 				// Integer brandId = Integer.parseInt(brandField.getId());
 				String modelString = modelField.getModelObject().toString();
 				Model model = modelService.getByName(modelString);
-				Color color = colorField.getModelObject();
+//				Color color = colorField.getModelObject();
 				car.setModel(model);
-				car.setColor(color);
+//				car.setColor(color);
 				carService.saveOrUpdate(car);
 				if (ifPhotoUpload) {
 					if (car.getCarPhotos() != null) {
@@ -202,19 +206,32 @@ public class CarEditPage extends AbstractPage {
 		Image nullImg = new Image("null_photo", new ContextRelativeResource("images/car-null.png"));
 		imageForm.add(nullImg);
 
-		// Image img = ImageResource.createImage("car_photo",
-		// car.getCarPhotos().get(0).getPhoto());
-		// imageForm.add(img);
+		Image img = new Image("car_photo", new ContextRelativeResource("images/car-null.png"));;
 
-		CarPhotoListPanel carPhotoListPanel = new CarPhotoListPanel("carphotolist-panel", car);
-		imageForm.add(carPhotoListPanel);
+		if (car.getCarPhotos() != null) {
+		if (car.getCarPhotos().size() != 0) {
+			img = ImageResource.createImage("car_photo",car.getCarPhotos().get(0).getPhoto());
+		}
+		}
+		imageForm.add(img);
 
+//		CarPhotoListPanel carPhotoListPanel = new CarPhotoListPanel("carphotolist-panel", car);
+//		carPhotoListPanel.setOutputMarkupId(true);
+//		carPhotoListPanel.setOutputMarkupPlaceholderTag(true);
+//		imageForm.add(carPhotoListPanel);
+
+		if (car.getCarPhotos() != null) {
 		if (car.getCarPhotos().size() == 0) {
-			carPhotoListPanel.setVisible(false);
-			// img.setVisible(false);
+			//carPhotoListPanel.setVisible(false);
+			 img.setVisible(false);
 		} else {
 			nullImg.setVisible(false);
 		}
+		}
+		else {
+			img.setVisible(false);
+		};
+			
 
 		FileUploadField photoUpload = new FileUploadField("photoUpload");
 		imageForm.add(photoUpload);

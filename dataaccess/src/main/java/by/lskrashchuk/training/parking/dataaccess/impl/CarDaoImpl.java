@@ -90,6 +90,7 @@ public class CarDaoImpl extends AbstractDaoImpl<Car, Long> implements CarDao{
 
 
 	        from.fetch(Car_.carPhotos, JoinType.LEFT);
+	        from.fetch(Car_.color, JoinType.LEFT);
 	        
 	        
 	        cq.where(cb.equal(from.get(Car_.id), id));

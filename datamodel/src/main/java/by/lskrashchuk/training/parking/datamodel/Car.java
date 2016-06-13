@@ -23,7 +23,7 @@ public class Car extends AbstractModel{
 	@Column
 	private Integer yearProduced;
 	
-	@ManyToOne( targetEntity = Color.class, fetch = FetchType.EAGER)
+	@ManyToOne( targetEntity = Color.class, fetch = FetchType.LAZY)
 	private Color color;
 	
 	@JoinTable(name = "user_2_car", joinColumns = {@JoinColumn(name = "car_id")}, inverseJoinColumns = {@JoinColumn(name = "user_id")})
@@ -58,13 +58,7 @@ public class Car extends AbstractModel{
 		this.yearProduced = yearProduced;
 	}
 	
-	public Color getColor() {
-		return color;
-	}
-	
-	public void setColor(Color color) {
-		this.color = color;
-	}
+
 
 	public List<User> getUsers() {
 		return users;
@@ -83,12 +77,27 @@ public class Car extends AbstractModel{
 	}
 	
 	public Brand getBrand() {
+		if (model !=null){
 		return model.getBrand();
+		}
+		else {
+			return null;
+		}
+			
 	}
 	
 	public void setBrand(Brand brand) {
+		this.model = new Model();
 		this.model.setBrand(brand);
 	}
-	
 
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
+	}
+	
+	
 }
