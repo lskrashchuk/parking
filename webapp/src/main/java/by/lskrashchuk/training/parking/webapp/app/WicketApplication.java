@@ -6,7 +6,6 @@ import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSessio
 import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AnnotationsRoleAuthorizationStrategy;
 import org.apache.wicket.markup.html.WebPage;
-import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
@@ -45,7 +44,7 @@ public class WicketApplication extends AuthenticatedWebApplication {
         mountPage("/userDetails", UserEditPage.class);
         mountPage("/carDetails", CarEditPage.class);
  
-
+        
     }
     
     public ApplicationContext getApplicationContext() {

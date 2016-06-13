@@ -43,6 +43,8 @@
 	<entry key="car.brand">Brand</entry>
 	<entry key="car.model">Model</entry>
 	<entry key="car.yearproduced">Year</entry>
+	<entry key="car.saved">Vehicle saved</entry>
+	<entry key="car.color">Color</entry>
 
 
 

@@ -23,7 +23,7 @@ public class Car extends AbstractModel{
 	@Column
 	private Integer yearProduced;
 	
-	@ManyToOne( targetEntity = Color.class, fetch = FetchType.LAZY)
+	@ManyToOne( targetEntity = Color.class, fetch = FetchType.EAGER)
 	private Color color;
 	
 	@JoinTable(name = "user_2_car", joinColumns = {@JoinColumn(name = "car_id")}, inverseJoinColumns = {@JoinColumn(name = "user_id")})

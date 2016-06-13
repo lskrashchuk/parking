@@ -1,26 +1,33 @@
 package by.lskrashchuk.training.parking.webapp.page.car;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import org.apache.wicket.Component;
+import org.apache.wicket.ajax.AjaxEventBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
 import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
-import org.apache.wicket.extensions.markup.html.form.DateTextField;
-import org.apache.wicket.extensions.yui.calendar.DatePicker;
+import org.apache.wicket.event.Broadcast;
+import org.apache.wicket.event.IEvent;
+import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.markup.html.form.SubmitLink;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.form.upload.FileUpload;
 import org.apache.wicket.markup.html.form.upload.FileUploadField;
 import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
+import org.apache.wicket.model.AbstractReadOnlyModel;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.model.ResourceModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
@@ -31,26 +38,24 @@ import org.apache.wicket.validation.validator.RangeValidator;
 import by.lskrashchuk.training.parking.datamodel.Brand;
 import by.lskrashchuk.training.parking.datamodel.Car;
 import by.lskrashchuk.training.parking.datamodel.CarPhoto;
+import by.lskrashchuk.training.parking.datamodel.Color;
 import by.lskrashchuk.training.parking.datamodel.Model;
-import by.lskrashchuk.training.parking.datamodel.Role;
-import by.lskrashchuk.training.parking.datamodel.User;
-import by.lskrashchuk.training.parking.datamodel.UserType;
 import by.lskrashchuk.training.parking.service.BrandService;
+import by.lskrashchuk.training.parking.service.CarPhotoService;
 import by.lskrashchuk.training.parking.service.CarService;
 import by.lskrashchuk.training.parking.service.ModelService;
-import by.lskrashchuk.training.parking.service.UserService;
-import by.lskrashchuk.training.parking.service.UserTypeService;
-import by.lskrashchuk.training.parking.webapp.common.image.ImageResource;
 import by.lskrashchuk.training.parking.webapp.common.renderer.CarBrandChoiceRenderer;
+import by.lskrashchuk.training.parking.webapp.common.renderer.CarColorChoiceRenderer;
 import by.lskrashchuk.training.parking.webapp.common.renderer.CarModelChoiceRenderer;
-import by.lskrashchuk.training.parking.webapp.common.renderer.UserRoleChoiceRenderer;
-import by.lskrashchuk.training.parking.webapp.common.renderer.UserTypeChoiceRenderer;
 import by.lskrashchuk.training.parking.webapp.page.AbstractPage;
 import by.lskrashchuk.training.parking.webapp.page.car.panel.CarPhotoListPanel;
-import by.lskrashchuk.training.parking.webapp.page.user.UsersPage;
-import by.lskrashchuk.training.parking.webapp.page.user.panel.CarListPanel;
 
-public class CarEditPage extends AbstractPage{
+public class CarEditPage extends AbstractPage {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Inject
 	private CarService carService;
@@ -59,7 +64,7 @@ public class CarEditPage extends AbstractPage{
 	private BrandService brandService;
 
 	@Inject
-	private ModelService modelService;
+	private CarPhotoService carPhotoService;
 
 	private Car car;
 
@@ -80,40 +85,74 @@ public class CarEditPage extends AbstractPage{
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
-		
+
 		Form form = new Form("form");
 		add(form);
 
-		Form<Car> textForm = new Form<Car>("textForm", new CompoundPropertyModel<Car>(car));
+		CompoundPropertyModel baseModel = new CompoundPropertyModel<Car>(car);
+
+		Form<Car> textForm = new Form<Car>("textForm", baseModel);
 
 		form.add(textForm);
 
 		TextField<String> regnumberField = new TextField<>("regNumber");
-        regnumberField.setLabel(new ResourceModel("car.regnumber"));
+		regnumberField.setLabel(new ResourceModel("car.regnumber"));
 		regnumberField.setRequired(true);
 		textForm.add(regnumberField);
 
+		IModel modelChoiceModel = new AbstractReadOnlyModel() {
+			@Override
+			public Object getObject() {
+				if (car.getBrand() == null) {
+					return Collections.EMPTY_LIST;
+				}
+				List<String> result = new ArrayList<String>();
+				for (Model model : carService.getAllModels(brandService.getBrand(car.getBrand().getId()))) {
+					result.add(model.getName());
+				}
+				return result;
+			}
+		};
+
 		DropDownChoice<Brand> brandField = new DropDownChoice<>("brand", carService.getAllBrands(),
 				CarBrandChoiceRenderer.INSTANCE);
-        brandField.setLabel(new ResourceModel("car.brand"));
+		brandField.setLabel(new ResourceModel("car.brand"));
 		brandField.setRequired(true);
+		brandField.setOutputMarkupId(true);
 		textForm.add(brandField);
 
-		DropDownChoice<Model> modelField = new DropDownChoice<>("model", carService.getAllModels(brandService.getBrand(car.getBrand().getId())),
+		DropDownChoice<Model> modelField = new DropDownChoice<>("model",
+				carService.getAllModels(brandService.getBrand(car.getBrand().getId())),
 				CarModelChoiceRenderer.INSTANCE);
-        modelField.setLabel(new ResourceModel("car.model"));
+		// DropDownChoice modelField = new DropDownChoice("model", baseModel,
+		// modelChoiceModel);
+		modelField.setLabel(new ResourceModel("car.model"));
 		modelField.setRequired(true);
-		textForm.add(modelField); 
+		modelField.setOutputMarkupId(true);
+		textForm.add(modelField);
 
-		TextField yearproducedField = new TextField("yearProduced");
-		Calendar calendar = Calendar.getInstance(java.util.TimeZone.getDefault(), java.util.Locale.getDefault());
-		calendar.setTime(new Date());
-		int currentYear = calendar.get(java.util.Calendar.YEAR); 
-		yearproducedField.add(RangeValidator.<Integer> range(1900, currentYear));
-        yearproducedField.setLabel(new ResourceModel("car.yearproduced"));
-		yearproducedField.setRequired(true);
-		textForm.add(yearproducedField);
+		brandField.add(new AjaxFormComponentUpdatingBehavior("onchange") {
+			protected void onUpdate(AjaxRequestTarget target) {
+				target.add(modelField);
+			}
+		});
 
+		/*
+		 * DropDownChoice<Color> colorField = new DropDownChoice<>("color",
+		 * carService.getAllColors(), CarColorChoiceRenderer.INSTANCE);
+		 * colorField.setLabel(new ResourceModel("car.color"));
+		 * colorField.setRequired(true); textForm.add(colorField);
+		 * 
+		 * 
+		 * TextField yearproducedField = new TextField("yearProduced"); Calendar
+		 * calendar = Calendar.getInstance(java.util.TimeZone.getDefault(),
+		 * java.util.Locale.getDefault()); calendar.setTime(new Date()); int
+		 * currentYear = calendar.get(java.util.Calendar.YEAR);
+		 * yearproducedField.add(RangeValidator.<Integer> range(1900,
+		 * currentYear)); yearproducedField.setLabel(new
+		 * ResourceModel("car.yearproduced"));
+		 * yearproducedField.setRequired(true); textForm.add(yearproducedField);
+		 */
 
 		textForm.add(new SubmitLink("save") {
 			private static final long serialVersionUID = 1L;
@@ -121,80 +160,80 @@ public class CarEditPage extends AbstractPage{
 			@Override
 			public void onSubmit() {
 				super.onSubmit();
-
 				carService.saveOrUpdate(car);
+				if (car.getCarPhotos() != null) {
+					if (car.getCarPhotos().size() == 0) {
+						carPhotoService.register(car.getCarPhotos().get(car.getCarPhotos().size() - 1));
+					} else {
+						carPhotoService.update(car.getCarPhotos().get(car.getCarPhotos().size() - 1));
+					}
+				}
 				CarsPage page = new CarsPage();
 				String localizedMessage = getString("car.saved");
-                page.info(localizedMessage);
+				page.info(localizedMessage);
 				setResponsePage(page);
 			}
 		});
 
 		Form<Car> imageForm = new Form<Car>("imageForm", new PropertyModel<Car>(car, "photo"));
 		imageForm.setOutputMarkupId(true);
-		
+
 		// Enable multipart mode (need for uploads file)
 		imageForm.setMultiPart(true);
 
 		// max upload size, 100k
 		imageForm.setMaxSize(Bytes.kilobytes(100));
-		
+
 		Image nullImg = new Image("null_photo", new ContextRelativeResource("images/car-null.png"));
 		imageForm.add(nullImg);
 
-		CarPhotoListPanel carPhotoListPanel = new CarPhotoListPanel("carlist-panel", car);
+		// Image img = ImageResource.createImage("car_photo",
+		// car.getCarPhotos().get(0).getPhoto());
+		// imageForm.add(img);
+
+		CarPhotoListPanel carPhotoListPanel = new CarPhotoListPanel("carphotolist-panel", car);
 		imageForm.add(carPhotoListPanel);
 
-		
-		List<CarPhoto> carPhotos = car.getCarPhotos();
-		if (car.getCarPhotos().size()==0) {
+		if (car.getCarPhotos().size() == 0) {
 			carPhotoListPanel.setVisible(false);
-		}
-		else {
+			// img.setVisible(false);
+		} else {
 			nullImg.setVisible(false);
-		} 
+		}
 
 		FileUploadField photoUpload = new FileUploadField("photoUpload");
 		imageForm.add(photoUpload);
 
+		imageForm.add(new AjaxSubmitLink("load") {
 
-      
-        imageForm.add(new AjaxSubmitLink("load") {
-        	
-        	@Override
+			@Override
 			protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
 				// TODO Auto-generated method stub
 				super.onSubmit(target, form);
 				FileUpload uploadedFile = photoUpload.getFileUpload();
-		
-			
+
 				if (uploadedFile != null) {
-					if (car.getCarPhotos()== null) {
-						car.setCarPhotos(new ArrayList<CarPhoto>());				
+					if (car.getCarPhotos() == null) {
+						car.setCarPhotos(new ArrayList<CarPhoto>());
 					}
 					CarPhoto carPhoto = new CarPhoto();
 					carPhoto.setCar(car);
 					carPhoto.setPhoto(uploadedFile.getBytes());
 					car.getCarPhotos().add(carPhoto);
 					String localizedMessage = getString("user.photo.loaded");
-	                this.info(localizedMessage);
-	                target.addChildren(getPage(), FeedbackPanel.class);
-				};
+					this.info(localizedMessage);
+					target.addChildren(getPage(), FeedbackPanel.class);
+				}
+				;
 			}
-       });
+		});
 
-
-
-        form.add(imageForm);
+		form.add(imageForm);
 
 		FeedbackPanel feedback = new FeedbackPanel("feedback");
-        add(feedback);
+		add(feedback);
 		feedback.setOutputMarkupId(true);
-		
 
 	}
-	
-
-
 
 }

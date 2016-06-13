@@ -1,5 +1,6 @@
 package by.lskrashchuk.training.parking.datamodel;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
@@ -8,7 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Model extends AbstractModel{
+public class Model extends AbstractModel implements Serializable{
 	
 	@Column
 	private String name;

@@ -45,6 +45,8 @@
 	<entry key="car.brand">Марка</entry>
 	<entry key="car.model">Модель</entry>
 	<entry key="car.yearproduced">Год</entry>
+	<entry key="car.saved">Транспортное средство сохранено</entry>
+	<entry key="car.color">Цвет</entry>
 	
 
 	<entry key="US">Английский</entry>

@@ -16,9 +16,12 @@
 						<label> <strong><wicket:message key="car.model"/>:</strong> <select type="text"
 							wicket:id="model" />
 						</label> 
+<!-- 						<label> <strong><wicket:message key="car.color"/>:</strong> <select type="text"
+							wicket:id="color" />
+						</label>  
 						<label> <strong><wicket:message key="car.yearproduced"/>:</strong> <input type="text"
 							wicket:id="yearProduced" />
-						</label> 
+						</label>  -->
 						<br></br>
 						<label> <a class="button-2" type="submit"
 							wicket:id="save"><wicket:message key="btn.save"/></a>
@@ -32,11 +35,7 @@
 	 			  	    	<wicket:enclosure>
 				  	    		<img height="133"  wicket:id="null_photo"/> 
 							</wicket:enclosure>
-							<wicket:enclosure>
-								<label> 
-									<wicket:container wicket:id="carlist-panel"></wicket:container>
-								</label>							
-							</wicket:enclosure> 
+								<wicket:container wicket:id="carphotolist-panel"></wicket:container> 
 							<label>
 								<input wicket:id="photoUpload" size="40" type="file" />
 							</label> 

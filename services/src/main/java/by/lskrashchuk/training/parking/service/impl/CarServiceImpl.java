@@ -10,12 +10,13 @@ import org.springframework.stereotype.Service;
 
 import by.lskrashchuk.training.parking.dataaccess.BrandDao;
 import by.lskrashchuk.training.parking.dataaccess.CarDao;
+import by.lskrashchuk.training.parking.dataaccess.ColorDao;
 import by.lskrashchuk.training.parking.dataaccess.ModelDao;
 import by.lskrashchuk.training.parking.dataaccess.filters.CarFilter;
 import by.lskrashchuk.training.parking.datamodel.Brand;
 import by.lskrashchuk.training.parking.datamodel.Car;
+import by.lskrashchuk.training.parking.datamodel.Color;
 import by.lskrashchuk.training.parking.datamodel.Model;
-import by.lskrashchuk.training.parking.datamodel.User;
 import by.lskrashchuk.training.parking.service.CarService;
 
 @Service
@@ -30,6 +31,9 @@ public class CarServiceImpl implements CarService {
 
 	@Inject
 	private ModelDao modelDao;
+
+	@Inject
+	private ColorDao colorDao;
 
 	@Override
 	public void register(Car car) {
@@ -83,6 +87,11 @@ public class CarServiceImpl implements CarService {
 	@Override
 	public List<Model> getAllModels(Brand brand) {
 		return brand.getModels();
+	}
+
+	@Override
+	public List<Color> getAllColors() {
+		return colorDao.getAll();
 	}
 
 }

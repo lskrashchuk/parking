@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import javax.persistence.PersistenceException;
 import javax.persistence.metamodel.SingularAttribute;
 
-import org.apache.wicket.datetime.markup.html.basic.DateLabel;
 import org.apache.wicket.extensions.markup.html.repeater.data.sort.OrderByBorder;
 import org.apache.wicket.extensions.markup.html.repeater.data.sort.SortOrder;
 import org.apache.wicket.extensions.markup.html.repeater.util.SortableDataProvider;
@@ -21,14 +20,9 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 
 import by.lskrashchuk.training.parking.dataaccess.filters.CarFilter;
-import by.lskrashchuk.training.parking.dataaccess.filters.UserFilter;
-import by.lskrashchuk.training.parking.datamodel.Brand_;
 import by.lskrashchuk.training.parking.datamodel.Car;
 import by.lskrashchuk.training.parking.datamodel.Car_;
-import by.lskrashchuk.training.parking.datamodel.Model_;
-import by.lskrashchuk.training.parking.service.BrandService;
 import by.lskrashchuk.training.parking.service.CarService;
-import by.lskrashchuk.training.parking.service.ModelService;
 import by.lskrashchuk.training.parking.webapp.page.car.CarEditPage;
 import by.lskrashchuk.training.parking.webapp.page.car.CarsPage;
 
@@ -37,14 +31,7 @@ public class CarListPanel extends Panel{
     @Inject
     private CarService carService;
     
-    @Inject
-    private BrandService brandService;
-    
-    @Inject
-    private ModelService modelService;
 
-    
-    
 	public CarListPanel(String id) {
 		super(id);
         CarDataProvider carDataProvider = new CarDataProvider();
