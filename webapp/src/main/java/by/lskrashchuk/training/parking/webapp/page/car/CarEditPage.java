@@ -64,9 +64,14 @@ public class CarEditPage extends AbstractPage {
 	private BrandService brandService;
 
 	@Inject
+	private ModelService modelService;
+
+	@Inject
 	private CarPhotoService carPhotoService;
 
 	private Car car;
+
+	private Boolean ifPhotoUpload;
 
 	public CarEditPage(PageParameters parameters) {
 		super();
@@ -85,6 +90,7 @@ public class CarEditPage extends AbstractPage {
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
+		ifPhotoUpload = false;
 
 		Form form = new Form("form");
 		add(form);
@@ -100,7 +106,17 @@ public class CarEditPage extends AbstractPage {
 		regnumberField.setRequired(true);
 		textForm.add(regnumberField);
 
+		TextField<Integer> yearproducedField = new TextField<Integer>("yearProduced");
+		Calendar calendar = Calendar.getInstance(java.util.TimeZone.getDefault(), java.util.Locale.getDefault());
+		calendar.setTime(new Date());
+		int currentYear = calendar.get(java.util.Calendar.YEAR);
+		yearproducedField.add(RangeValidator.<Integer> range(1900, currentYear));
+		yearproducedField.setLabel(new ResourceModel("car.yearproduced"));
+		yearproducedField.setRequired(true);
+		textForm.add(yearproducedField);
+
 		IModel modelChoiceModel = new AbstractReadOnlyModel() {
+
 			@Override
 			public Object getObject() {
 				if (car.getBrand() == null) {
@@ -121,11 +137,10 @@ public class CarEditPage extends AbstractPage {
 		brandField.setOutputMarkupId(true);
 		textForm.add(brandField);
 
-		DropDownChoice<Model> modelField = new DropDownChoice<>("model",
-				carService.getAllModels(brandService.getBrand(car.getBrand().getId())),
-				CarModelChoiceRenderer.INSTANCE);
-		// DropDownChoice modelField = new DropDownChoice("model", baseModel,
-		// modelChoiceModel);
+		// DropDownChoice<Model> modelField = new DropDownChoice<>("model",
+		// carService.getAllModels(brandService.getBrand(car.getBrand().getId())
+		// ), CarModelChoiceRenderer.INSTANCE);
+		DropDownChoice modelField = new DropDownChoice("model", baseModel, modelChoiceModel);
 		modelField.setLabel(new ResourceModel("car.model"));
 		modelField.setRequired(true);
 		modelField.setOutputMarkupId(true);
@@ -137,37 +152,37 @@ public class CarEditPage extends AbstractPage {
 			}
 		});
 
-		/*
-		 * DropDownChoice<Color> colorField = new DropDownChoice<>("color",
-		 * carService.getAllColors(), CarColorChoiceRenderer.INSTANCE);
-		 * colorField.setLabel(new ResourceModel("car.color"));
-		 * colorField.setRequired(true); textForm.add(colorField);
-		 * 
-		 * 
-		 * TextField yearproducedField = new TextField("yearProduced"); Calendar
-		 * calendar = Calendar.getInstance(java.util.TimeZone.getDefault(),
-		 * java.util.Locale.getDefault()); calendar.setTime(new Date()); int
-		 * currentYear = calendar.get(java.util.Calendar.YEAR);
-		 * yearproducedField.add(RangeValidator.<Integer> range(1900,
-		 * currentYear)); yearproducedField.setLabel(new
-		 * ResourceModel("car.yearproduced"));
-		 * yearproducedField.setRequired(true); textForm.add(yearproducedField);
-		 */
+		DropDownChoice<Color> colorField = new DropDownChoice<>("color", carService.getAllColors(),
+				CarColorChoiceRenderer.INSTANCE);
+		colorField.setLabel(new ResourceModel("car.color"));
+		colorField.setRequired(true);
+		textForm.add(colorField);
 
-		textForm.add(new SubmitLink("save") {
+
+		textForm.add(new SubmitLink("saveCar") {
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void onSubmit() {
 				super.onSubmit();
+				// Integer brandId = Integer.parseInt(brandField.getId());
+				String modelString = modelField.getModelObject().toString();
+				Model model = modelService.getByName(modelString);
+				Color color = colorField.getModelObject();
+				car.setModel(model);
+				car.setColor(color);
 				carService.saveOrUpdate(car);
-				if (car.getCarPhotos() != null) {
-					if (car.getCarPhotos().size() == 0) {
-						carPhotoService.register(car.getCarPhotos().get(car.getCarPhotos().size() - 1));
-					} else {
-						carPhotoService.update(car.getCarPhotos().get(car.getCarPhotos().size() - 1));
+				if (ifPhotoUpload) {
+					if (car.getCarPhotos() != null) {
+						if (car.getCarPhotos().size() == 0) {
+							carPhotoService.register(car.getCarPhotos().get(car.getCarPhotos().size() - 1));
+						} else {
+							carPhotoService.update(car.getCarPhotos().get(car.getCarPhotos().size() - 1));
+						}
 					}
+					ifPhotoUpload = false;
 				}
+
 				CarsPage page = new CarsPage();
 				String localizedMessage = getString("car.saved");
 				page.info(localizedMessage);
@@ -213,6 +228,7 @@ public class CarEditPage extends AbstractPage {
 				FileUpload uploadedFile = photoUpload.getFileUpload();
 
 				if (uploadedFile != null) {
+					ifPhotoUpload = true;
 					if (car.getCarPhotos() == null) {
 						car.setCarPhotos(new ArrayList<CarPhoto>());
 					}

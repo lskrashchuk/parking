@@ -57,4 +57,9 @@ public class ModelServiceImpl implements ModelService{
 		return modelDao.getAll();
 	}
 
+	@Override
+	public Model getByName(String modelName) {
+		return modelDao.find(modelName);
+	}
+
 }

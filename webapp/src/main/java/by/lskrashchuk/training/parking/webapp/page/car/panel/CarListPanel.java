@@ -20,6 +20,7 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 
 import by.lskrashchuk.training.parking.dataaccess.filters.CarFilter;
+import by.lskrashchuk.training.parking.datamodel.Brand_;
 import by.lskrashchuk.training.parking.datamodel.Car;
 import by.lskrashchuk.training.parking.datamodel.Car_;
 import by.lskrashchuk.training.parking.service.CarService;

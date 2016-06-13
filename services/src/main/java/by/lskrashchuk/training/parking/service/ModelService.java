@@ -6,6 +6,7 @@ import javax.transaction.Transactional;
 
 import by.lskrashchuk.training.parking.dataaccess.filters.ModelFilter;
 import by.lskrashchuk.training.parking.datamodel.Model;
+import by.lskrashchuk.training.parking.datamodel.User;
 
 public interface ModelService {
 	
@@ -23,6 +24,8 @@ public interface ModelService {
     List<Model> find(ModelFilter filter);
 
     List<Model> getAll();
+    
+    Model getByName(String modelName);
 
 
 }

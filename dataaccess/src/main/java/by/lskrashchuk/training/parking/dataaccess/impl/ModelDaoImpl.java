@@ -16,6 +16,8 @@ import by.lskrashchuk.training.parking.dataaccess.ModelDao;
 import by.lskrashchuk.training.parking.dataaccess.filters.ModelFilter;
 import by.lskrashchuk.training.parking.datamodel.Model;
 import by.lskrashchuk.training.parking.datamodel.Model_;
+import by.lskrashchuk.training.parking.datamodel.User;
+import by.lskrashchuk.training.parking.datamodel.User_;
 
 @Repository
 public class ModelDaoImpl extends AbstractDaoImpl<Model, Long> implements ModelDao{
@@ -61,6 +63,33 @@ public class ModelDaoImpl extends AbstractDaoImpl<Model, Long> implements ModelD
         // set execute query
         List<Model> allitems = q.getResultList();
         return allitems;
+	}
+
+	@Override
+	public Model find(String modelName) {
+	        EntityManager em = getEntityManager();
+
+	        CriteriaBuilder cb = em.getCriteriaBuilder();
+
+	        CriteriaQuery<Model> cq = cb.createQuery(Model.class);
+
+	        Root<Model> from = cq.from(Model.class);
+
+	        cq.select(from);
+	        Predicate modelnameEqualCondition = cb.equal(from.get(Model_.name), modelName);
+	        cq.where(modelnameEqualCondition);
+
+	        TypedQuery<Model> q = em.createQuery(cq);
+
+	        List<Model> allitems = q.getResultList();
+
+	        if (allitems.isEmpty()) {
+	            return null;
+	        } else if (allitems.size() == 1) {
+	            return allitems.get(0);
+	        } else {
+	            throw new IllegalArgumentException("more than 1 model found ");
+	        }
 	}
 
 }
