@@ -102,7 +102,7 @@ public class RegistryPage extends AbstractPage {
 		public RegistryDataProvider() {
 			super();
 			registryFilter = new RegistryFilter();
-			setSort((Serializable) Registry_.eventTime, SortOrder.ASCENDING);
+			setSort((Serializable) Registry_.eventTime, SortOrder.DESCENDING);
 		}
 
 		@Override
