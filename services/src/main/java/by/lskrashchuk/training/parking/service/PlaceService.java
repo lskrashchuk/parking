@@ -29,7 +29,11 @@ public interface PlaceService {
 	 
 	 List<Place> find(PlaceFilter filter);
 
-	Long count(PlaceFilter filter);
+	 Long count(PlaceFilter filter);
+	 
+	 Boolean getIsBusy(Place place);
+	 
+	 Integer countNotBusy(); 
 
 
 }

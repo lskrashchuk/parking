@@ -19,6 +19,9 @@
 	<entry key="label.delete">Delete</entry>
 	<entry key="label.car.edit">Vehicle information</entry>
 	<entry key="label.cars">Vehicles</entry>
+	<entry key="label.home.welcome">, welcome!</entry>
+	<entry key="label.home.free"> not busy place(s) on the parking</entry>
+	<entry key="label.home.busy">All places are busy now</entry>
 	
 	
 	<entry key="loging.err.auth">authorization error</entry>

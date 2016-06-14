@@ -69,4 +69,9 @@ public class PlaceServiceImpl implements PlaceService{
 		return placeDao.count(filter);
 	}
 
+	@Override
+	public Boolean getIsBusy(Place place) {
+		return placeDao.isBasy(place);
+	}
+
 }

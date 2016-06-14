@@ -60,7 +60,7 @@ public class PlacesPage extends AbstractPage {
 					Place place = item.getModelObject();
 
 					item.add(new Label("number", place.getNumber()));
-//					item.add(new Label("bind", registryService.getRegistry(id).place.getId()));
+					item.add(new Label("isbusy", placeService.getIsBusy(place)));
 	//				item.add(new Label("number", place.getNumber()));
 					item.add(new Link<Void>("edit-link") {
 						@Override

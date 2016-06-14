@@ -1,8 +1,10 @@
 package by.lskrashchuk.training.parking.dataaccess.impl;
 
+import java.awt.Event;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -16,6 +18,8 @@ import by.lskrashchuk.training.parking.dataaccess.PlaceDao;
 import by.lskrashchuk.training.parking.dataaccess.filters.PlaceFilter;
 import by.lskrashchuk.training.parking.datamodel.Place;
 import by.lskrashchuk.training.parking.datamodel.Place_;
+import by.lskrashchuk.training.parking.datamodel.Registry;
+import by.lskrashchuk.training.parking.datamodel.Registry_;
 import by.lskrashchuk.training.parking.datamodel.User;
 import by.lskrashchuk.training.parking.datamodel.User_;
 
@@ -74,6 +78,33 @@ public class PlaceDaoImpl extends AbstractDaoImpl<Place, Long> implements PlaceD
         // set execute query
         List<Place> allitems = q.getResultList();
         return allitems;
+	}
+
+	@Override
+	public Boolean isBasy(Place place) {
+	
+		EntityManager em = getEntityManager();
+//		Query query = em.createQuery("SELECT FIRST r.event_type FROM Registry r LEFT JOIN Place p ON r.place_id=p.id WHERE p.id="+place.getId()+" ORDER BY r.event_time DESC");
+		List queryResult  = em.createNativeQuery("SELECT r.event_type FROM registry r LEFT JOIN place p ON r.place_id=p.id WHERE p.id="+place.getId()+" ORDER BY r.event_time DESC LIMIT 1").getResultList(); 
+
+		if (!queryResult.isEmpty()) {
+			Integer eventType = (Integer)queryResult.get(0); 
+	
+			return (eventType == 0);
+		}
+			else return false;
+	}
+
+	@Override
+	public Integer countNotBuzy() {
+		EntityManager em = getEntityManager();
+		List queryResult  = em.createNativeQuery("SELECT r.event_type FROM registry r LEFT JOIN place p ON r.place_id=p.id WHERE p.id="+place.getId()+" ORDER BY r.event_time DESC LIMIT 1").getResultList(); 
+		if (!queryResult.isEmpty()) {
+			Integer eventType = (Integer)queryResult.get(0); 
+	
+			return (eventType == 0);
+		}
+			else return false;
 	}
 
 }

@@ -10,4 +10,8 @@ public interface PlaceDao extends AbstractDao<Place, Long>{
 	Long count(PlaceFilter filter);
 
 	List<Place> find(PlaceFilter filter);
+	
+	Boolean isBasy(Place place);
+
+	Integer countNotBuzy();
 }

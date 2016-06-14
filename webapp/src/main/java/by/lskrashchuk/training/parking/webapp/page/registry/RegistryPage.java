@@ -38,8 +38,8 @@ public class RegistryPage extends AbstractPage {
 				Registry registry = item.getModelObject();
 
 				item.add(new Label("id", registry.getId()));
-				item.add(new Label("place", registry.getPlace()));
-				item.add(new Label("car", registry.getCar()));
+				item.add(new Label("place", registry.getPlace().getNumber()));
+				item.add(new Label("car", registry.getCar().getRegNumber()));
 				item.add(new Label("event", registry.getEventType()));
 				item.add(DateLabel.forDatePattern("time", Model.of(registry.getEventTime()), "dd-MM-yyyy hh:mm"));
 
