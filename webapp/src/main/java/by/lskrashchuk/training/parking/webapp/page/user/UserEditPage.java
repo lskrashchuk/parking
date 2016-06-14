@@ -18,6 +18,7 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.form.upload.FileUpload;
 import org.apache.wicket.markup.html.form.upload.FileUploadField;
 import org.apache.wicket.markup.html.image.Image;
+import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.PropertyModel;
@@ -154,12 +155,13 @@ public class UserEditPage extends AbstractPage {
 
 		form.add(new UserCarListPanel("carlist-panel", user));
 
-		form.add(new SubmitLink("editlist") {
+		form.add(new Link("editlist") {
 			@Override
-			public void onSubmit() {
-				super.onSubmit();
+			public void onClick() {
+				
 				// userService.saveOrUpdate(user);
-				// setResponsePage(new UsersPage());
+				Users2CarsPage page = new Users2CarsPage(user);
+				setResponsePage(page);
 			}
 		});
 
