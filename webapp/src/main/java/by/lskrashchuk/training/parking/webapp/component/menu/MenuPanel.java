@@ -1,5 +1,6 @@
 package by.lskrashchuk.training.parking.webapp.component.menu;
 
+import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.Panel;
 
@@ -28,7 +29,8 @@ public class MenuPanel extends Panel{
             }
         });
 
-		add(new Link("link-users") {
+
+        add(new Link("link-users") {
             @Override
             public void onClick() {
                 setResponsePage(new UsersPage());

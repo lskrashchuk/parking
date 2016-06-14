@@ -57,5 +57,17 @@ public class RegistryServiceImpl implements RegistryService{
 		return registryDao.find(filter);
 	}
 
+	@Override
+	public void saveOrUpdate(Registry registry) {
+	       if (registry.getId() == null) {
+	            registryDao.insert(registry);
+	            LOGGER.info("Registry inserted: {}", registry);
+	        } else {
+	            registryDao.update(registry);
+	            LOGGER.info("User updated: {}", registry);
+	        }
+		
+	}
+
 
 }

@@ -26,6 +26,10 @@ public interface RegistryService {
 	Long count(RegistryFilter filter);
 	
     List<Registry> find(RegistryFilter filter);
+    
+    @Transactional
+	void saveOrUpdate(Registry registry);
+	
 
 
 

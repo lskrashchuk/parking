@@ -22,8 +22,9 @@
 	<entry key="label.car.edit">Сведения о транспортном средстве</entry>
 	<entry key="label.cars">Транспортные средства</entry>
 	<entry key="label.home.welcome">, добро пожаловать!</entry>
-	<entry key="label.home.free">свободных мест на стоянке на данный момент</entry>
+	<entry key="label.home.free"> свободных мест на стоянке на данный момент</entry>
 	<entry key="label.home.busy">На данный момент нет свободных мест на стоянке</entry>
+	<entry key="label.registry.edit">Сведения о событии</entry>
 
 
 	<entry key="loging.err.auth">ошибка авторизации</entry>
@@ -50,6 +51,12 @@
 	<entry key="car.yearproduced">Год</entry>
 	<entry key="car.saved">Транспортное средство сохранено</entry>
 	<entry key="car.color">Цвет</entry>
+
+	<entry key="registry.eventTime">Время</entry>
+	<entry key="registry.eventType">Тип</entry>
+	<entry key="registry.car">ТС</entry>
+	<entry key="registry.place">Место</entry>
+	<entry key="registry.saved">Событие сохранено</entry>
 	
 
 	<entry key="US">Английский</entry>

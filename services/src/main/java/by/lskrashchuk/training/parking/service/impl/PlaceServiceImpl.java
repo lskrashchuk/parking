@@ -74,4 +74,9 @@ public class PlaceServiceImpl implements PlaceService{
 		return placeDao.isBasy(place);
 	}
 
+	@Override
+	public Integer countNotBusy() {
+		return placeDao.countNotBuzy();
+	}
+
 }

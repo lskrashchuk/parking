@@ -97,14 +97,14 @@ public class PlaceDaoImpl extends AbstractDaoImpl<Place, Long> implements PlaceD
 
 	@Override
 	public Integer countNotBuzy() {
-		EntityManager em = getEntityManager();
+/*		EntityManager em = getEntityManager();
 		List queryResult  = em.createNativeQuery("SELECT r.event_type FROM registry r LEFT JOIN place p ON r.place_id=p.id WHERE p.id="+place.getId()+" ORDER BY r.event_time DESC LIMIT 1").getResultList(); 
 		if (!queryResult.isEmpty()) {
-			Integer eventType = (Integer)queryResult.get(0); 
-	
-			return (eventType == 0);
+			return 0;
 		}
-			else return false;
+			else return 0;
+	}*/
+		return 0;
 	}
 
 }

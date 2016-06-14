@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.persistence.PersistenceException;
 import javax.persistence.metamodel.SingularAttribute;
 
+import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.datetime.markup.html.basic.DateLabel;
 import org.apache.wicket.extensions.markup.html.repeater.data.sort.OrderByBorder;
 import org.apache.wicket.extensions.markup.html.repeater.data.sort.SortOrder;
@@ -14,6 +15,7 @@ import org.apache.wicket.extensions.markup.html.repeater.util.SortableDataProvid
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.navigation.paging.PagingNavigator;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.markup.repeater.data.DataView;
 import org.apache.wicket.model.IModel;
@@ -22,8 +24,12 @@ import org.apache.wicket.model.Model;
 import by.lskrashchuk.training.parking.dataaccess.filters.RegistryFilter;
 import by.lskrashchuk.training.parking.datamodel.Registry;
 import by.lskrashchuk.training.parking.datamodel.Registry_;
+import by.lskrashchuk.training.parking.datamodel.User;
 import by.lskrashchuk.training.parking.service.RegistryService;
 import by.lskrashchuk.training.parking.webapp.page.AbstractPage;
+import by.lskrashchuk.training.parking.webapp.page.user.UserEditPage;
+
+@AuthorizeInstantiation(value = { "admin", "guard" })
 
 public class RegistryPage extends AbstractPage {
 	@Inject
@@ -77,6 +83,15 @@ public class RegistryPage extends AbstractPage {
 		add(new OrderByBorder("sort-car", Registry_.car, registryDataProvider));
 		add(new OrderByBorder("sort-event", Registry_.eventType, registryDataProvider));
 		add(new OrderByBorder("sort-time", Registry_.eventTime, registryDataProvider));
+ 
+		add(new Link("create") {
+            @Override
+            public void onClick() {
+                setResponsePage(new RegistryEditPage(new Registry()));
+            }
+        });
+        
+        add(new FeedbackPanel("feedback"));
 
 	}
 
