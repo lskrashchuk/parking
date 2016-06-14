@@ -139,6 +139,14 @@ public class CarEditPage extends AbstractPage {
 			}
 		};
 
+		IModel modelChoiced = new AbstractReadOnlyModel() {
+
+			@Override
+			public Object getObject() {
+				return car.getModel().getName();
+			}
+		};
+
 		DropDownChoice<Brand> brandField = new DropDownChoice<>("brand", carService.getAllBrands(),
 				CarBrandChoiceRenderer.INSTANCE);
 		brandField.setLabel(new ResourceModel("car.brand"));

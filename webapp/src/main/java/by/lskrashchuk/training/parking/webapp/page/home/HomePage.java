@@ -15,7 +15,7 @@ import by.lskrashchuk.training.parking.webapp.page.AbstractPage;
 import by.lskrashchuk.training.parking.webapp.page.user.UsersPage;
 
 
-@AuthorizeInstantiation(value = { "admin", "manager" })
+@AuthorizeInstantiation(value = { "admin", "manager", "guard", "user" })
 public class HomePage extends AbstractPage{
 
 	@Inject
