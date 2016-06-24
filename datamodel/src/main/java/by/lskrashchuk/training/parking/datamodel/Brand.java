@@ -10,6 +10,11 @@ import javax.persistence.OneToMany;
 @Entity
 public class Brand extends AbstractModel{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Column
 	private String name;
 	

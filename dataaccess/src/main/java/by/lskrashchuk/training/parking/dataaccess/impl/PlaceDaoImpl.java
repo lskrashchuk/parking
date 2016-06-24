@@ -81,7 +81,7 @@ public class PlaceDaoImpl extends AbstractDaoImpl<Place, Long> implements PlaceD
 	}
 
 	@Override
-	public Boolean isBasy(Place place) {
+	public Boolean isBusy(Place place) {
 	
 		EntityManager em = getEntityManager();
 //		Query query = em.createQuery("SELECT FIRST r.event_type FROM Registry r LEFT JOIN Place p ON r.place_id=p.id WHERE p.id="+place.getId()+" ORDER BY r.event_time DESC");

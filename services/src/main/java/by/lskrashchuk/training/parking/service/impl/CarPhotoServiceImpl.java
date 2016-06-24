@@ -9,12 +9,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import by.lskrashchuk.training.parking.dataaccess.CarPhotoDao;
-import by.lskrashchuk.training.parking.dataaccess.filters.CarFilter;
 import by.lskrashchuk.training.parking.dataaccess.filters.CarPhotoFilter;
-import by.lskrashchuk.training.parking.datamodel.Car;
 import by.lskrashchuk.training.parking.datamodel.CarPhoto;
 import by.lskrashchuk.training.parking.service.CarPhotoService;
-import by.lskrashchuk.training.parking.service.CarService;
 
 @Service
 public class CarPhotoServiceImpl implements CarPhotoService{

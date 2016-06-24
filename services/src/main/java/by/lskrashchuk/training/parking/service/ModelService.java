@@ -6,7 +6,6 @@ import javax.transaction.Transactional;
 
 import by.lskrashchuk.training.parking.dataaccess.filters.ModelFilter;
 import by.lskrashchuk.training.parking.datamodel.Model;
-import by.lskrashchuk.training.parking.datamodel.User;
 
 public interface ModelService {
 	

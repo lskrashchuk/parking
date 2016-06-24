@@ -5,10 +5,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import by.lskrashchuk.training.parking.dataaccess.filters.RegistryFilter;
-import by.lskrashchuk.training.parking.dataaccess.filters.UserFilter;
-import by.lskrashchuk.training.parking.datamodel.Place;
 import by.lskrashchuk.training.parking.datamodel.Registry;
-import by.lskrashchuk.training.parking.datamodel.User;
 
 public interface RegistryService {
 	

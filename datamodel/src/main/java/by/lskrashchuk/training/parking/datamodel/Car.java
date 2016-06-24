@@ -14,6 +14,11 @@ import javax.persistence.OneToMany;
 @Entity
 public class Car extends AbstractModel{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Column
 	private String regNumber;
 	

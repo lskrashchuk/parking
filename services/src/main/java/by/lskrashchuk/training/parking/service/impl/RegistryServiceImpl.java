@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import by.lskrashchuk.training.parking.dataaccess.RegistryDao;
 import by.lskrashchuk.training.parking.dataaccess.filters.RegistryFilter;
-import by.lskrashchuk.training.parking.datamodel.Place;
 import by.lskrashchuk.training.parking.datamodel.Registry;
 import by.lskrashchuk.training.parking.service.RegistryService;
 

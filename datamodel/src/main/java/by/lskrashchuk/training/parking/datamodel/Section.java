@@ -14,6 +14,11 @@ import javax.persistence.OneToMany;
 @Entity
 public class Section extends AbstractModel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Column
 	private String name;
 	

@@ -71,7 +71,7 @@ public class PlaceServiceImpl implements PlaceService{
 
 	@Override
 	public Boolean getIsBusy(Place place) {
-		return placeDao.isBasy(place);
+		return placeDao.isBusy(place);
 	}
 
 	@Override

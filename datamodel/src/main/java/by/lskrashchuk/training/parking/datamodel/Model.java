@@ -11,6 +11,11 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Model extends AbstractModel implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Column
 	private String name;
 	

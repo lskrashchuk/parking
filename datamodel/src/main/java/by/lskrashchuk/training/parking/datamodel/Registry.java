@@ -12,6 +12,11 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Registry extends AbstractModel{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@ManyToOne(targetEntity = Car.class, fetch = FetchType.EAGER)
 	private Car car;
 	

@@ -28,6 +28,7 @@ public class BrandServiceImpl implements BrandService{
 	@Override
 	public Brand getBrand(Long id) {
 		return brandDao.getWithModels(id);
+//		return brandDao.get(id);
 	}
 
 	@Override

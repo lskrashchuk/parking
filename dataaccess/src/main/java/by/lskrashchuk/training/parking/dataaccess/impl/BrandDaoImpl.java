@@ -17,10 +17,7 @@ import by.lskrashchuk.training.parking.dataaccess.BrandDao;
 import by.lskrashchuk.training.parking.dataaccess.filters.BrandFilter;
 import by.lskrashchuk.training.parking.datamodel.Brand;
 import by.lskrashchuk.training.parking.datamodel.Brand_;
-import by.lskrashchuk.training.parking.datamodel.Car;
-import by.lskrashchuk.training.parking.datamodel.Car_;
-import by.lskrashchuk.training.parking.datamodel.User;
-import by.lskrashchuk.training.parking.datamodel.User_;
+
 
 @Repository
 public class BrandDaoImpl extends AbstractDaoImpl<Brand, Long> implements BrandDao {
@@ -71,6 +68,10 @@ public class BrandDaoImpl extends AbstractDaoImpl<Brand, Long> implements BrandD
 	@Override
 	public Brand getWithModels(Long id) {
 		EntityManager em = getEntityManager();
+		
+		if (em.find(getEntityClass(), id)==null) {
+			return null;
+		};
 
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 

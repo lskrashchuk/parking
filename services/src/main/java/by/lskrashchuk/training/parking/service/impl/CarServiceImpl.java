@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import by.lskrashchuk.training.parking.dataaccess.BrandDao;
 import by.lskrashchuk.training.parking.dataaccess.CarDao;
 import by.lskrashchuk.training.parking.dataaccess.ColorDao;
-import by.lskrashchuk.training.parking.dataaccess.ModelDao;
 import by.lskrashchuk.training.parking.dataaccess.filters.CarFilter;
 import by.lskrashchuk.training.parking.datamodel.Brand;
 import by.lskrashchuk.training.parking.datamodel.Car;
@@ -28,9 +27,6 @@ public class CarServiceImpl implements CarService {
 
 	@Inject
 	private BrandDao brandDao;
-
-	@Inject
-	private ModelDao modelDao;
 
 	@Inject
 	private ColorDao colorDao;

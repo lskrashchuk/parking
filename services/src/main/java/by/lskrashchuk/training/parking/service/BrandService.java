@@ -5,7 +5,6 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import by.lskrashchuk.training.parking.datamodel.Brand;
-import by.lskrashchuk.training.parking.datamodel.UserType;
 
 public interface BrandService {
 	

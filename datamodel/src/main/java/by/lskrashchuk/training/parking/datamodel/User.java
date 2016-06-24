@@ -1,6 +1,5 @@
 package by.lskrashchuk.training.parking.datamodel;
 
-import java.sql.Blob;
 import java.util.Date;
 import java.util.List;
 
@@ -11,18 +10,21 @@ import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name="`user`")
 public class User extends AbstractModel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Column
 	private String firstName;
 	

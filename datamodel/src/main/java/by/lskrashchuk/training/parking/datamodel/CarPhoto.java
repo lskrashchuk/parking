@@ -1,7 +1,5 @@
 package by.lskrashchuk.training.parking.datamodel;
 
-import java.sql.Blob;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +7,11 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class CarPhoto extends AbstractModel{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@ManyToOne(targetEntity = Car.class, fetch = FetchType.LAZY)
 	private Car car;

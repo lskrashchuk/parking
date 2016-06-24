@@ -3,7 +3,6 @@ package by.lskrashchuk.training.parking.service;
 import java.util.List;
 
 import by.lskrashchuk.training.parking.dataaccess.filters.UserTypeFilter;
-import by.lskrashchuk.training.parking.datamodel.User;
 import by.lskrashchuk.training.parking.datamodel.UserType;
 
 

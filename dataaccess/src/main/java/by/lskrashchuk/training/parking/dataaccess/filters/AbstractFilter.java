@@ -6,7 +6,11 @@ import javax.persistence.metamodel.SingularAttribute;
 
 public class AbstractFilter implements Serializable {
 
-    private SingularAttribute sortProperty;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private SingularAttribute sortProperty;
     private boolean sortOrder;
     private Integer offset;
     private Integer limit;

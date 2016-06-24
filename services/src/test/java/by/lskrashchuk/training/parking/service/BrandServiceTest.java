@@ -8,7 +8,6 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import by.lskrashchuk.training.parking.dataaccess.BrandDao;
 import by.lskrashchuk.training.parking.datamodel.Brand;
 import by.lskrashchuk.training.parking.service.BrandService;
 
@@ -22,7 +21,7 @@ public class BrandServiceTest {
 	@Test
 	public void testRegistrationBrand(){
 		Brand brand = new Brand();
-		brand.setName("Peugeot");
+		brand.setName("Gilly");
         brandService.register(brand);
         
 

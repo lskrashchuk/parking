@@ -8,6 +8,11 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Place extends AbstractModel{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@ManyToOne(targetEntity = Section.class, fetch = FetchType.LAZY)
 	private Section section;
 	

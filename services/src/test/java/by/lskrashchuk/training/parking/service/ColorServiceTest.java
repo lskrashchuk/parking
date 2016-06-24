@@ -8,7 +8,6 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import by.lskrashchuk.training.parking.dataaccess.ColorDao;
 import by.lskrashchuk.training.parking.datamodel.Color;
 import by.lskrashchuk.training.parking.service.ColorService;
 
@@ -18,9 +17,7 @@ import by.lskrashchuk.training.parking.service.ColorService;
 		
 		@Inject
 		private ColorService colorService;
-		
-		@Inject
-		private ColorDao colorDao;
+
 		
 		@Test
 		public void testRegistrationColor(){

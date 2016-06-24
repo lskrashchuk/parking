@@ -1,19 +1,20 @@
 package by.lskrashchuk.training.parking.dataaccess.filters;
 
-import javax.persistence.metamodel.SingularAttribute;
 
 import by.lskrashchuk.training.parking.datamodel.Car;
 import by.lskrashchuk.training.parking.datamodel.CarPhoto;
 
-public class CarPhotoFilter {
+public class CarPhotoFilter extends AbstractFilter{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private Car car;
 	
 	private CarPhoto carPhoto;
     
-	private Integer offset;
-    
-	private Integer limit;
 
 	public Car getCar() {
 		return car;
@@ -23,21 +24,6 @@ public class CarPhotoFilter {
 		this.car = car;
 	}
 
-	public Integer getOffset() {
-		return offset;
-	}
-
-	public void setOffset(Integer offset) {
-		this.offset = offset;
-	}
-
-	public Integer getLimit() {
-		return limit;
-	}
-
-	public void setLimit(Integer limit) {
-		this.limit = limit;
-	}
 
 	public CarPhoto getCarPhoto() {
 		return carPhoto;

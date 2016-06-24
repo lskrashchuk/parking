@@ -1,6 +1,5 @@
 package by.lskrashchuk.training.parking.service.impl;
 
-import java.util.Date;
 
 import javax.inject.Inject;
 

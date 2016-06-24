@@ -1,8 +1,6 @@
 package by.lskrashchuk.training.parking.service;
 
-import java.io.OutputStream;
 import java.lang.reflect.Field;
-import java.sql.Blob;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -50,34 +48,7 @@ public class UserServiceTest {
 		
 	}
 	
-	@Test
-	public void testRegistrationUser(){
-		User user = registrationUser("testFName", "testLName");
-		
-        User registredUser = userService.getUser(user.getId());
-
-        Assert.assertNotNull(registredUser);
-
-
-        String updatedFName = "updatedName";
-        user.setFirstName(updatedFName);
-        userService.saveOrUpdate(user);
-
-        Assert.assertEquals(updatedFName, userService.getUser(user.getId()).getFirstName());
-
-        deleteUser(user);
-  
-        Assert.assertNull(userService.getUser(user.getId()));
-	}
-
 	
-	private void deleteUser(User user) {
-
-		userService.delete(user);
-
-	}
-
-
 	private User registrationUser(String fn, String ln) {
 		User user = new User();
 		user.setFirstName(fn);
@@ -95,6 +66,32 @@ public class UserServiceTest {
  		return user;
 	}
 	
+	
+	@Test
+	public void testRegistrationUser(){
+		User user = registrationUser("testFName", "testLName");
+		
+        User registredUser = userService.getUser(user.getId());
+
+        Assert.assertNotNull(registredUser);
+
+
+        String updatedFName = "updatedName";
+        user.setFirstName(updatedFName);
+        userService.saveOrUpdate(user);
+
+        Assert.assertEquals(updatedFName, userService.getUser(user.getId()).getFirstName());
+
+  //      deleteUser(user);
+        userService.delete(user);
+
+  
+        Assert.assertNull(userService.getUser(user.getId()));
+	}
+
+	
+	
+	
 	   @Test
 	    public void testSearch() {
 	        // clean all data from users
@@ -106,7 +103,7 @@ public class UserServiceTest {
 	        // start create new data
 	        int testObjectsCount = 5;
 	        for (int i = 0; i < testObjectsCount; i++) {
-	    		User user = registrationUser("testFName"+i, "testLName"+i);
+	    		registrationUser("testFName"+i, "testLName"+i);
 	        }
 
 	        UserFilter filter = new UserFilter();

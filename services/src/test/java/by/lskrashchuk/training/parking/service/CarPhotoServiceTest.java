@@ -21,9 +21,6 @@ import by.lskrashchuk.training.parking.datamodel.CarPhoto;
 public class CarPhotoServiceTest {
 	
 	@Inject
-	private CarService carService;
-
-	@Inject
 	private CarDao carDao;
 	
 	@Inject

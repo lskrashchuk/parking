@@ -19,12 +19,12 @@ import by.lskrashchuk.training.parking.datamodel.UserType;
 import by.lskrashchuk.training.parking.service.UserService;
 
 @Service
-public class UserServiceImpl implements UserService{
-    private static Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
-	
+public class UserServiceImpl implements UserService {
+	private static Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
+
 	@Inject
 	private UserDao userDao;
-	
+
 	@Inject
 	private UserTypeDao userTypeDao;
 
@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService{
 	public void register(User user) {
 		user.setCreated(new Date());
 		userDao.insert(user);
-        LOGGER.info("User registred: {}", user);
+		LOGGER.info("User registred: {}", user);
 	}
 
 	@Override
@@ -42,20 +42,20 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public void saveOrUpdate(User user) {
-	       if (user.getId() == null) {
-	            userDao.insert(user);
-	            LOGGER.info("User inserted: {}", user);
-	        } else {
-	            userDao.update(user);
-	            LOGGER.info("User updated: {}", user);
-	        }
+		if (user.getId() == null) {
+			userDao.insert(user);
+			LOGGER.info("User inserted: {}", user);
+		} else {
+			userDao.update(user);
+			LOGGER.info("User updated: {}", user);
+		}
 
- 	}
+	}
 
 	@Override
 	public void delete(User user) {
 		userDao.delete(user.getId());
-        LOGGER.info("User deleted: {}", user);
+		LOGGER.info("User deleted: {}", user);
 	}
 
 	@Override
@@ -70,27 +70,24 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public Long count(UserFilter filter) {
-        return userDao.count(filter);
+		return userDao.count(filter);
 
 	}
 
 	@Override
 	public User getByNameAndPassword(String userName, String password) {
-        return userDao.find(userName, password);
+		return userDao.find(userName, password);
 	}
 
 	@Override
 	public Collection<? extends String> resolveRoles(Long id) {
-        User user = userDao.get(id);
-        return Collections.singletonList(user.getRole().name());
+		User user = userDao.get(id);
+		return Collections.singletonList(user.getRole().name());
 	}
 
 	@Override
 	public List<UserType> getAllUserTypes() {
 		return userTypeDao.getAll();
 	}
-
-	
-	
 
 }

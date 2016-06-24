@@ -12,10 +12,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import by.lskrashchuk.training.parking.dataaccess.BrandDao;
 import by.lskrashchuk.training.parking.dataaccess.CarDao;
-import by.lskrashchuk.training.parking.dataaccess.ColorDao;
-import by.lskrashchuk.training.parking.dataaccess.ModelDao;
 import by.lskrashchuk.training.parking.dataaccess.impl.AbstractDaoImpl;
 import by.lskrashchuk.training.parking.datamodel.Brand;
 import by.lskrashchuk.training.parking.datamodel.Car;
@@ -30,23 +27,14 @@ public class CarServiceTest {
 	private ColorService colorService;
 
 	@Inject
-	private ColorDao colorDao;
-
-	@Inject
 	private CarService carService;
 
 	@Inject
 	private CarDao carDao;
 
 	@Inject
-	private ModelDao modelDao;
-
-	@Inject
 	private ModelService modelService;
 	
-	@Inject
-	private BrandDao brandDao;
-
 	@Inject
 	private BrandService brandService;
 
