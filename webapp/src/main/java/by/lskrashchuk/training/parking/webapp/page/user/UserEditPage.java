@@ -3,6 +3,7 @@ package by.lskrashchuk.training.parking.webapp.page.user;
 
 
 import java.util.Arrays;
+import java.util.Date;
 
 import javax.inject.Inject;
 
@@ -63,6 +64,7 @@ public class UserEditPage extends AbstractPage {
 	public UserEditPage(User user) {
 		super();
 		if (user.getId() == null) {
+			user.setCreated(new Date());
 			this.user = user;
 		} else {
 			this.user = userService.getUser(user.getId());

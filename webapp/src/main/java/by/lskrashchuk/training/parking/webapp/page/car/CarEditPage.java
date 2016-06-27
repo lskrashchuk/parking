@@ -8,17 +8,11 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.apache.wicket.Component;
-import org.apache.wicket.ajax.AjaxEventBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
 import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
-import org.apache.wicket.event.Broadcast;
-import org.apache.wicket.event.IEvent;
-import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.markup.html.form.SubmitLink;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.form.upload.FileUpload;
@@ -47,9 +41,7 @@ import by.lskrashchuk.training.parking.service.ModelService;
 import by.lskrashchuk.training.parking.webapp.common.image.ImageResource;
 import by.lskrashchuk.training.parking.webapp.common.renderer.CarBrandChoiceRenderer;
 import by.lskrashchuk.training.parking.webapp.common.renderer.CarColorChoiceRenderer;
-import by.lskrashchuk.training.parking.webapp.common.renderer.CarModelChoiceRenderer;
 import by.lskrashchuk.training.parking.webapp.page.AbstractPage;
-import by.lskrashchuk.training.parking.webapp.page.car.panel.CarPhotoListPanel;
 
 public class CarEditPage extends AbstractPage {
 
@@ -140,6 +132,12 @@ public class CarEditPage extends AbstractPage {
 		};
 
 		IModel modelChoiced = new AbstractReadOnlyModel() {
+//	PropertyModel<Car> modelChoiced = new PropertyModel<Car>(car, "model") {
+
+			/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 
 			@Override
 			public Object getObject() {
@@ -157,7 +155,7 @@ public class CarEditPage extends AbstractPage {
 		// DropDownChoice<Model> modelField = new DropDownChoice<>("model",
 		// carService.getAllModels(brandService.getBrand(car.getBrand().getId())
 		// ), CarModelChoiceRenderer.INSTANCE);
-		DropDownChoice modelField = new DropDownChoice("model", baseModel, modelChoiceModel);
+		DropDownChoice modelField = new DropDownChoice("model", new PropertyModel(car, "model"), modelChoiceModel);
 		modelField.setLabel(new ResourceModel("car.model"));
 		modelField.setRequired(true);
 		modelField.setOutputMarkupId(true);

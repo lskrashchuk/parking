@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void register(User user) {
-		user.setCreated(new Date());
+//		user.setCreated(new Date());
 		userDao.insert(user);
 		LOGGER.info("User registred: {}", user);
 	}
