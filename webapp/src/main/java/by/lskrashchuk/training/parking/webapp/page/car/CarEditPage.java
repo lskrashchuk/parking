@@ -41,6 +41,7 @@ import by.lskrashchuk.training.parking.service.ModelService;
 import by.lskrashchuk.training.parking.webapp.common.image.ImageResource;
 import by.lskrashchuk.training.parking.webapp.common.renderer.CarBrandChoiceRenderer;
 import by.lskrashchuk.training.parking.webapp.common.renderer.CarColorChoiceRenderer;
+import by.lskrashchuk.training.parking.webapp.common.renderer.CarModelChoiceRenderer;
 import by.lskrashchuk.training.parking.webapp.page.AbstractPage;
 
 public class CarEditPage extends AbstractPage {
@@ -123,25 +124,11 @@ public class CarEditPage extends AbstractPage {
 				if (car.getBrand() == null) {
 					return Collections.EMPTY_LIST;
 				}
-				List<String> result = new ArrayList<String>();
+				List<Model> result = new ArrayList<Model>();
 				for (Model model : carService.getAllModels(brandService.getBrand(car.getBrand().getId()))) {
-					result.add(model.getName());
+					result.add(model);
 				}
 				return result;
-			}
-		};
-
-		IModel modelChoiced = new AbstractReadOnlyModel() {
-//	PropertyModel<Car> modelChoiced = new PropertyModel<Car>(car, "model") {
-
-			/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
-
-			@Override
-			public Object getObject() {
-				return car.getModel().getName();
 			}
 		};
 
@@ -152,10 +139,7 @@ public class CarEditPage extends AbstractPage {
 		brandField.setOutputMarkupId(true);
 		textForm.add(brandField);
 
-		// DropDownChoice<Model> modelField = new DropDownChoice<>("model",
-		// carService.getAllModels(brandService.getBrand(car.getBrand().getId())
-		// ), CarModelChoiceRenderer.INSTANCE);
-		DropDownChoice modelField = new DropDownChoice("model", new PropertyModel(car, "model"), modelChoiceModel);
+		DropDownChoice<Model> modelField = new DropDownChoice<>("model", modelChoiceModel, CarModelChoiceRenderer.INSTANCE);
 		modelField.setLabel(new ResourceModel("car.model"));
 		modelField.setRequired(true);
 		modelField.setOutputMarkupId(true);
@@ -175,12 +159,6 @@ public class CarEditPage extends AbstractPage {
 			@Override
 			public void onSubmit() {
 				super.onSubmit();
-				// Integer brandId = Integer.parseInt(brandField.getId());
-				String modelString = modelField.getModelObject().toString();
-				Model model = modelService.getByName(modelString);
-//				Color color = colorField.getModelObject();
-				car.setModel(model);
-//				car.setColor(color);
 				carService.saveOrUpdate(car);
 				if (ifPhotoUpload) {
 					if (car.getCarPhotos() != null) {
@@ -267,8 +245,12 @@ public class CarEditPage extends AbstractPage {
 			}
 		});
 
+	
 		form.add(imageForm);
 
+
+
+		
 		FeedbackPanel feedback = new FeedbackPanel("feedback");
 		add(feedback);
 		feedback.setOutputMarkupId(true);
