@@ -18,6 +18,8 @@ import by.lskrashchuk.training.parking.datamodel.Color;
 import by.lskrashchuk.training.parking.datamodel.Color_;
 import by.lskrashchuk.training.parking.datamodel.Model;
 import by.lskrashchuk.training.parking.datamodel.Model_;
+import by.lskrashchuk.training.parking.datamodel.User;
+import by.lskrashchuk.training.parking.datamodel.User_;
 
 @Repository
 public class ColorDaoImpl extends AbstractDaoImpl<Color, Long> implements ColorDao{
@@ -39,8 +41,8 @@ public class ColorDaoImpl extends AbstractDaoImpl<Color, Long> implements ColorD
         cq.select(from);
 
         if (filter.getColorName() != null) {
-            Predicate fRegNumberEqualCondition = cb.equal(from.get(Color_.name), filter.getColorName());
-            cq.where(cb.or(fRegNumberEqualCondition));
+            Predicate colornameEqualCondition = cb.equal(from.get(Color_.name), filter.getColorName());
+            cq.where(colornameEqualCondition);
         }
         // set fetching
  //       if (filter.isFetchCredentials()) {
@@ -63,6 +65,33 @@ public class ColorDaoImpl extends AbstractDaoImpl<Color, Long> implements ColorD
         // set execute query
         List<Color> allitems = q.getResultList();
         return allitems;
+	}
+
+	@Override
+	public Color find(String colorName) {
+		EntityManager em = getEntityManager();
+
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+
+		CriteriaQuery<Color> cq = cb.createQuery(Color.class);
+
+		Root<Color> from = cq.from(Color.class);
+
+		cq.select(from);
+		Predicate colornameEqualCondition = cb.equal(cb.upper(from.get(Color_.name)), colorName.toUpperCase().toUpperCase());
+		cq.where(colornameEqualCondition);
+
+		TypedQuery<Color> q = em.createQuery(cq);
+
+		List<Color> allitems = q.getResultList();
+
+		if (allitems.isEmpty()) {
+			return null;
+		} else if (allitems.size() == 1) {
+			return allitems.get(0);
+		} else {
+			throw new IllegalArgumentException("more than 1 color found ");
+		}
 	}
 
 }

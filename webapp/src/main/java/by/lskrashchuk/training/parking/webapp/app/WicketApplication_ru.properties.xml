@@ -4,6 +4,7 @@
 	<entry key="btn.create">Создать</entry>
 	<entry key="btn.save">Сохранить</entry>
 	<entry key="btn.upload">Загрузить</entry>
+	<entry key="btn.cancel">Отмена</entry>
 	
 	
 
@@ -51,6 +52,10 @@
 	<entry key="car.yearproduced">Год</entry>
 	<entry key="car.saved">Транспортное средство сохранено</entry>
 	<entry key="car.color">Цвет</entry>
+	<entry key="car.edit.newcolor">Добавить новый цвет</entry>
+	<entry key="car.edit.newmodel">Добавить новую модель</entry>
+	<entry key="car.edit.newbrand">Добавить новую марку</entry>
+	<entry key="car.edit.newcolor.exist">Такой цвет уже добавлен</entry>
 
 	<entry key="registry.eventTime">Время</entry>
 	<entry key="registry.eventType">Тип</entry>

@@ -8,9 +8,13 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
+import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
+import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
+import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow.WindowClosedCallback;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.SubmitLink;
@@ -37,12 +41,14 @@ import by.lskrashchuk.training.parking.datamodel.Model;
 import by.lskrashchuk.training.parking.service.BrandService;
 import by.lskrashchuk.training.parking.service.CarPhotoService;
 import by.lskrashchuk.training.parking.service.CarService;
+import by.lskrashchuk.training.parking.service.ColorService;
 import by.lskrashchuk.training.parking.service.ModelService;
 import by.lskrashchuk.training.parking.webapp.common.image.ImageResource;
 import by.lskrashchuk.training.parking.webapp.common.renderer.CarBrandChoiceRenderer;
 import by.lskrashchuk.training.parking.webapp.common.renderer.CarColorChoiceRenderer;
 import by.lskrashchuk.training.parking.webapp.common.renderer.CarModelChoiceRenderer;
 import by.lskrashchuk.training.parking.webapp.page.AbstractPage;
+import by.lskrashchuk.training.parking.webapp.page.color.ColorEditPanel;
 
 public class CarEditPage extends AbstractPage {
 
@@ -93,6 +99,7 @@ public class CarEditPage extends AbstractPage {
 
 		Form<Car> textForm = new Form<Car>("textForm", baseModel);
 
+		textForm.setOutputMarkupId(true);
 		form.add(textForm);
 
 		TextField<String> regnumberField = new TextField<>("regNumber");
@@ -109,13 +116,16 @@ public class CarEditPage extends AbstractPage {
 		yearproducedField.setRequired(true);
 		textForm.add(yearproducedField);
 		
-		List<Color> lc = carService.getAllColors();
+
+
+		
 		DropDownChoice<Color> colorField = new DropDownChoice<>("color", carService.getAllColors(),
 				CarColorChoiceRenderer.INSTANCE);
 		colorField.setLabel(new ResourceModel("car.color"));
 		colorField.setRequired(true);
+		colorField.setOutputMarkupId(true);
 		textForm.add(colorField);
-
+		
 
 		IModel modelChoiceModel = new AbstractReadOnlyModel() {
 
@@ -177,6 +187,9 @@ public class CarEditPage extends AbstractPage {
 				setResponsePage(page);
 			}
 		});
+		addModalWindow(textForm);
+		
+		
 
 		Form<Car> imageForm = new Form<Car>("imageForm", new PropertyModel<Car>(car, "photo"));
 		imageForm.setOutputMarkupId(true);
@@ -245,16 +258,40 @@ public class CarEditPage extends AbstractPage {
 			}
 		});
 
-	
 		form.add(imageForm);
-
-
-
 		
 		FeedbackPanel feedback = new FeedbackPanel("feedback");
 		add(feedback);
 		feedback.setOutputMarkupId(true);
-
 	}
+	
+    private void addModalWindow(Form form) {
+        ModalWindow modalWindow = new ModalWindow("modal");
+        form.add(modalWindow);
+
+        form.add(new AjaxLink("create") {
+            /**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+            public void onClick(AjaxRequestTarget target) {
+                modalWindow.setContent(new ColorEditPanel(modalWindow, new Color()));
+                modalWindow.show(target);
+            }
+        });
+
+        modalWindow.setWindowClosedCallback(new WindowClosedCallback() {
+
+ 			private static final long serialVersionUID = 1L;
+
+			@Override
+            public void onClose(AjaxRequestTarget target) {
+//                target.add(form);
+            }
+        });
+    }
+
 
 }

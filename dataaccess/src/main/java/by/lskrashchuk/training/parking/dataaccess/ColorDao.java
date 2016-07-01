@@ -11,4 +11,6 @@ public interface ColorDao extends AbstractDao<Color, Long>{
 	
 	List<Color> find(ColorFilter filter);
 
+	Color find(String colorName);
+
 }

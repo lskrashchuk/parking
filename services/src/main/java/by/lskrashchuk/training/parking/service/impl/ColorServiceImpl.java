@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import by.lskrashchuk.training.parking.dataaccess.ColorDao;
 import by.lskrashchuk.training.parking.datamodel.Color;
+import by.lskrashchuk.training.parking.datamodel.User;
 import by.lskrashchuk.training.parking.service.ColorService;
 
 @Service
@@ -40,6 +41,22 @@ public class ColorServiceImpl implements ColorService{
 	public Color getColor(Long id) {
 		return colorDao.get(id);
 		
+	}
+
+	@Override
+	public void saveOrUpdate(Color color) {
+		if (color.getId() == null) {
+			colorDao.insert(color);
+			LOGGER.info("Color inserted: {}", color);
+		} else {
+			colorDao.update(color);
+			LOGGER.info("Color updated: {}", color);
+		}
+	}
+
+	@Override
+	public Color getByName(String colorName) {
+		return colorDao.find(colorName);
 	}
 
 }

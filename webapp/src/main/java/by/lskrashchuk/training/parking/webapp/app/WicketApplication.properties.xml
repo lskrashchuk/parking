@@ -4,6 +4,8 @@
 	<entry key="btn.create">Create</entry>
 	<entry key="btn.save">Save</entry>
 	<entry key="btn.upload">Upload</entry>
+	<entry key="btn.cancel">Cancel</entry>
+	
 
 	<entry key="menu.home">Home</entry>
 	<entry key="menu.users">Users</entry>
@@ -49,6 +51,10 @@
 	<entry key="car.yearproduced">Year</entry>
 	<entry key="car.saved">Vehicle saved</entry>
 	<entry key="car.color">Color</entry>
+	<entry key="car.edit.newcolor">Create new color</entry>
+	<entry key="car.edit.newmodel">Create new model</entry>
+	<entry key="car.edit.newbrand">Create new brand</entry>
+	<entry key="car.edit.newcolor.exist">The color is already exists</entry>
 
 	<entry key="registry.eventTime">Time</entry>
 	<entry key="registry.eventType">Type</entry>
