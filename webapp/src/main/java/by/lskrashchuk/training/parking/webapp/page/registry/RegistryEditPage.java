@@ -1,6 +1,7 @@
 package by.lskrashchuk.training.parking.webapp.page.registry;
 
 import java.util.Arrays;
+import java.util.Date;
 
 import javax.inject.Inject;
 
@@ -64,6 +65,7 @@ public class RegistryEditPage extends AbstractPage{
 		super();
 		if (registry.getId() == null) {
 			this.registry = registry;
+			registry.setEventTime(new Date());
 		} else {
 			this.registry = registryService.getRegistry(registry.getId());
 		}

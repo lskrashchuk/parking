@@ -2,6 +2,7 @@ package by.lskrashchuk.training.parking.webapp.page.place;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -27,8 +28,10 @@ import org.apache.wicket.request.resource.ContextRelativeResource;
 import by.lskrashchuk.training.parking.dataaccess.filters.PlaceFilter;
 import by.lskrashchuk.training.parking.dataaccess.filters.UserFilter;
 import by.lskrashchuk.training.parking.datamodel.Car;
+import by.lskrashchuk.training.parking.datamodel.EventType;
 import by.lskrashchuk.training.parking.datamodel.Place;
 import by.lskrashchuk.training.parking.datamodel.Place_;
+import by.lskrashchuk.training.parking.datamodel.Registry;
 import by.lskrashchuk.training.parking.datamodel.Section;
 import by.lskrashchuk.training.parking.datamodel.User;
 import by.lskrashchuk.training.parking.datamodel.User_;
@@ -38,6 +41,7 @@ import by.lskrashchuk.training.parking.service.RegistryService;
 import by.lskrashchuk.training.parking.service.UserService;
 import by.lskrashchuk.training.parking.webapp.page.AbstractPage;
 import by.lskrashchuk.training.parking.webapp.page.car.CarEditPage;
+import by.lskrashchuk.training.parking.webapp.page.registry.RegistryEditPage;
 import by.lskrashchuk.training.parking.webapp.page.user.UserEditPage;
 import by.lskrashchuk.training.parking.webapp.page.user.UsersPage;
 
@@ -68,9 +72,29 @@ public class PlacesPage extends AbstractPage {
 
 					item.add(new Label("number", place.getNumber()));
 					item.add(new Label("isbusy", placeService.getIsBusy(place)));
+
+					Link<Void> freeLink = new Link<Void>("free-link"){
+
+						/**
+						 * 
+						 */
+						private static final long serialVersionUID = 1L;
+
+						@Override
+						public void onClick() {
+							Registry registry = new Registry();
+							registry.setEventTime(new Date());
+							registry.setEventType(EventType.arrived);
+							registry.setPlace(place);
+							setResponsePage(new RegistryEditPage(registry));
+						}
+					};	
+					item.add(freeLink);
+
 					Image freeImg = new Image("free_place", new ContextRelativeResource("images/parking.png"));
-					item.add(freeImg);
+					freeLink.add(freeImg);
 					if (placeService.getIsBusy(place)) {
+						freeLink.setVisible(false);
 						freeImg.setVisible(false);
 					}
 
@@ -79,7 +103,7 @@ public class PlacesPage extends AbstractPage {
 						reg = carService.getCar(placeService.getCarId(place)).getRegNumber();
 					};
 					Label buzyCar = new Label("regnumber",reg);	
-//					item.add(buzyCar);
+
 					Link<Void> buzyCarLink = new Link<Void>("regnumber-link"){
 
 						/**
