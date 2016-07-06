@@ -37,6 +37,7 @@ import by.lskrashchuk.training.parking.service.PlaceService;
 import by.lskrashchuk.training.parking.service.RegistryService;
 import by.lskrashchuk.training.parking.service.UserService;
 import by.lskrashchuk.training.parking.webapp.page.AbstractPage;
+import by.lskrashchuk.training.parking.webapp.page.car.CarEditPage;
 import by.lskrashchuk.training.parking.webapp.page.user.UserEditPage;
 import by.lskrashchuk.training.parking.webapp.page.user.UsersPage;
 
@@ -78,7 +79,21 @@ public class PlacesPage extends AbstractPage {
 						reg = carService.getCar(placeService.getCarId(place)).getRegNumber();
 					};
 					Label buzyCar = new Label("regnumber",reg);	
-					item.add(buzyCar);
+//					item.add(buzyCar);
+					Link<Void> buzyCarLink = new Link<Void>("regnumber-link"){
+
+						/**
+						 * 
+						 */
+						private static final long serialVersionUID = 1L;
+
+						@Override
+						public void onClick() {
+							setResponsePage(new CarEditPage(carService.getCar(placeService.getCarId(place))));
+						}
+					};	
+					item.add(buzyCarLink);
+					buzyCarLink.add(buzyCar);
 
 
 					item.add(new Link<Void>("edit-link") {
