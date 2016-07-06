@@ -19,8 +19,9 @@
 						<label> <strong><wicket:message key="car.color"/>:</strong> <select type="text"
 							wicket:id="color" />
 							<a class="link" wicket:id="create" align="left"><wicket:message key="car.edit.newcolor"/></a>
+							<div wicket:id="modal"></div>
+							
 						</label>  
-						<div wicket:id="modal"></div>
 						
 						<label> <strong><wicket:message key="car.yearproduced"/>:</strong> <input type="text"
 							wicket:id="yearProduced" />
@@ -31,7 +32,6 @@
 						</label>
 					</form>
 				</div>
-
 				<div class="col-2">
 					<label> <strong><wicket:message key="user.photo"/>:</strong>
 						<form wicket:id="imageForm" id="imageForm">

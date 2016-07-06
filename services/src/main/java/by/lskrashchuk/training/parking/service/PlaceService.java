@@ -32,6 +32,8 @@ public interface PlaceService {
 	 Boolean getIsBusy(Place place);
 	 
 	 Integer countNotBusy(); 
+	 
+	 Long getCarId(Place place);
 
 
 }

@@ -116,17 +116,35 @@ public class CarEditPage extends AbstractPage {
 		yearproducedField.setRequired(true);
 		textForm.add(yearproducedField);
 		
+		IModel colorChoiceModel = new AbstractReadOnlyModel() {
 
+			@Override
+			public Object getObject() {
+				return carService.getAllColors();
+			}
+		};
 
-		
-		DropDownChoice<Color> colorField = new DropDownChoice<>("color", carService.getAllColors(),
+		DropDownChoice<Color> colorField = new DropDownChoice<>("color", colorChoiceModel,
 				CarColorChoiceRenderer.INSTANCE);
 		colorField.setLabel(new ResourceModel("car.color"));
 		colorField.setRequired(true);
 		colorField.setOutputMarkupId(true);
 		textForm.add(colorField);
 		
+/*		colorField.add(new AjaxFormComponentUpdatingBehavior("change") {
 
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            protected void onUpdate(AjaxRequestTarget target) {
+
+//update your model here
+//then you need to add model to target
+                target.add();
+            }
+        });*/
+
+		
 		IModel modelChoiceModel = new AbstractReadOnlyModel() {
 
 			@Override
@@ -155,7 +173,7 @@ public class CarEditPage extends AbstractPage {
 		modelField.setOutputMarkupId(true);
 		textForm.add(modelField);
 
-		brandField.add(new AjaxFormComponentUpdatingBehavior("onchange") {
+		brandField.add(new AjaxFormComponentUpdatingBehavior("change") {
 			protected void onUpdate(AjaxRequestTarget target) {
 				target.add(modelField);
 			}
@@ -187,10 +205,10 @@ public class CarEditPage extends AbstractPage {
 				setResponsePage(page);
 			}
 		});
-		addModalWindow(textForm);
+//		Form colorForm = new Form("colorForm");
+		addModalWindow(textForm, colorField);
+//		form.add(colorForm);
 		
-		
-
 		Form<Car> imageForm = new Form<Car>("imageForm", new PropertyModel<Car>(car, "photo"));
 		imageForm.setOutputMarkupId(true);
 
@@ -250,7 +268,7 @@ public class CarEditPage extends AbstractPage {
 					carPhoto.setCar(car);
 					carPhoto.setPhoto(uploadedFile.getBytes());
 					car.getCarPhotos().add(carPhoto);
-					String localizedMessage = getString("user.photo.loaded");
+					String localizedMessage = getString("label.file.loaded");
 					this.info(localizedMessage);
 					target.addChildren(getPage(), FeedbackPanel.class);
 				}
@@ -265,11 +283,11 @@ public class CarEditPage extends AbstractPage {
 		feedback.setOutputMarkupId(true);
 	}
 	
-    private void addModalWindow(Form form) {
+    private void addModalWindow(Form form, Component colorDrop) {
         ModalWindow modalWindow = new ModalWindow("modal");
         form.add(modalWindow);
 
-        form.add(new AjaxLink("create") {
+        AjaxLink createLink = new AjaxLink("create") {
             /**
 			 * 
 			 */
@@ -278,9 +296,11 @@ public class CarEditPage extends AbstractPage {
 			@Override
             public void onClick(AjaxRequestTarget target) {
                 modalWindow.setContent(new ColorEditPanel(modalWindow, new Color()));
+                modalWindow.setTitle(getString("car.edit.newcolor")); 
                 modalWindow.show(target);
             }
-        });
+        };
+        form.add(createLink);
 
         modalWindow.setWindowClosedCallback(new WindowClosedCallback() {
 
@@ -288,7 +308,7 @@ public class CarEditPage extends AbstractPage {
 
 			@Override
             public void onClose(AjaxRequestTarget target) {
-//                target.add(form);
+               target.add(colorDrop);
             }
         });
     }

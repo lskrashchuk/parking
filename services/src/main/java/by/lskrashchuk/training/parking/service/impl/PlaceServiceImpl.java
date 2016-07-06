@@ -79,4 +79,9 @@ public class PlaceServiceImpl implements PlaceService{
 		return placeDao.countNotBuzy();
 	}
 
+	@Override
+	public Long getCarId(Place place) {
+		return placeDao.getCarId(place);
+	}
+
 }

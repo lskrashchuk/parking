@@ -26,15 +26,12 @@
 	<entry key="label.home.free"> свободных мест на стоянке на данный момент</entry>
 	<entry key="label.home.busy">На данный момент нет свободных мест на стоянке</entry>
 	<entry key="label.registry.edit">Сведения о событии</entry>
+	<entry key="label.file.loaded">Файл загружен и будет сохранен</entry>
 
 
 	<entry key="loging.err.auth">ошибка авторизации</entry>
 
-	<entry key="user.photo.loaded">Файл загружен и будет сохранен</entry>
 	<entry key="user.saved">Пользователь сохранен</entry>
-	<entry key="user.empty"></entry>
-
-
 	<entry key="user.fname">Имя</entry>
 	<entry key="user.lname">Фамилия</entry>
 	<entry key="user.created">Создан</entry>
@@ -45,6 +42,7 @@
 	<entry key="user.role">Права</entry>
 	<entry key="user.photo">Фото</entry>
 	<entry key="user.vehicles">ТC</entry>
+	<entry key="user.edit.cars">Редактировать список ТС</entry>
 
 	<entry key="car.regnumber">Регномер</entry>
 	<entry key="car.brand">Марка</entry>
@@ -67,7 +65,6 @@
 	<entry key="US">Английский</entry>
 	<entry key="RU">Русский</entry>
 
-	<entry key="products.basePrice.title">введите цену</entry>
 
 
 </properties>

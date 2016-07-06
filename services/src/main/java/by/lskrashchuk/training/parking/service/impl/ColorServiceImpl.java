@@ -22,13 +22,13 @@ public class ColorServiceImpl implements ColorService{
 	@Override
 	public void register(Color color) {
 		colorDao.insert(color);
-        LOGGER.info("Color regirstred: {}", color);
+        LOGGER.info("Color regirstred: {}", color.getName());
 	}
 
 	@Override
 	public void update(Color color) {
 		colorDao.update(color);
-        LOGGER.info("Color updated: {}", color);
+        LOGGER.info("Color updated: {}", color.getName());
 	}
 
 	@Override
@@ -47,10 +47,10 @@ public class ColorServiceImpl implements ColorService{
 	public void saveOrUpdate(Color color) {
 		if (color.getId() == null) {
 			colorDao.insert(color);
-			LOGGER.info("Color inserted: {}", color);
+			LOGGER.info("Color inserted: {}", color.getName());
 		} else {
 			colorDao.update(color);
-			LOGGER.info("Color updated: {}", color);
+			LOGGER.info("Color updated: {}", color.getName());
 		}
 	}
 

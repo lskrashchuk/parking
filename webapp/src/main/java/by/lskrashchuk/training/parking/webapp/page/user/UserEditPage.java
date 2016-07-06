@@ -93,23 +93,11 @@ public class UserEditPage extends AbstractPage {
 		lnameField.setRequired(true);
 		textForm.add(lnameField);
 
-		/*
-		 * TextField<Double> basePriceField = new TextField<>("basePrice");
-		 * basePriceField.add(RangeValidator.<Double> range(0d, 1_000_000d));
-		 * basePriceField.setRequired(true);
-		 */
-
 		DateTextField createdField = new DateTextField("created", "dd-MM-yyyy");
 		createdField.add(new DatePicker());
         createdField.setLabel(new ResourceModel("user.created"));
 		createdField.setRequired(true);
 		textForm.add(createdField);
-
-		/*
-		 * form.add(basePriceField);
-		 * 
-		 * CheckBox activeField = new CheckBox("active"); form.add(activeField);
-		 */
 
 		TextField<String> phoneField = new TextField<>("phone");
         phoneField.setLabel(new ResourceModel("user.phone"));
@@ -126,12 +114,6 @@ public class UserEditPage extends AbstractPage {
 		passwordField.setRequired(true);
 		textForm.add(passwordField);
 
-		// List<UserType> allUserTypes = userTypeService.find(new
-		// UserTypeFilter());
-		// DropDownChoice<UserType> typeField = new DropDownChoice<>("userType",
-		// allUserTypes, UserTypeChoiceRenderer.INSTANCE);
-		// DropDownChoice<UserType> typeField = new DropDownChoice<>("userType",
-		// userTypeService.getAll(), UserTypeChoiceRenderer.INSTANCE);;
 		DropDownChoice<UserType> typeField = new DropDownChoice<>("userType", userService.getAllUserTypes(),
 				UserTypeChoiceRenderer.INSTANCE);
         typeField.setLabel(new ResourceModel("user.type"));
@@ -143,17 +125,6 @@ public class UserEditPage extends AbstractPage {
         roleField.setLabel(new ResourceModel("user.role"));
 		roleField.setRequired(true);
 		textForm.add(roleField);
-
-		/*
-		 * form.add(new SubmitLink("load") {
-		 * 
-		 * @Override public void onSubmit() { super.onSubmit(); //
-		 * userService.saveOrUpdate(user); setResponsePage(new
-		 * FileUploadPage()); // setResponsePage(new UsersPage()); } });
-		 * 
-		 */
-		// FileUploadField photoUpload = new FileUploadField("photo");
-		// form.add(photoUpload);
 
 		form.add(new UserCarListPanel("carlist-panel", user));
 
@@ -192,14 +163,6 @@ public class UserEditPage extends AbstractPage {
 		imageForm.setMaxSize(Bytes.kilobytes(100));
 
 
-/*		File file = new File("images/icon-car.png"); 
-		try {
-		  user.setPhoto(ImageResource.getBytesFromFile(file));
-		  } catch (IOException e) { 
-			  // TODO Auto-generated catch block
-			  e.printStackTrace(); 
-			  };*/
-		
 		Image nullImg = new Image("null_photo", new ContextRelativeResource("images/user-null.png"));
 		imageForm.add(nullImg);
 
@@ -233,7 +196,7 @@ public class UserEditPage extends AbstractPage {
 			
 				if (uploadedFile != null) {
 					user.setPhoto(uploadedFile.getBytes());
-					String localizedMessage = getString("user.photo.loaded");
+					String localizedMessage = getString("label.file.loaded");
 	                this.info(localizedMessage);
 	                target.addChildren(getPage(), FeedbackPanel.class);
 				};

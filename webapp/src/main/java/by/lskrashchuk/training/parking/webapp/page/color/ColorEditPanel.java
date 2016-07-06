@@ -11,6 +11,8 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.model.Model;
+import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.model.ResourceModel;
 
 import by.lskrashchuk.training.parking.datamodel.Color;
@@ -38,9 +40,9 @@ public class ColorEditPanel extends Panel{
     @Override
     protected void onInitialize() {
         super.onInitialize();
-        Form<Color> form = new Form<>("form", new CompoundPropertyModel<>(color));
-        add(form);
-        form.setOutputMarkupId(true);
+        Form<Color> colorForm = new Form<Color>("colorForm1", new CompoundPropertyModel<>(color));
+        add(colorForm);
+        colorForm.setOutputMarkupId(true);
 //        form.add(new TextField<>("name"));
 
 
@@ -48,14 +50,14 @@ public class ColorEditPanel extends Panel{
 		colorField.setLabel(new ResourceModel("car.color"));
 		colorField.setRequired(true);
 		colorField.setOutputMarkupId(true);
-		form.add(colorField);
+		colorForm.add(colorField);
 
 		FeedbackPanel feedback = new FeedbackPanel("feedback");
-		form.add(feedback);
+		colorForm.add(feedback);
 		feedback.setOutputMarkupId(true);
 
         
-        form.add(new AjaxSubmitLink("saveColor") {
+		colorForm.add( new AjaxSubmitLink("saveColor") {
             /**
 			 * 
 			 */
@@ -63,7 +65,7 @@ public class ColorEditPanel extends Panel{
 
 			@Override
             protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
-                super.onSubmit(target, form);
+ //               super.onSubmit(target, form);
 				target.add(feedback);
 
                 if (colorService.getByName(color.getName()) != null) {
@@ -79,12 +81,12 @@ public class ColorEditPanel extends Panel{
 			
 			@Override
 			protected void onError(AjaxRequestTarget target, Form<?> form) {
-				super.onError(target, form);
+//				super.onError(target, form);
 				target.add(feedback);
 			}
         });
 
-        form.add(new AjaxLink("cancel") {
+        colorForm.add(new AjaxLink("cancel") {
             /**
 			 * 
 			 */

@@ -14,6 +14,7 @@ import org.apache.wicket.datetime.markup.html.basic.DateLabel;
 import org.apache.wicket.extensions.markup.html.repeater.data.sort.SortOrder;
 import org.apache.wicket.extensions.markup.html.repeater.util.SortableDataProvider;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
@@ -21,6 +22,7 @@ import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.markup.repeater.data.DataView;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
+import org.apache.wicket.request.resource.ContextRelativeResource;
 
 import by.lskrashchuk.training.parking.dataaccess.filters.PlaceFilter;
 import by.lskrashchuk.training.parking.dataaccess.filters.UserFilter;
@@ -30,6 +32,7 @@ import by.lskrashchuk.training.parking.datamodel.Place_;
 import by.lskrashchuk.training.parking.datamodel.Section;
 import by.lskrashchuk.training.parking.datamodel.User;
 import by.lskrashchuk.training.parking.datamodel.User_;
+import by.lskrashchuk.training.parking.service.CarService;
 import by.lskrashchuk.training.parking.service.PlaceService;
 import by.lskrashchuk.training.parking.service.RegistryService;
 import by.lskrashchuk.training.parking.service.UserService;
@@ -42,6 +45,9 @@ public class PlacesPage extends AbstractPage {
 
 	@Inject
 	private PlaceService placeService;
+
+	@Inject
+	private CarService carService;
 
 	@Inject
 	private UserService userService;
@@ -61,8 +67,26 @@ public class PlacesPage extends AbstractPage {
 
 					item.add(new Label("number", place.getNumber()));
 					item.add(new Label("isbusy", placeService.getIsBusy(place)));
-	//				item.add(new Label("number", place.getNumber()));
+					Image freeImg = new Image("free_place", new ContextRelativeResource("images/parking.png"));
+					item.add(freeImg);
+					if (placeService.getIsBusy(place)) {
+						freeImg.setVisible(false);
+					}
+
+					String reg = "";
+					if (placeService.getIsBusy(place)) {
+						reg = carService.getCar(placeService.getCarId(place)).getRegNumber();
+					};
+					Label buzyCar = new Label("regnumber",reg);	
+					item.add(buzyCar);
+
+
 					item.add(new Link<Void>("edit-link") {
+						/**
+						 * 
+						 */
+						private static final long serialVersionUID = 1L;
+
 						@Override
 						public void onClick() {
 							setResponsePage(new PlaceEditPage(place));
@@ -70,6 +94,11 @@ public class PlacesPage extends AbstractPage {
 					});
 
 					item.add(new Link<Void>("delete-link") {
+						/**
+						 * 
+						 */
+						private static final long serialVersionUID = 1L;
+
 						@Override
 						public void onClick() {
 							try {

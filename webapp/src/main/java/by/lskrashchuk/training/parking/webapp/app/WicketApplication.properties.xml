@@ -25,15 +25,12 @@
 	<entry key="label.home.free"> not busy place(s) on the parking</entry>
 	<entry key="label.home.busy">All places are busy now</entry>
 	<entry key="label.registry.edit">Event information</entry>
+	<entry key="albel.file.loaded">File uploaded and will be saved</entry>
 	
 	
 	<entry key="loging.err.auth">authorization error</entry>
 
-	<entry key="user.photo.loaded">File uploaded and will be saved</entry>
 	<entry key="user.saved">User saved</entry>
-	
-
-
 	<entry key="user.fname">Name</entry>
 	<entry key="user.lname">Surname</entry>
 	<entry key="user.created">Created</entry>
@@ -44,6 +41,7 @@
 	<entry key="user.role">Access</entry>
 	<entry key="user.photo">Photo</entry>
 	<entry key="user.vehicles">Vehicles</entry>
+	<entry key="user.edit.cars">Edit cars list</entry>
 
 	<entry key="car.regnumber">Regnumber</entry>
 	<entry key="car.brand">Brand</entry>

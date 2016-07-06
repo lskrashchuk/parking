@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 
 import by.lskrashchuk.training.parking.dataaccess.PlaceDao;
 import by.lskrashchuk.training.parking.dataaccess.filters.PlaceFilter;
+import by.lskrashchuk.training.parking.datamodel.Car;
 import by.lskrashchuk.training.parking.datamodel.Place;
 import by.lskrashchuk.training.parking.datamodel.Place_;
 import by.lskrashchuk.training.parking.datamodel.Registry;
@@ -89,7 +90,6 @@ public class PlaceDaoImpl extends AbstractDaoImpl<Place, Long> implements PlaceD
 
 		if (!queryResult.isEmpty()) {
 			Integer eventType = (Integer)queryResult.get(0); 
-	
 			return (eventType == 0);
 		}
 			else return false;
@@ -105,6 +105,24 @@ public class PlaceDaoImpl extends AbstractDaoImpl<Place, Long> implements PlaceD
 			else return 0;
 	}*/
 		return 0;
+	}
+
+	@Override
+	public Long getCarId(Place place) {
+		EntityManager em = getEntityManager();
+//		Query query = em.createQuery("SELECT FIRST r.event_type FROM Registry r LEFT JOIN Place p ON r.place_id=p.id WHERE p.id="+place.getId()+" ORDER BY r.event_time DESC");
+		List<Object[]> queryResult  = em.createNativeQuery("SELECT r.event_type, r.car_id FROM registry r LEFT JOIN place p ON r.place_id=p.id WHERE p.id="+place.getId()+" ORDER BY r.event_time DESC LIMIT 1").getResultList(); 
+
+		if (!queryResult.isEmpty()) {
+			Object[] res = queryResult.get(0); 
+			Integer eventType = (Integer)res[0];
+			if (eventType == 0){
+				Long r = new Long(res[1].toString());
+				return r;
+			}
+			else return null;
+		}
+			else return null;
 	}
 
 }
