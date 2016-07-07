@@ -12,7 +12,6 @@ import org.apache.wicket.extensions.markup.html.repeater.data.sort.OrderByBorder
 import org.apache.wicket.extensions.markup.html.repeater.data.sort.SortOrder;
 import org.apache.wicket.extensions.markup.html.repeater.util.SortableDataProvider;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.navigation.paging.PagingNavigator;
 import org.apache.wicket.markup.html.panel.Panel;
@@ -30,14 +29,23 @@ import by.lskrashchuk.training.parking.webapp.page.user.UsersPage;
 
 public class UserListPanel extends Panel{
 	
-    @Inject
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Inject
     private UserService userService;
     
 	public UserListPanel(String id) {
 		super(id);
         UsersDataProvider usersDataProvider = new UsersDataProvider();
         DataView<User> dataView = new DataView<User>("rows", usersDataProvider, 5) {
-            @Override
+            /**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
             protected void populateItem(Item<User> item) {
                 User user = item.getModelObject();
 
@@ -50,14 +58,24 @@ public class UserListPanel extends Panel{
            //     checkbox.setEnabled(false);
            //     item.add(checkbox);
                 item.add(new Link<Void>("edit-link") {
-                    @Override
+                    /**
+					 * 
+					 */
+					private static final long serialVersionUID = 1L;
+
+					@Override
                     public void onClick() {
                         setResponsePage(new UserEditPage(user));
                     }
                 });
 
                 item.add(new Link<Void>("delete-link") {
-                    @Override
+                    /**
+					 * 
+					 */
+					private static final long serialVersionUID = 1L;
+
+					@Override
                     public void onClick() {
                         try {
                             userService.delete(user);
@@ -83,7 +101,11 @@ public class UserListPanel extends Panel{
 
     private class UsersDataProvider extends SortableDataProvider<User, Serializable> {
 
-        private UserFilter userFilter;
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		private UserFilter userFilter;
 
         public UsersDataProvider() {
             super();

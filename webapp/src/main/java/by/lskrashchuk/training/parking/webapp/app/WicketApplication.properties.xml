@@ -25,7 +25,8 @@
 	<entry key="label.home.free"> not busy place(s) on the parking</entry>
 	<entry key="label.home.busy">All places are busy now</entry>
 	<entry key="label.registry.edit">Event information</entry>
-	<entry key="albel.file.loaded">File uploaded and will be saved</entry>
+	<entry key="label.file.loaded">File uploaded and will be saved</entry>
+	<entry key="label.places">Places</entry>
 	
 	
 	<entry key="loging.err.auth">authorization error</entry>
@@ -60,8 +61,9 @@
 	<entry key="registry.place">Place</entry>
 	<entry key="registry.saved">Event saved</entry>
 
-
-
+	<entry key="place.number">Number</entry>
+	<entry key="place.occupation">Occupation</entry>
+	<entry key="place.depart">Free place</entry>
 	
 	<entry key="US">English</entry>
 	<entry key="RU">Russian</entry>

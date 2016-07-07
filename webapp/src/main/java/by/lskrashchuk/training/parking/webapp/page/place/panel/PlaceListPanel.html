@@ -1,0 +1,32 @@
+<meta charset="utf-8">
+<wicket:panel>
+	<table>
+		<thead>
+			<tr>
+				<th><wicket:message key="place.number"/></th>
+				<th><wicket:message key="place.occupation"/></th>
+				<th></th>
+				<th><wicket:message key="label.actions"/></th>
+			</tr>
+		
+		</thead>
+		<tbody>
+			<tr wicket:id="rows">
+				<td><h2><span wicket:id="number"/></h2></td>
+				<td>
+		  	    	<wicket:enclosure child="free-link">
+		  	    		<a wicket:id="free-link"><img height="30"  wicket:id="free_place"/></a> 
+					</wicket:enclosure>
+					<a wicket:id="regnumber-link"><span wicket:id="regnumber"/></a>
+				</td>
+				<td>
+		  	    	<wicket:enclosure>
+		  	    		<a class="link" wicket:id="depart-link"><wicket:message key="place.depart"/></a> 
+					</wicket:enclosure>
+				</td>
+				<td><a wicket:id="delete-link"><wicket:message key="label.delete"/></a>/<a wicket:id="edit-link"><wicket:message key="label.edit"/></a></td>
+			</tr>
+		</tbody>
+	</table>
+
+</wicket:panel>
