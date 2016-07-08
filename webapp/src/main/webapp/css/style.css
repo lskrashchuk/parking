@@ -219,3 +219,19 @@ dl dd a {}
 	height:18px;
 	float:left;
 }
+
+
+th {
+  font-weight: normal;
+  padding: 10px 15px;
+}
+td {
+  border-top: 1px solid #e8edff;
+  padding: 10px 15px;
+  vertical-align : middle;
+}
+tr:nth-child(2n) {
+  background: #DCDCDC;
+}{
+  background: #DCDCDC;
+}
