@@ -1,0 +1,27 @@
+<wicket:extend xmlns:wicket="http://wicket.apache.org">
+	<meta charset="utf-8">
+	<form wicket:id="form" id="form">
+		<section class="content-subpage" id="content">
+			<div class="wrap">
+				<div class="col-1 border-2">
+					<form wicket:id="textForm" id="textForm">
+						<h2><wicket:message key="label.place.edit"/></h2>
+
+						<label> <strong><wicket:message key="place.number"/>:</strong> <input type="text"
+							wicket:id="number" />
+						</label> 
+						<br></br>
+						<label> <a class="button-2" type="submit"
+							wicket:id="save"><wicket:message key="btn.save"/></a>
+						</label>
+					</form>
+				</div>
+			</div>
+		</section>
+
+
+	</form>
+
+	<div wicket:id="feedback"></div>
+
+</wicket:extend>

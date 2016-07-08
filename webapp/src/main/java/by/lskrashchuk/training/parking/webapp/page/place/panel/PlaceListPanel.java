@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import javax.persistence.PersistenceException;
 import javax.persistence.metamodel.SingularAttribute;
 
+import org.apache.wicket.extensions.markup.html.repeater.data.sort.OrderByBorder;
 import org.apache.wicket.extensions.markup.html.repeater.data.sort.SortOrder;
 import org.apache.wicket.extensions.markup.html.repeater.util.SortableDataProvider;
 import org.apache.wicket.markup.html.basic.Label;
@@ -25,6 +26,7 @@ import by.lskrashchuk.training.parking.datamodel.EventType;
 import by.lskrashchuk.training.parking.datamodel.Place;
 import by.lskrashchuk.training.parking.datamodel.Place_;
 import by.lskrashchuk.training.parking.datamodel.Registry;
+import by.lskrashchuk.training.parking.datamodel.User_;
 import by.lskrashchuk.training.parking.service.CarService;
 import by.lskrashchuk.training.parking.service.PlaceService;
 import by.lskrashchuk.training.parking.webapp.page.car.CarEditPage;
@@ -154,7 +156,7 @@ public class PlaceListPanel extends Panel{
 				}
 			};
 			add(dataView);
-//		}
+	        add(new OrderByBorder("sort-number", Place_.number, placesDataProvider));
 	}
 		private class PlacesDataProvider extends SortableDataProvider<Place, Serializable> {
 

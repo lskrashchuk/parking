@@ -13,6 +13,7 @@ import by.lskrashchuk.training.parking.dataaccess.SectionDao;
 import by.lskrashchuk.training.parking.dataaccess.filters.PlaceFilter;
 import by.lskrashchuk.training.parking.datamodel.Place;
 import by.lskrashchuk.training.parking.datamodel.Section;
+import by.lskrashchuk.training.parking.datamodel.User;
 import by.lskrashchuk.training.parking.service.PlaceService;
 
 @Service
@@ -82,6 +83,18 @@ public class PlaceServiceImpl implements PlaceService{
 	@Override
 	public Long getCarId(Place place) {
 		return placeDao.getCarId(place);
+	}
+
+	@Override
+	public void saveOrUpdate(Place place) {
+		if (place.getId() == null) {
+			placeDao.insert(place);
+			LOGGER.info("Place inserted: {}", place.getNumber());
+		} else {
+			placeDao.update(place);
+			LOGGER.info("Place updated: {}", place.getNumber());
+		}
+		
 	}
 
 }

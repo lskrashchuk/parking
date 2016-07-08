@@ -28,6 +28,7 @@
 	<entry key="label.registry.edit">Сведения о событии</entry>
 	<entry key="label.file.loaded">Файл загружен и будет сохранен</entry>
 	<entry key="label.places">Парковочные места</entry>
+	<entry key="label.place.edit">Сведения о парковочном месте</entry>
 
 
 	<entry key="loging.err.auth">ошибка авторизации</entry>
@@ -65,6 +66,7 @@
 	<entry key="place.number">Номер</entry>
 	<entry key="place.occupation">Занятость</entry>
 	<entry key="place.depart">Освободить место</entry>
+	<entry key="place.saved">Парковочное место сохранено</entry>
 
 	<entry key="US">Английский</entry>
 	<entry key="RU">Русский</entry>
