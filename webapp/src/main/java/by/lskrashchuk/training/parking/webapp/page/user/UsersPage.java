@@ -4,7 +4,9 @@ import org.apache.wicket.authroles.authorization.strategies.role.annotations.Aut
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 
+import by.lskrashchuk.training.parking.dataaccess.filters.UserFilter;
 import by.lskrashchuk.training.parking.datamodel.User;
+import by.lskrashchuk.training.parking.webapp.component.search.SearchPanel;
 import by.lskrashchuk.training.parking.webapp.page.AbstractPage;
 import by.lskrashchuk.training.parking.webapp.page.user.panel.UserListPanel;
 
@@ -18,8 +20,18 @@ public class UsersPage extends AbstractPage{
 	
 	public UsersPage() {
 		super();
-        add(new UserListPanel("list-panel"));
- 
+
+		UserFilter uf = new UserFilter();
+		
+		UserListPanel userListPanel = new UserListPanel("list-panel", uf);
+		userListPanel.setOutputMarkupId(true);
+        add(userListPanel);
+
+		SearchPanel searchPanel = new SearchPanel("search-panel", userListPanel);
+        add(searchPanel);
+		
+        
+
         add(new Link<Void>("create") {
             /**
 			 * 

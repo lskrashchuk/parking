@@ -17,6 +17,7 @@ import by.lskrashchuk.training.parking.dataaccess.CarDao;
 import by.lskrashchuk.training.parking.dataaccess.filters.CarFilter;
 import by.lskrashchuk.training.parking.datamodel.Car;
 import by.lskrashchuk.training.parking.datamodel.Car_;
+import by.lskrashchuk.training.parking.datamodel.Place;
 
 @Repository
 public class CarDaoImpl extends AbstractDaoImpl<Car, Long> implements CarDao{
@@ -102,6 +103,24 @@ public class CarDaoImpl extends AbstractDaoImpl<Car, Long> implements CarDao{
 	        // set execute query
 	        return q.getSingleResult();
 	}
+
+	@Override
+	public Long getPlaceId(Car car) {
+			EntityManager em = getEntityManager();
+			List<Object[]> queryResult  = em.createNativeQuery("SELECT r.event_type, r.place_id FROM registry r LEFT JOIN car c ON r.car_id=c.id WHERE c.id="+car.getId()+" ORDER BY r.event_time DESC LIMIT 1").getResultList(); 
+
+			if (!queryResult.isEmpty()) {
+				Object[] res = queryResult.get(0); 
+				Integer eventType = (Integer)res[0];
+				if (eventType == 0){
+					Long r = new Long(res[1].toString());
+					return r;
+				}
+				else return null;
+			}
+				else return null;
+		}
+	
 	
 	
 

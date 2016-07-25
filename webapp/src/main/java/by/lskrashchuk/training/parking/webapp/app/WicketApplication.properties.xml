@@ -22,12 +22,14 @@
 	<entry key="label.car.edit">Vehicle information</entry>
 	<entry key="label.cars">Vehicles</entry>
 	<entry key="label.home.welcome">, welcome!</entry>
-	<entry key="label.home.free"> not busy place(s) on the parking</entry>
+	<entry key="label.home.free"> free place(s) on the parking</entry>
 	<entry key="label.home.busy">All places are busy now</entry>
 	<entry key="label.registry.edit">Event information</entry>
 	<entry key="label.file.loaded">File uploaded and will be saved</entry>
 	<entry key="label.places">Places</entry>
 	<entry key="label.place.edit">Place information</entry>
+	<entry key="label.search">Search</entry>
+	
 	
 	
 	<entry key="loging.err.auth">authorization error</entry>
@@ -70,5 +72,4 @@
 	<entry key="US">English</entry>
 	<entry key="RU">Russian</entry>
 	
-	<entry key="products.basePrice.title">enter price</entry>
 </properties>

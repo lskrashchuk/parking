@@ -29,6 +29,7 @@
 	<entry key="label.file.loaded">Файл загружен и будет сохранен</entry>
 	<entry key="label.places">Парковочные места</entry>
 	<entry key="label.place.edit">Сведения о парковочном месте</entry>
+	<entry key="label.search">Поиск</entry>
 
 
 	<entry key="loging.err.auth">ошибка авторизации</entry>

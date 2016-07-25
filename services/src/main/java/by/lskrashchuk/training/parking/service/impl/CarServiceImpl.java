@@ -90,4 +90,9 @@ public class CarServiceImpl implements CarService {
 		return colorDao.getAll();
 	}
 
+	@Override
+	public Long getPlaceId(Car car) {
+		return carDao.getPlaceId(car);
+	}
+
 }

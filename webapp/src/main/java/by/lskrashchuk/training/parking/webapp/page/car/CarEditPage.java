@@ -71,7 +71,7 @@ public class CarEditPage extends AbstractPage {
 
 	private Car car;
 
-	private Boolean ifPhotoUpload;
+	private Boolean isPhotoUpload;
 
 	public CarEditPage(PageParameters parameters) {
 		super();
@@ -90,7 +90,7 @@ public class CarEditPage extends AbstractPage {
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
-		ifPhotoUpload = false;
+		isPhotoUpload = false;
 		
 		Form form = new Form("form");
 		add(form);
@@ -188,7 +188,7 @@ public class CarEditPage extends AbstractPage {
 			public void onSubmit() {
 				super.onSubmit();
 				carService.saveOrUpdate(car);
-				if (ifPhotoUpload) {
+				if (isPhotoUpload) {
 					if (car.getCarPhotos() != null) {
 						if (car.getCarPhotos().size() == 0) {
 							carPhotoService.register(car.getCarPhotos().get(car.getCarPhotos().size() - 1));
@@ -196,7 +196,7 @@ public class CarEditPage extends AbstractPage {
 							carPhotoService.update(car.getCarPhotos().get(car.getCarPhotos().size() - 1));
 						}
 					}
-					ifPhotoUpload = false;
+					isPhotoUpload = false;
 				}
 
 				CarsPage page = new CarsPage();
@@ -260,7 +260,7 @@ public class CarEditPage extends AbstractPage {
 				FileUpload uploadedFile = photoUpload.getFileUpload();
 
 				if (uploadedFile != null) {
-					ifPhotoUpload = true;
+					isPhotoUpload = true;
 					if (car.getCarPhotos() == null) {
 						car.setCarPhotos(new ArrayList<CarPhoto>());
 					}

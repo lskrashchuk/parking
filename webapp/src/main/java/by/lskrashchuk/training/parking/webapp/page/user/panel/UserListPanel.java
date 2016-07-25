@@ -35,9 +35,13 @@ public class UserListPanel extends Panel{
 	private static final long serialVersionUID = 1L;
 	@Inject
     private UserService userService;
+	
+	private UserFilter userFilter;
     
-	public UserListPanel(String id) {
+	public UserListPanel(String id, UserFilter userFilter) {
 		super(id);
+		
+		this.userFilter = userFilter;
         UsersDataProvider usersDataProvider = new UsersDataProvider();
         DataView<User> dataView = new DataView<User>("rows", usersDataProvider, 5) {
             /**
@@ -105,11 +109,11 @@ public class UserListPanel extends Panel{
 		 * 
 		 */
 		private static final long serialVersionUID = 1L;
-		private UserFilter userFilter;
+//		private UserFilter userFilter;
 
         public UsersDataProvider() {
             super();
-            userFilter = new UserFilter();
+//            userFilter = new UserFilter();
             setSort((Serializable) User_.lastName, SortOrder.ASCENDING);
         }
 
@@ -137,6 +141,16 @@ public class UserListPanel extends Panel{
         }
 
     }
+
+
+	public UserFilter getUserFilter() {
+		return userFilter;
+	}
+
+
+	public void setUserFilter(UserFilter userFilter) {
+		this.userFilter = userFilter;
+	}
 
 
 }

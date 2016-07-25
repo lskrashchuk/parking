@@ -9,6 +9,7 @@ import by.lskrashchuk.training.parking.datamodel.Brand;
 import by.lskrashchuk.training.parking.datamodel.Car;
 import by.lskrashchuk.training.parking.datamodel.Color;
 import by.lskrashchuk.training.parking.datamodel.Model;
+import by.lskrashchuk.training.parking.datamodel.Place;
 
 public interface CarService {
 	
@@ -35,6 +36,7 @@ public interface CarService {
 
     List<Color> getAllColors();
 
+	Long getPlaceId(Car car);
 
 
 }

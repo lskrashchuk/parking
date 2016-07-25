@@ -104,5 +104,5 @@ public class Car extends AbstractModel{
 		this.color = color;
 	}
 	
-	
+
 }
