@@ -21,17 +21,13 @@ public class UsersPage extends AbstractPage{
 	public UsersPage() {
 		super();
 
-		UserFilter uf = new UserFilter();
-		
-		UserListPanel userListPanel = new UserListPanel("list-panel", uf);
+		UserListPanel userListPanel = new UserListPanel("list-panel", new UserFilter());
 		userListPanel.setOutputMarkupId(true);
         add(userListPanel);
 
 		SearchPanel searchPanel = new SearchPanel("search-panel", userListPanel);
         add(searchPanel);
 		
-        
-
         add(new Link<Void>("create") {
             /**
 			 * 
