@@ -42,6 +42,11 @@
 				<version>1.0.0</version>
 			</dependency>
 
+			<dependency>
+				<groupId>by.lskrashchuk.training.parking</groupId>
+				<artifactId>webapp</artifactId>
+				<version>1.0.0</version>
+			</dependency>
 
 
 			<dependency>

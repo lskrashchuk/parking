@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Repository;
 
 import by.lskrashchuk.training.parking.dataaccess.UserDao;
 import by.lskrashchuk.training.parking.dataaccess.filters.UserFilter;
-import by.lskrashchuk.training.parking.datamodel.Car;
 import by.lskrashchuk.training.parking.datamodel.User;
 import by.lskrashchuk.training.parking.datamodel.User_;
 
